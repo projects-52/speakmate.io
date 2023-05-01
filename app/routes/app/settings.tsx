@@ -1,13 +1,23 @@
-import { Form } from '@remix-run/react';
+import type { LoaderFunction } from '@remix-run/node';
+import { Form, useLoaderData } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
+import { authenticator } from '~/services/auth.service';
 
 const languages: Record<string, { nativeName: string }> = {
   en: { nativeName: 'English' },
   ua: { nativeName: 'Українська' },
 };
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await authenticator.isAuthenticated(request, {
+    failureRedirect: '/auth',
+  });
+  return { user };
+};
+
 export default function Settings() {
   const { i18n, t } = useTranslation();
+  const { user } = useLoaderData<typeof loader>();
 
   return (
     <div className="bg-white shadow sm:rounded-lg">
@@ -17,7 +27,7 @@ export default function Settings() {
         </h2>
         <img
           className="inline-block h-12 w-12 rounded-full mt-4"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          src={user.picture}
           alt=""
         />
         <div className="mt-5">
