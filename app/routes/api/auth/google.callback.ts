@@ -4,10 +4,11 @@ import { SocialsProvider } from 'remix-auth-socials';
 import { authenticator } from '~/services/auth.service';
 
 export const loader: LoaderFunction = async ({ request }) => {
+  console.log('REQUEST');
   try {
     return await authenticator.authenticate(SocialsProvider.GOOGLE, request, {
-      successRedirect: '/dashboard',
-      failureRedirect: '/login',
+      successRedirect: '/app/dashboard',
+      failureRedirect: '/auth',
       throwOnError: true,
     });
   } catch (error) {
