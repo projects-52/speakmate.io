@@ -44,6 +44,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         body: formData,
       }).then(handleResponse);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRecording, chunks, onMessageReceived, conversation]);
 
   const startRecording = async () => {
@@ -83,6 +84,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         stopRecording();
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isRecording]
   );
 

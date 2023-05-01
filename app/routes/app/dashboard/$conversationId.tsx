@@ -58,7 +58,7 @@ export default function Conversation() {
   };
 
   return (
-    <div className="h-screen flex flex-col border-l border-slate-200">
+    <div className="h-screen flex flex-col border-l border-slate-200 bg-white z-10 relative">
       <div className="overflow-y-auto flex-1 p-4">
         {messageList
           .filter((message: Message) => message.role !== 'system')

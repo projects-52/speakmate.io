@@ -1,17 +1,8 @@
-import { Fragment, useState } from 'react';
 import { Outlet, useLoaderData } from '@remix-run/react';
-import { Dialog, Transition } from '@headlessui/react';
-import {
-  Bars3Icon,
-  FolderIcon,
-  HomeIcon,
-  XMarkIcon,
-  Cog6ToothIcon,
-} from '@heroicons/react/24/outline';
+import { HomeIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { NavLink, useLocation } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/node';
-import { useTranslation } from 'react-i18next';
 import { authenticator } from '~/services/auth.service';
 
 const navigation = [
@@ -41,13 +32,12 @@ export default function App() {
   const location = useLocation();
 
   const { user } = useLoaderData<typeof loader>();
-  const { t } = useTranslation();
 
   return (
     <>
       <div className="flex">
         <nav className="flex flex-col h-screen bg-white flex-none w-16 border-r border-slate-200 items-center">
-          <div className="w-10 h-10 bg-blue-300 rounded-full mt-6 mb-6" />
+          <div className="w-10 h-10 bg-blue-300 rounded-full mt-4 mb-6" />
           <ul className="flex flex-1 flex-col gap-y-2 justify-center">
             {navigation.map((item) => (
               <li key={item.name}>

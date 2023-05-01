@@ -1,7 +1,7 @@
 import type { Conversation } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form, Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
+import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth.service';
 import { getAllConversationsForUser } from '~/services/conversation.service';
 import { PlusIcon } from '@heroicons/react/24/outline';
@@ -61,8 +61,16 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 relative">
         <Outlet />
+        <div
+          className="absolute w-full h-screen left-0 top-0 border-l
+          border-slate-200 flex items-center justify-center"
+        >
+          <span className="text-lg text-gray-600">
+            Choose conversation or create new one!
+          </span>
+        </div>
       </div>
     </div>
   );
