@@ -3,6 +3,7 @@ import { json } from '@remix-run/node';
 
 import { Response } from '@remix-run/node';
 import { authenticator } from '~/services/auth.service';
+import { createMessage } from '~/services/message.service';
 import { transcribeAudio } from '~/services/openai.service';
 
 export const action: ActionFunction = async ({ request }) => {
@@ -14,6 +15,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const formData = await request.formData();
   const file = formData.get('audio');
+  const conversationId = formData.get('conversationId') as string;
 
   if (!(file instanceof File)) {
     throw new Error('File not found');
@@ -24,5 +26,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   const response = await transcribeAudio(buffer, file);
 
-  return json(response);
+  const message = await createMessage(conversationId, response.text, 'user');
+
+  return json(message);
 };
