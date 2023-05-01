@@ -46,7 +46,7 @@ export async function getAllMessagesForConversationOrderedByDate(
         conversationId,
       },
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
     });
 

@@ -26,6 +26,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   const response = await transcribeAudio(buffer, file);
 
+  if (!response || !response.text || !response.text.length) {
+    return null;
+  }
+
   const message = await createMessage(conversationId, response.text, 'user');
 
   return json(message);

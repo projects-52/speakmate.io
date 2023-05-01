@@ -21,7 +21,9 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   const handleResponse = async (response: Response) => {
     if (response.ok) {
       const data: Message = await response.json();
-      onMessageReceived(data);
+      if (data !== null) {
+        onMessageReceived(data);
+      }
     } else {
       console.error('Failed to fetch response');
     }
@@ -105,7 +107,7 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
         onMouseUp={stopRecording}
         onTouchStart={startRecording}
         onTouchEnd={stopRecording}
-        className="font-bold p-8 rounded mt-8 w-full bg-slate-100"
+        className="font-bold p-8 rounded w-full bg-slate-100"
         disabled={isLoading}
       >
         {isRecording && (

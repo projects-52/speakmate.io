@@ -37,7 +37,7 @@ export default function Conversation() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messageList]);
 
   useEffect(() => {
     setMessageList(messages);

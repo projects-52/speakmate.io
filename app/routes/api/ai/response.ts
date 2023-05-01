@@ -25,6 +25,8 @@ export const action: ActionFunction = async ({ request }) => {
     conversationId
   );
 
+  console.log('messages', messages);
+
   const response = await getAnswer(messages);
 
   if (!response) {
