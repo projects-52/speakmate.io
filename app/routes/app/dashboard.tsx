@@ -1,3 +1,9 @@
+import AudioRecorder from '~/components/AudioRecorder';
+
 export default function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <AudioRecorder />
+    </div>
+  );
 }
