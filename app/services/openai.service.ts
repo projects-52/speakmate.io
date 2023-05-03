@@ -86,3 +86,55 @@ export async function getAnswer(
     return null;
   }
 }
+
+export async function getAdvice(message: Message, conversation: Conversation) {
+  if (!message) {
+    return;
+  }
+
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: `
+    You're the language learning assistant.
+    You will try to adapt to the user's level of language proficiency.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
+
+    Please correct the user's mistakes and give them advice on how to improve.
+    Keep in mind, that this is the recognized speech, so avoid correcting the user's mistakes that are caused by the speech recognition errors.
+    Give me html string as a response
+
+    User: ${message.text}
+
+    Example of a good response:
+
+    <div>
+      <p>Good overal, just few corrections:</p>
+
+      <p> - "I'm" instead of "i'm"</p>
+      <p> - You should use past tense here: "I was born in 1990"</p>
+    </div>
+    Good overal, just few corrections:
+    `,
+  };
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [propmptMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

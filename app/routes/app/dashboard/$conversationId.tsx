@@ -4,6 +4,7 @@ import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import AudioRecorder from '~/components/AudioRecorder';
+import AdvicePopup from '~/components/conversation/AdvicePopup';
 import { authenticator } from '~/services/auth.service';
 import { getConversationById } from '~/services/conversation.service';
 import { getAllMessagesForConversation } from '~/services/message.service';
@@ -33,7 +34,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 export default function Conversation() {
   const { conversation, messages } = useLoaderData<typeof loader>();
   const [messageList, setMessageList] = useState<Message[]>(messages);
+  const [advice, setAdvice] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const [loading, setLoading] = useState<string | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -57,6 +60,20 @@ export default function Conversation() {
     setMessageList((messages) => [...messages, message]);
   };
 
+  const getAdvice = async (messageId: string) => {
+    setLoading(messageId);
+    const response = await fetch('/api/ai/advice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ messageId, conversationId: conversation.id }),
+    });
+    const advice = await response.json();
+    setLoading(null);
+    setAdvice(advice);
+  };
+
   return (
     <div className="h-screen flex flex-col border-l border-slate-200 bg-white z-10 relative">
       <div className="overflow-y-auto flex-1 p-4">
@@ -77,11 +94,27 @@ export default function Conversation() {
                 } inline-block rounded-md px-4 py-2 m-1 max-w-lg`}
               >
                 {message.text}
+
+                {message.role === 'user' && (
+                  <div className="border-t mt-2 border-blue-200">
+                    <span
+                      className="text-xs text-gray-200 cursor-pointer"
+                      onClick={() => getAdvice(message.id)}
+                    >
+                      {loading === message.id ? 'Loading...' : 'Get advice'}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ))}
         <div ref={messagesEndRef} />
       </div>
+      <AdvicePopup
+        open={!!advice}
+        setOpen={() => setAdvice(null)}
+        advice={advice}
+      />
       <div className="">
         <AudioRecorder
           conversation={conversation}

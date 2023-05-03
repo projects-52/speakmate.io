@@ -56,3 +56,16 @@ export async function getAllMessagesForConversationOrderedByDate(
     return [];
   }
 }
+
+export async function getMessageById(id: string) {
+  try {
+    return await prisma.message.findUnique({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    console.error('ERROR GETTING MESSAGE BY ID', error);
+    return null;
+  }
+}
