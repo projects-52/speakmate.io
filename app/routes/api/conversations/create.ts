@@ -12,9 +12,16 @@ export const action: ActionFunction = async ({ request }) => {
     return redirect('/auth');
   }
 
-  const conversation = await createConversation(user.id);
+  const formData = await request.formData();
 
-  console.log('conversation', conversation);
+  const language = formData.get('language') as string;
+  const level = formData.get('level') as string;
+  const native= formData.get('native') as string;
+  const name = `${language} ${level}`;
+
+
+
+  const conversation = await createConversation(user.id, name, language, native, level);
 
   if (!conversation) {
     return redirect('/app/dashboard');

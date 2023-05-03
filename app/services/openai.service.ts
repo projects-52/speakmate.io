@@ -1,4 +1,4 @@
-import type { Message } from '@prisma/client';
+import type { Conversation, Message } from '@prisma/client';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import FormData from 'form-data';
@@ -39,7 +39,10 @@ export async function transcribeAudio(buffer: Buffer, file: File) {
   }
 }
 
-export async function getAnswer(messages: Message[]) {
+export async function getAnswer(
+  messages: Message[],
+  conversation: Conversation
+) {
   if (!messages || messages?.length === 0) {
     return;
   }
@@ -59,6 +62,9 @@ export async function getAnswer(messages: Message[]) {
     You will try to keep the conversation interesting.
     You will actively propose topics and questions to the user.
     You wouldn't try to correct the user's mistakes.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
     `,
   };
 

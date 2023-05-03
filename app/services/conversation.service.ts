@@ -26,17 +26,21 @@ export async function getConversationById(id: string) {
   }
 }
 
-function getDateString() {
-  const date = new Date();
-  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-}
-
-export async function createConversation(userId: string) {
+export async function createConversation(
+  userId: string,
+  name: string,
+  language: string,
+  native: string,
+  level: string
+) {
   try {
     return await prisma.conversation.create({
       data: {
         userId,
-        name: getDateString(),
+        name,
+        language,
+        native,
+        level,
       },
     });
   } catch (error) {

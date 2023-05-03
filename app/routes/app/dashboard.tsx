@@ -1,7 +1,7 @@
 import type { Conversation } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { Form, NavLink, Outlet, useLoaderData } from '@remix-run/react';
+import { Form, Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth.service';
 import { getAllConversationsForUser } from '~/services/conversation.service';
 import { PlusIcon } from '@heroicons/react/24/outline';
@@ -27,13 +27,14 @@ export default function Dashboard() {
   return (
     <div className="flex h-full">
       <div className="h-full">
-        {/* <Link
+        <Link
           to="/app/dashboard/new"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-8 mt-4"
+          className="p-4 rounded mb-4 flex items-center justify-center gap-2 text-gray-500 border-b border-slate-200"
         >
-          Add conversation
-        </Link> */}
-        <Form method="post" action="/api/conversations/create">
+          <PlusIcon className="w-8 h-8" />
+          New conversation
+        </Link>
+        {/* <Form method="post" action="/api/conversations/create">
           <button
             type="submit"
             className="p-4 rounded mb-4 flex items-center justify-center gap-2 text-gray-500 border-b border-slate-200"
@@ -41,7 +42,7 @@ export default function Dashboard() {
             <PlusIcon className="w-8 h-8" />
             Add conversation
           </button>
-        </Form>
+        </Form> */}
         <div className="p-2">
           {conversations.map((conversation: Conversation) => (
             <NavLink

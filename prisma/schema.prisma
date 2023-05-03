@@ -27,6 +27,9 @@ model Conversation {
   messages  Message[]
   userId    String    @db.ObjectId
   user      User      @relation(fields: [userId], references: [id])
+  level     String?
+  language  String?
+  native    String?
 }
 
 model Message {
