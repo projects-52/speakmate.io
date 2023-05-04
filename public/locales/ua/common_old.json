@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "appName": "Додаток"
+  },
+  "navigation": {
+    "profile": "Профіль",
+    "home": "Головна",
+    "courses": "Курси",
+    "settings": "Налаштування",
+    "sidebar": {
+      "open": "Відкрити сайдбар"
+    },
+    "dashboard": "Домашня сторінка"
+  },
+  "auth": {
+    "facebook": "Увійти з Facebook"
+  },
+  "hello": {
+    "world": "Привіт світ"
+  }
+}

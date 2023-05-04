@@ -1,17 +1,6 @@
 {
   "meta": {
-    "title": "App",
-    "appName": "App name"
-  },
-  "navigation": {
-    "profile": "Profile",
-    "home": "Home",
-    "courses": "Courses",
-    "settings": "Settings",
-    "sidebar": {
-      "open": "Open sidebar"
-    },
-    "dashboard": "Dashboard"
+    "title": "App"
   },
   "profile": {
     "logout": "Logout",
@@ -19,10 +8,6 @@
   },
   "auth": {
     "title": "Sign in to your account",
-    "google": "Sign in with Google",
-    "facebook": "Sign in with Facebook"
-  },
-  "hello": {
-    "world": "Hello, world!"
+    "google": "Sign in with Google"
   }
 }

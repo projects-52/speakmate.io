@@ -138,3 +138,54 @@ export async function getAdvice(message: Message, conversation: Conversation) {
     return null;
   }
 }
+
+export async function getExplanation(
+  message: Message,
+  conversation: Conversation,
+  text: string
+) {
+  if (!message) {
+    return;
+  }
+
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: `
+    You're the language learning assistant.
+    You will try to adapt to the user's level of language proficiency.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
+
+    User wants you to explain part of the following message: "${message.text}"
+
+    Part of the message to explain: "${text}"
+
+    Example of a good response:
+
+    <div>
+      <p><original text> - <text translated to the user's native language></p>
+      <p><Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns></p>
+    </div>
+    `,
+  };
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [propmptMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "appName": "App name"
+  },
+  "navigation": {
+    "profile": "Profile",
+    "home": "Home",
+    "courses": "Courses",
+    "settings": "Settings",
+    "sidebar": {
+      "open": "Open sidebar"
+    },
+    "dashboard": "Dashboard"
+  },
+  "auth": {
+    "facebook": "Sign in with Facebook"
+  },
+  "hello": {
+    "world": "Hello, world!"
+  }
+}

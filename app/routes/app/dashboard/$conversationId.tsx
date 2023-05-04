@@ -5,6 +5,8 @@ import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import AudioRecorder from '~/components/AudioRecorder';
 import AdvicePopup from '~/components/conversation/AdvicePopup';
+import AssistantMessage from '~/components/conversation/messages/AssistanceMessage';
+import UserMessage from '~/components/conversation/messages/UserMessage';
 import { authenticator } from '~/services/auth.service';
 import { getConversationById } from '~/services/conversation.service';
 import { getAllMessagesForConversation } from '~/services/message.service';
@@ -79,35 +81,13 @@ export default function Conversation() {
       <div className="overflow-y-auto flex-1 p-4">
         {messageList
           .filter((message: Message) => message.role !== 'system')
-          .map((message: Message) => (
-            <div
-              key={message.id}
-              className={`${
-                message.role === 'user' ? 'text-right' : 'text-left'
-              }`}
-            >
-              <div
-                className={`${
-                  message.role === 'user'
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-300 text-black'
-                } inline-block rounded-md px-4 py-2 m-1 max-w-lg`}
-              >
-                {message.text}
-
-                {message.role === 'user' && (
-                  <div className="border-t mt-2 border-blue-200">
-                    <span
-                      className="text-xs text-gray-200 cursor-pointer"
-                      onClick={() => getAdvice(message.id)}
-                    >
-                      {loading === message.id ? 'Loading...' : 'Get advice'}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
+          .map((message: Message) =>
+            message.role === 'user' ? (
+              <UserMessage message={message} key={message.id} />
+            ) : (
+              <AssistantMessage message={message} key={message.id} />
+            )
+          )}
         <div ref={messagesEndRef} />
       </div>
       <AdvicePopup

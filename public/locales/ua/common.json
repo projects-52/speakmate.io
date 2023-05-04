@@ -1,17 +1,6 @@
 {
   "meta": {
-    "title": "Додаток",
-    "appName": "Додаток"
-  },
-  "navigation": {
-    "profile": "Профіль",
-    "home": "Головна",
-    "courses": "Курси",
-    "settings": "Налаштування",
-    "sidebar": {
-      "open": "Відкрити сайдбар"
-    },
-    "dashboard": "Домашня сторінка"
+    "title": "Додаток"
   },
   "profile": {
     "logout": "Вийти",
@@ -19,10 +8,6 @@
   },
   "auth": {
     "title": "Увійти у свій аккаунт",
-    "google": "Увійти з Google",
-    "facebook": "Увійти з Facebook"
-  },
-  "hello": {
-    "world": "Привіт світ"
+    "google": "Увійти з Google"
   }
 }
