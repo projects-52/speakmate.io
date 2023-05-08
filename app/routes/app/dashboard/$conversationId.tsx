@@ -10,15 +10,12 @@ import UserMessage from '~/components/conversation/messages/UserMessage';
 import { authenticator } from '~/services/auth.service';
 import { getConversationById } from '~/services/conversation.service';
 import { getAllMessagesForConversation } from '~/services/message.service';
+import { getNextMessageForConversation } from '~/services/response.service';
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  const user = await authenticator.isAuthenticated(request, {
+  await authenticator.isAuthenticated(request, {
     failureRedirect: '/auth',
   });
-
-  if (!user) {
-    return redirect('/auth');
-  }
 
   const conversation = await getConversationById(
     params.conversationId as string
@@ -38,7 +35,6 @@ export default function Conversation() {
   const [messageList, setMessageList] = useState<Message[]>(messages);
   const [advice, setAdvice] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const [loading, setLoading] = useState<string | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -48,32 +44,9 @@ export default function Conversation() {
     setMessageList(messages);
   }, [conversation, messages]);
 
-  // useEffect, that call function scrollIntoView, when messageList changes
   const getResponse = async () => {
-    const response = await fetch('/api/ai/response', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ conversationId: conversation.id }),
-    });
-    const message = await response.json();
-
+    const message = await getNextMessageForConversation(conversation.id);
     setMessageList((messages) => [...messages, message]);
-  };
-
-  const getAdvice = async (messageId: string) => {
-    setLoading(messageId);
-    const response = await fetch('/api/ai/advice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ messageId, conversationId: conversation.id }),
-    });
-    const advice = await response.json();
-    setLoading(null);
-    setAdvice(advice);
   };
 
   return (
