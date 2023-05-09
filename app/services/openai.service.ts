@@ -158,16 +158,20 @@ export async function getExplanation(
     User's level of language proficiency is ${conversation.level}.
     User's native language is ${conversation.native}.
 
+    Response only with JSON and nothing else besides JSON
+
     User wants you to explain part of the following message: "${message.text}"
 
     Part of the message to explain: "${text}"
 
     Example of a good response:
 
-    <div>
-      <p><original text> - <text translated to the user's native language></p>
-      <p><Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns></p>
-    </div>
+    {
+      "original": "<original part of the message to explain>",
+      "translation": "<original part of the message translated to the user's native language>",
+      "explanation": "<Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns>"
+    }
+
     `,
   };
 
