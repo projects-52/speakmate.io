@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData } from '@remix-run/react';
-import { HomeIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, Cog6ToothIcon, ListBulletIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { NavLink, useLocation } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/node';
@@ -19,6 +19,11 @@ const navigation = [
     icon: Cog6ToothIcon,
     current: false,
   },
+  {
+    name: 'navigation.cards',
+    href: '/app/cards',
+    icon: ListBulletIcon,
+  }
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {

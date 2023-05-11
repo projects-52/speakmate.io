@@ -196,3 +196,60 @@ export async function getExplanation(
     return null;
   }
 }
+
+export async function getCardExplanation(
+  message: Message,
+  conversation: Conversation,
+  text: string
+) {
+  if (!message) {
+    return;
+  }
+
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: `
+    You're the language learning assistant.
+    You will try to adapt to the user's level of language proficiency.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
+
+    Response only with JSON and nothing else besides JSON
+
+    User wants to add a dictionary item for the following text: "${text}"
+
+    User wants to keep those cards to learcn language more efficiently.
+
+    This text is the part of the following message: "${text}"
+
+    Example of a good response:
+
+    {
+      "text": "<original part of the message to explain>",
+      "translation": "<original part of the message translated to the user's native language>",
+      "explanation": "<Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns>"
+    }
+
+    `,
+  };
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [propmptMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}

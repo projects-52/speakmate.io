@@ -21,7 +21,12 @@ export default function AssistantMessage({
   const messageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseUp = () => {
+    const handleMouseUp = (e: MouseEvent) => {
+      console.log('mouse up');
+
+      if (e.target.dataset.button === 'card') {
+        return;
+      }
       setExplanation(undefined);
       const selection = window.getSelection();
       // @ts-ignore
