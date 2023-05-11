@@ -1,5 +1,5 @@
 import type { Explanation, Message } from '@prisma/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { explainText } from '~/services/explanation.service';
 
 interface ExplanationPopupProps {

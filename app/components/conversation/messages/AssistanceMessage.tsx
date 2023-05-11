@@ -48,6 +48,7 @@ export default function AssistantMessage({
       messageRef.current.addEventListener('mouseup', handleMouseUp);
       return () => {
         // @ts-ignore
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         messageRef.current?.removeEventListener('mouseup', handleMouseUp);
       };
     }

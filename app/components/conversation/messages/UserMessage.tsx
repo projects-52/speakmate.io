@@ -7,7 +7,6 @@ interface UserMessageProps {
 
 export default function UserMessage({ message }: UserMessageProps) {
   const [loading, setLoading] = useState<string | null>(null);
-  const [advice, setAdvice] = useState<string | null>(null);
 
   const getAdvice = async (messageId: string) => {
     setLoading(messageId);
@@ -18,9 +17,8 @@ export default function UserMessage({ message }: UserMessageProps) {
       },
       body: JSON.stringify({ messageId }),
     });
-    const advice = await response.json();
+    await response.json();
     setLoading(null);
-    setAdvice(advice);
   };
 
   return (

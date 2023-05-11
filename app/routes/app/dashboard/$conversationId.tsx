@@ -3,8 +3,8 @@ import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
-import AudioRecorder from '~/components/AudioRecorder';
 import AdvicePopup from '~/components/conversation/AdvicePopup';
+import { ChatInput } from '~/components/conversation/ChatInput';
 import AssistantMessage from '~/components/conversation/messages/AssistanceMessage';
 import UserMessage from '~/components/conversation/messages/UserMessage';
 import { authenticator } from '~/services/auth.service';
@@ -85,7 +85,7 @@ export default function Conversation() {
         advice={advice}
       />
       <div className="">
-        <AudioRecorder
+        <ChatInput
           conversation={conversation}
           onMessageReceived={(message: Message) => {
             setMessageList((messages) => [...messages, message]);

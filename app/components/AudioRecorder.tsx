@@ -101,13 +101,13 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   }, [handleKeyDown, handleKeyUp]);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center w-full">
       <button
         onMouseDown={startRecording}
         onMouseUp={stopRecording}
         onTouchStart={startRecording}
         onTouchEnd={stopRecording}
-        className="font-bold p-8 rounded w-full bg-slate-100"
+        className="font-bold p-4 rounded w-full "
         disabled={isLoading}
       >
         {isRecording && (
