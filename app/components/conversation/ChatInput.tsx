@@ -10,7 +10,7 @@ interface ChatInputProps {
 }
 
 export function ChatInput({ conversation, onMessageReceived }: ChatInputProps) {
-  const [type, setType] = useState<'text' | 'voice'>('text');
+  const [type, setType] = useState<'text' | 'voice'>('voice');
   return (
     <div className="flex p-2 border-t border-slate-200">
       <div className="flex flex-col gap-2 pr-4">

@@ -1,19 +1,20 @@
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/24/outline';
+import type { Feedback } from '@prisma/client';
 
-interface AdvicePopupProps {
+interface FeedbackPopupProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  advice: string | null;
+  feedback: Feedback | null;
 }
 
-export default function AdvicePopup({
+export default function FeedbackPopup({
   open,
   setOpen,
-  advice,
-}: AdvicePopupProps) {
-  if (!advice) {
+  feedback,
+}: FeedbackPopupProps) {
+  if (!feedback) {
     return null;
   }
   return (
@@ -55,13 +56,14 @@ export default function AdvicePopup({
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Here is your advice!
+                      {feedback.text.intro}
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p
-                        className="text-sm text-gray-500 text-left"
-                        dangerouslySetInnerHTML={{ __html: advice }}
-                      ></p>
+                      <ul className="text-sm text-gray-500 text-left list-disc">
+                        {feedback.text.corrections.map((correction) => (
+                          <li key={correction}>{correction}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>

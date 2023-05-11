@@ -3,7 +3,6 @@ import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
-import AdvicePopup from '~/components/conversation/AdvicePopup';
 import { ChatInput } from '~/components/conversation/ChatInput';
 import AssistantMessage from '~/components/conversation/messages/AssistanceMessage';
 import UserMessage from '~/components/conversation/messages/UserMessage';
@@ -37,7 +36,6 @@ export default function Conversation() {
   const { conversation, messages, explanations } =
     useLoaderData<typeof loader>();
   const [messageList, setMessageList] = useState<Message[]>(messages);
-  const [advice, setAdvice] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -79,11 +77,7 @@ export default function Conversation() {
           )}
         <div ref={messagesEndRef} />
       </div>
-      <AdvicePopup
-        open={!!advice}
-        setOpen={() => setAdvice(null)}
-        advice={advice}
-      />
+
       <div className="">
         <ChatInput
           conversation={conversation}

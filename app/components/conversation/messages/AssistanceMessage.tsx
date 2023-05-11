@@ -22,6 +22,7 @@ export default function AssistantMessage({
 
   useEffect(() => {
     const handleMouseUp = () => {
+      setExplanation(undefined);
       const selection = window.getSelection();
       // @ts-ignore
       const selectedText = selection.toString();

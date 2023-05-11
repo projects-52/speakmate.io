@@ -87,7 +87,10 @@ export async function getAnswer(
   }
 }
 
-export async function getAdvice(message: Message, conversation: Conversation) {
+export async function getFeedback(
+  message: Message,
+  conversation: Conversation
+) {
   if (!message) {
     return;
   }
@@ -104,19 +107,19 @@ export async function getAdvice(message: Message, conversation: Conversation) {
 
     Please correct the user's mistakes and give them advice on how to improve.
     Keep in mind, that this is the recognized speech, so avoid correcting the user's mistakes that are caused by the speech recognition errors.
-    Give me html string as a response
+    Response only with JSON and nothing else besides JSON
 
     User: ${message.text}
 
     Example of a good response:
 
-    <div>
-      <p>Good overal, just few corrections:</p>
-
-      <p> - "I'm" instead of "i'm"</p>
-      <p> - You should use past tense here: "I was born in 1990"</p>
-    </div>
-    Good overal, just few corrections:
+    {
+      "intro": "<General overview of the message. Depends on the user's level, you can use either target or native language>",
+      "corrections": [
+        <Text of the first correction>,
+        <Text of the second correction>,
+      ]
+    }
     `,
   };
 

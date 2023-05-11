@@ -1,5 +1,7 @@
-import type { Message } from '@prisma/client';
+import type { Feedback, Message } from '@prisma/client';
 import { useState } from 'react';
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import FeedbackPopup from '../popups/FeedbackPopup';
 
 interface UserMessageProps {
   message: Message;
@@ -7,17 +9,19 @@ interface UserMessageProps {
 
 export default function UserMessage({ message }: UserMessageProps) {
   const [loading, setLoading] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
 
-  const getAdvice = async (messageId: string) => {
+  const getFedback = async (messageId: string) => {
     setLoading(messageId);
-    const response = await fetch('/api/ai/advice', {
+    const response = await fetch('/api/ai/feedback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ messageId }),
     });
-    await response.json();
+    const feedback = await response.json();
+    setFeedback(feedback);
     setLoading(null);
   };
 
@@ -36,16 +40,25 @@ export default function UserMessage({ message }: UserMessageProps) {
         {message.text}
 
         {message.role === 'user' && (
-          <div className="border-t mt-2 border-blue-200">
+          <div className="mt-2">
             <span
               className="text-xs text-gray-200 cursor-pointer"
-              onClick={() => getAdvice(message.id)}
+              onClick={() => getFedback(message.id)}
             >
-              {loading === message.id ? 'Loading...' : 'Get advice'}
+              {loading === message.id ? (
+                'Loading...'
+              ) : (
+                <QuestionMarkCircleIcon className="w-4 h-4" />
+              )}
             </span>
           </div>
         )}
       </div>
+      <FeedbackPopup
+        feedback={feedback}
+        open={!!feedback}
+        setOpen={() => setFeedback(null)}
+      />
     </div>
   );
 }
