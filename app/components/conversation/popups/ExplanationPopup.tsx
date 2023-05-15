@@ -1,6 +1,7 @@
-import type { Explanation, Message } from '@prisma/client';
+import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState } from 'react';
 import { explainText } from '~/services/explanation.service';
+import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 
 interface ExplanationPopupProps {
   show: boolean;
@@ -8,6 +9,7 @@ interface ExplanationPopupProps {
   position: { bottom: number; left: number } | null;
   message: Message;
   existingExplanation?: Explanation;
+  conversation: Conversation;
 }
 
 export default function ExplanationPopup({
@@ -16,6 +18,7 @@ export default function ExplanationPopup({
   text,
   message,
   existingExplanation,
+  conversation,
 }: ExplanationPopupProps) {
   const [loading, setLoading] = useState(false);
   const [explanation, setExplanation] = useState<Explanation | undefined>(
@@ -45,6 +48,13 @@ export default function ExplanationPopup({
     setAddingToCards(false);
   };
 
+  const onSpeak = (e) => {
+    e.nativeEvent.stopPropagation();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = conversation.language as string;
+    window.speechSynthesis.speak(utterance);
+  };
+
   const style = position
     ? {
         bottom: `${position.bottom + 20}px`,
@@ -56,10 +66,18 @@ export default function ExplanationPopup({
       {loading ? <p>Loading...</p> : null}
       {explanation && !loading && !existingExplanation ? (
         <div>
-          <p>{explanation.explanation?.original}</p>
+          <p className="flex items-center gap-2">
+            {explanation.explanation?.original}{' '}
+            <SpeakerWaveIcon
+              className="w-10 h-10 cursor-pointer hover:bg-slate-100 rounded p-2"
+              onClick={onSpeak}
+              data-button="card"
+            />
+          </p>
           <p>{explanation.explanation?.translation}</p>
           <p>{explanation.explanation?.explanation}</p>
           <button
+            data-button="card"
             className="bg-blue-500 text-white px-4 py-1 rounded"
             onClick={onAddToCardsClick}
           >
@@ -69,7 +87,14 @@ export default function ExplanationPopup({
       ) : null}
       {existingExplanation && !loading && !explanation ? (
         <div>
-          <p>{existingExplanation.explanation?.original}</p>
+          <p className="flex items-center gap-2">
+            {existingExplanation.explanation?.original}{' '}
+            <SpeakerWaveIcon
+              className="w-10 h-10 cursor-pointer hover:bg-slate-100 rounded p-2"
+              onClick={onSpeak}
+              data-button="card"
+            />
+          </p>
           <p>{existingExplanation.explanation?.translation}</p>
           <p>{existingExplanation.explanation?.explanation}</p>
           <button

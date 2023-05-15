@@ -33,6 +33,7 @@ model Conversation {
   native      String?
   Explanation Explanation[]
   Feedback    Feedback[]
+  topic       String?
 }
 
 model Message {

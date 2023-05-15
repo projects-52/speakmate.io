@@ -74,6 +74,7 @@ export default function Conversation() {
             key={message.id}
             message={message}
             explanations={getExplanationsForMessage(message, explanations)}
+            conversation={conversation}
           />
         ))}
         <div ref={messagesEndRef} />

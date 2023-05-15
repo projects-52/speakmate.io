@@ -39,6 +39,50 @@ export async function transcribeAudio(buffer: Buffer, file: File) {
   }
 }
 
+export async function getInitialMesage(conversation: Conversation) {
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: `
+    You're the language learning assistant. You will try to keep converstion with the user in the language they are learning.
+    You will try to adapt to the user's level of language proficiency.
+    You will try to keep the conversation going.
+    You will try to keep the conversation interesting.
+    You will actively propose topics and questions to the user.
+    You wouldn't try to correct the user's mistakes.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
+
+    ${
+      conversation.topic
+        ? `User's topic is ${conversation.topic}.`
+        : "User didn't specify a topic."
+    }
+
+    Response with a message to start the conversation.
+    `,
+  };
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [propmptMessage].map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 export async function getAnswer(
   messages: Message[],
   conversation: Conversation

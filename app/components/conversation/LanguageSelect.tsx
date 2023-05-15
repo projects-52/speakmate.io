@@ -4,6 +4,12 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 const languages = ['English', 'Japanese', 'Ukrainian'];
 
+const languageCodes: Record<string, string> = {
+  English: 'en-US',
+  Japanese: 'ja-JP',
+  Ukrainian: 'uk-UA',
+};
+
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
@@ -21,7 +27,7 @@ export default function LanguageSelect({
 
   const onSelect = (language: string) => {
     setSelected(language);
-    onChange(language);
+    onChange(languageCodes[language]);
   };
 
   return (

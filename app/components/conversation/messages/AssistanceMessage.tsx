@@ -1,15 +1,17 @@
-import type { Explanation, Message } from '@prisma/client';
+import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
 import ExplanationPopup from '../popups/ExplanationPopup';
 
 interface AssistantMessageProps {
   message: Message;
   explanations: Explanation[];
+  conversation: Conversation;
 }
 
 export default function AssistantMessage({
   message,
   explanations,
+  conversation,
 }: AssistantMessageProps) {
   const [selectedText, setSelectedText] = useState('');
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -23,6 +25,8 @@ export default function AssistantMessage({
   useEffect(() => {
     const handleMouseUp = (e: MouseEvent) => {
       console.log('mouse up');
+
+      console.log(e.target.dataset);
 
       if (e.target.dataset.button === 'card') {
         return;
@@ -146,6 +150,7 @@ export default function AssistantMessage({
         position={tooltipPosition}
         message={message}
         existingExplanation={explanation}
+        conversation={conversation}
       />
       <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 m-1 max-w-lg">
         {wrapTextInSpans(message.text, explanations)}
