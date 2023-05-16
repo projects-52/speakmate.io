@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import FormData from 'form-data';
 import { ChatCompletionRequestMessageRoleEnum } from 'openai';
+import { buildContextForChat } from './chat.service';
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY as string;
 
@@ -44,7 +45,10 @@ export async function getInitialMesage(conversation: Conversation) {
     role: ChatCompletionRequestMessageRoleEnum.System,
 
     content: `
-    You're the language learning assistant. You will try to keep converstion with the user in the language they are learning.
+    You're the language learning teacher. Your name is ${
+      conversation.character?.name
+    }.
+    Your personality is ${conversation.character?.personality}.
     You will try to adapt to the user's level of language proficiency.
     You will try to keep the conversation going.
     You will try to keep the conversation interesting.
@@ -60,7 +64,7 @@ export async function getInitialMesage(conversation: Conversation) {
         : "User didn't specify a topic."
     }
 
-    Response with a message to start the conversation.
+    Response with a message to start the conversation. You can introduce yourself and kick off the conversation.
     `,
   };
 
@@ -100,7 +104,8 @@ export async function getAnswer(
     role: ChatCompletionRequestMessageRoleEnum.System,
 
     content: `
-    You're the language learning assistant. You will try to keep converstion with the user in the language they are learning.
+    You're the language learning teacher. Your name is ${conversation.character?.name}.
+    Your personality is ${conversation.character?.personality}.
     You will try to adapt to the user's level of language proficiency.
     You will try to keep the conversation going.
     You will try to keep the conversation interesting.

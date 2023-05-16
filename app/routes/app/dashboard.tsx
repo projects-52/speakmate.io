@@ -34,15 +34,7 @@ export default function Dashboard() {
           <PlusIcon className="w-8 h-8" />
           New conversation
         </Link>
-        {/* <Form method="post" action="/api/conversations/create">
-          <button
-            type="submit"
-            className="p-4 rounded mb-4 flex items-center justify-center gap-2 text-gray-500 border-b border-slate-200"
-          >
-            <PlusIcon className="w-8 h-8" />
-            Add conversation
-          </button>
-        </Form> */}
+
         <div className="p-2">
           {conversations.map((conversation: Conversation) => (
             <NavLink
@@ -54,10 +46,12 @@ export default function Dashboard() {
                 }`
               }
             >
-              <span className="w-8 h-8 p-2 rounded-full bg-slate-300 text-white flex items-center justify-center mr-4">
-                EN
-              </span>
-              {conversation.name}
+              <img
+                className="w-8 h-8 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2"
+                src={`/characters/${conversation.character?.slug}.png`}
+                alt={conversation.character?.name}
+              />
+              {conversation.character?.name}
             </NavLink>
           ))}
         </div>

@@ -140,7 +140,7 @@ export default function AssistantMessage({
     <div
       key={message.id}
       ref={messageRef}
-      className={`relative ${
+      className={`relative flex items-start gap-2 ${
         message.role === 'user' ? 'text-right' : 'text-left'
       }`}
     >
@@ -152,7 +152,11 @@ export default function AssistantMessage({
         existingExplanation={explanation}
         conversation={conversation}
       />
-      <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 m-1 max-w-lg">
+      <img
+        src={`/characters/${conversation.character.slug}.png`}
+        className="w-12 h-12 rounded-full"
+      />
+      <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 max-w-lg">
         {wrapTextInSpans(message.text, explanations)}
       </div>
     </div>

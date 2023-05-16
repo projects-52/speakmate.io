@@ -1,3 +1,4 @@
+import type { Character } from '~/types/character.type';
 import { createMessage } from './message.service';
 import { getInitialMesage } from './openai.service';
 import { prisma } from './prisma.service';
@@ -34,7 +35,8 @@ export async function createConversation(
   language: string,
   native: string,
   level: string,
-  topic: string
+  topic: string,
+  characterData: Character
 ) {
   try {
     const conversation = await prisma.conversation.create({
@@ -45,6 +47,11 @@ export async function createConversation(
         native,
         level,
         topic,
+        character: {
+          slug: characterData.slug,
+          name: characterData.name,
+          personality: characterData.personality,
+        },
       },
     });
 

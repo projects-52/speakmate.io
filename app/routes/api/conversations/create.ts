@@ -2,6 +2,8 @@ import type { ActionFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { authenticator } from '~/services/auth.service';
 import { createConversation } from '~/services/conversation.service';
+import { Characters } from '~/characters';
+import type { Character } from '~/types/character.type';
 
 export const action: ActionFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request, {
@@ -18,7 +20,14 @@ export const action: ActionFunction = async ({ request }) => {
   const level = formData.get('level') as string;
   const native = formData.get('native') as string;
   const topic = formData.get('topic') as string;
+  const character = formData.get('character') as string;
   const name = `${language} ${level}`;
+
+  console.log(character);
+
+  const characterData = Characters[language].find(
+    (c: Character) => c.slug === character
+  ) as Character;
 
   const conversation = await createConversation(
     user.id,
@@ -26,7 +35,8 @@ export const action: ActionFunction = async ({ request }) => {
     language,
     native,
     level,
-    topic
+    topic,
+    characterData
   );
 
   if (!conversation) {
