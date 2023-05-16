@@ -153,11 +153,20 @@ export default function AssistantMessage({
         conversation={conversation}
       />
       <img
-        src={`/characters/${conversation.character.slug}.png`}
+        src={`/characters/${conversation.character?.slug}.png`}
         className="w-12 h-12 rounded-full"
+        alt={conversation.character?.name}
       />
-      <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 max-w-lg">
-        {wrapTextInSpans(message.text, explanations)}
+      <div>
+        <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 max-w-lg">
+          <p className="text-gray-500 text-sm mb-1">
+            {conversation.character?.name}
+          </p>
+          {wrapTextInSpans(message.text, explanations)}
+          <p className="text-gray-500 text-xs text-right">
+            {new Date(message.createdAt).toLocaleTimeString()}
+          </p>
+        </div>
       </div>
     </div>
   );

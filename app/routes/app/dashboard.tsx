@@ -4,7 +4,7 @@ import { redirect } from '@remix-run/node';
 import { Form, Link, NavLink, Outlet, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth.service';
 import { getAllConversationsForUser } from '~/services/conversation.service';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request, {
@@ -41,17 +41,18 @@ export default function Dashboard() {
               to={`/app/dashboard/${conversation.id}`}
               key={conversation.id}
               className={({ isActive }) =>
-                `p-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-l ${
+                `p-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-l max-w-sm ${
                   isActive ? 'bg-gray-200' : ''
                 }`
               }
             >
               <img
-                className="w-8 h-8 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2"
+                className="w-10 h-10 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2"
                 src={`/characters/${conversation.character?.slug}.png`}
                 alt={conversation.character?.name}
               />
-              {conversation.character?.name}
+              {conversation.name}
+              <EllipsisVerticalIcon className="w-8 h-8 justify-self-end ml-auto text-slate-200 hover:bg-slate-300 rounded-full" />
             </NavLink>
           ))}
         </div>

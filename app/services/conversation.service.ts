@@ -39,25 +39,34 @@ export async function createConversation(
   characterData: Character
 ) {
   try {
-    const conversation = await prisma.conversation.create({
-      data: {
-        userId,
-        name,
-        language,
-        native,
-        level,
-        topic,
-        character: {
-          slug: characterData.slug,
-          name: characterData.name,
-          personality: characterData.personality,
-        },
+    const conversationData = {
+      userId,
+      name,
+      language,
+      native,
+      level,
+      topic,
+      character: {
+        slug: characterData.slug,
+        name: characterData.name,
+        personality: characterData.personality,
       },
+    };
+    const data = await getInitialMesage(conversationData);
+
+    console.log(data);
+
+    const parsedData = JSON.parse(data as string);
+
+    const conversation = await prisma.conversation.create({
+      data: { ...conversationData, name: parsedData.name },
     });
 
-    const initialMessage = await getInitialMesage(conversation);
-
-    await createMessage(conversation.id, initialMessage as string, 'assistant');
+    await createMessage(
+      conversation.id,
+      parsedData.message as string,
+      'assistant'
+    );
 
     return conversation;
   } catch (error) {
