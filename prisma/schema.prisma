@@ -41,6 +41,7 @@ model Conversation {
   Feedback    Feedback[]
   topic       String?
   character   Character?
+  deleted     Boolean       @default(false)
 }
 
 model Message {

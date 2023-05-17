@@ -8,6 +8,7 @@ export async function getAllConversationsForUser(userId: string) {
     return await prisma.conversation.findMany({
       where: {
         userId,
+        deleted: false,
       },
     });
   } catch (error) {
@@ -18,9 +19,10 @@ export async function getAllConversationsForUser(userId: string) {
 
 export async function getConversationById(id: string) {
   try {
-    return await prisma.conversation.findUnique({
+    return await prisma.conversation.findFirst({
       where: {
         id,
+        deleted: false,
       },
     });
   } catch (error) {
@@ -46,6 +48,7 @@ export async function createConversation(
       native,
       level,
       topic,
+      deleted: false,
       character: {
         slug: characterData.slug,
         name: characterData.name,
@@ -53,8 +56,6 @@ export async function createConversation(
       },
     };
     const data = await getInitialMesage(conversationData);
-
-    console.log(data);
 
     const parsedData = JSON.parse(data as string);
 
@@ -73,4 +74,16 @@ export async function createConversation(
     console.error('ERROR CREATING CONVERSATION', error);
     return null;
   }
+}
+
+export async function deleteConversation(id: string) {
+  console.log('DELETING CONVERSATION', id);
+  return await prisma.conversation.update({
+    where: {
+      id,
+    },
+    data: {
+      deleted: true,
+    },
+  });
 }
