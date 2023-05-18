@@ -87,47 +87,52 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
 
   return (
     <div className="h-full">
-      <Link
-        to="/app/dashboard/new"
-        className="p-4 rounded mb-4 flex items-center justify-center gap-2 text-gray-500 border-b border-slate-200"
-      >
-        <PlusIcon className="w-8 h-8" />
-        New conversation
-      </Link>
-
-      <div className="flex py-2 px-4">
-        <div
-          className={`flex flex-col items-center justify-center mr-2 cursor-pointer w-10 h-10 bg-slate-200 rounded-full border-2 ${
-            selectedCharacter === null ? 'border-blue-500' : ''
-          }`}
-          onClick={() => setSelectedCharacter(null)}
+      <div className="p-4 flex gap-2 items-center justify-between ">
+        <div className="w-10 h-10 bg-blue-300 rounded-full  border-b border-slate-200" />
+        <Link
+          to="/app/dashboard/new"
+          className="p-2 rounded  flex items-center justify-center gap-2 text-slate-500"
         >
-          All
-        </div>
-        {uniqueCharacters.map((character) => (
-          <div
-            key={character.slug}
-            className="flex flex-col items-center justify-center"
-            onClick={() => setSelectedCharacter(character)}
-          >
-            <img
-              className={`w-10 h-10 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2 cursor-pointer border-2 ${
-                selectedCharacter?.slug === character.slug
-                  ? 'border-blue-500'
-                  : ''
-              }`}
-              src={`/characters/${character.slug}.png`}
-              alt={character.name}
-            />
-          </div>
-        ))}
+          <PlusIcon className="w-6 h-6" />
+          New conversation
+        </Link>
       </div>
+
+      {uniqueCharacters.length > 1 && (
+        <div className="flex py-2 px-4">
+          <div
+            className={`flex flex-col items-center justify-center mr-2 cursor-pointer w-10 h-10 bg-slate-200 rounded-full border-2 ${
+              selectedCharacter === null ? 'border-blue-500' : ''
+            }`}
+            onClick={() => setSelectedCharacter(null)}
+          >
+            All
+          </div>
+          {uniqueCharacters.map((character) => (
+            <div
+              key={character.slug}
+              className="flex flex-col items-center justify-center"
+              onClick={() => setSelectedCharacter(character)}
+            >
+              <img
+                className={`w-10 h-10 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2 cursor-pointer border-2 ${
+                  selectedCharacter?.slug === character.slug
+                    ? 'border-blue-500'
+                    : ''
+                }`}
+                src={`/characters/${character.slug}.png`}
+                alt={character.name}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="p-2">
         {groupedConversations.map(
           (conversationForDay: ConversationsForDay, index: number) => (
             <div key={index}>
-              <p className="mb-2 text-slate-400">
+              <p className="mb-2 text-slate-400 ml-2">
                 {isToday(conversationForDay.day) ? 'Today' : ''}
                 {isYesterday(conversationForDay.day) ? 'Yesterday' : ''}
                 {!isToday(conversationForDay.day) &&
@@ -141,8 +146,8 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
                     to={`/app/dashboard/${conversation.id}`}
                     key={conversation.id}
                     className={({ isActive }) =>
-                      `p-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-lg max-w-sm mb-2 ${
-                        isActive ? 'bg-gray-200' : ''
+                      `p-2 text-sm text-gray-700 flex items-center rounded-lg max-w-sm mb-2 ${
+                        isActive ? 'bg-primary-dark' : ''
                       }`
                     }
                   >

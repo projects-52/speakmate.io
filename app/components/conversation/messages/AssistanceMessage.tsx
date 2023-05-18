@@ -180,7 +180,7 @@ export default function AssistantMessage({
         alt={conversation.character?.name}
       />
       <div>
-        <div className="bg-gray-300 text-black inline-block rounded-md px-4 py-2 max-w-lg">
+        <div className="bg-gray-200 text-black inline-block rounded-md px-4 py-2 max-w-lg">
           <p className="text-gray-500 text-sm mb-1">
             {conversation.character?.name}
           </p>

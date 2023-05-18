@@ -85,10 +85,15 @@ export default function Conversation() {
         return m;
       })
     );
-  }
+  };
 
   return (
-    <div className="h-screen flex flex-col border-l border-slate-200 bg-white z-10 relative">
+    <div className="h-screen flex flex-col bg-primary z-10 relative">
+      <div className="p-4 flex items-center justify-center">
+        <p className="text-gray-600 h-10 flex items-center">
+          {conversation.name}
+        </p>
+      </div>
       <div
         className="overflow-y-auto flex-1 p-4"
         onScroll={onScroll}
@@ -105,7 +110,8 @@ export default function Conversation() {
               message.id
             }
             isLastByAssistant={
-              messageList.filter((m) => m.role === 'assistant').pop()?.id === message.id
+              messageList.filter((m) => m.role === 'assistant').pop()?.id ===
+              message.id
             }
             onEditMessage={onEditMessage}
             nextMessage={messageList[index + 1]}

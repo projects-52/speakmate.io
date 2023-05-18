@@ -1,5 +1,9 @@
 import { Outlet, useLoaderData } from '@remix-run/react';
-import { HomeIcon, Cog6ToothIcon, ListBulletIcon } from '@heroicons/react/24/outline';
+import {
+  HomeIcon,
+  Cog6ToothIcon,
+  ListBulletIcon,
+} from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { NavLink, useLocation } from '@remix-run/react';
 import type { LoaderFunction } from '@remix-run/node';
@@ -23,7 +27,7 @@ const navigation = [
     name: 'navigation.cards',
     href: '/app/cards',
     icon: ListBulletIcon,
-  }
+  },
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -41,7 +45,7 @@ export default function App() {
   return (
     <>
       <div className="flex">
-        <nav className="flex flex-col h-screen bg-white flex-none w-16 border-r border-slate-200 items-center">
+        {/* <nav className="flex flex-col h-screen bg-white flex-none w-16 border-r border-slate-200 items-center">
           <div className="w-10 h-10 bg-blue-300 rounded-full mt-4 mb-6" />
           <ul className="flex flex-1 flex-col gap-y-2 justify-center">
             {navigation.map((item) => (
@@ -83,7 +87,7 @@ export default function App() {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         <main className="bg-white flex-1">
           <Outlet />

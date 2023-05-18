@@ -73,3 +73,11 @@
 .animate-opacity {
   animation: opacity 0.8s ease-in-out infinite alternate;
 }
+
+.bg-primary {
+  background-color: #f3f1ec;
+}
+
+.bg-primary-dark {
+  background-color: #e2e0db;
+}

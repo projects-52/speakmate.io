@@ -16,7 +16,7 @@ export default function NewConversation() {
   const disabled = !language || !nativeLanguage || !level || !character;
 
   return (
-    <div className="h-screen border-l border-slate-200 bg-white relative z-10 p-4 overflow-y-auto">
+    <div className="h-screen bg-primary relative z-10 p-4 overflow-y-auto">
       <LanguageSelect
         label="Choose language to practice"
         onChange={(value) => setLanguage(value)}

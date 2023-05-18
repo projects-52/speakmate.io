@@ -24,14 +24,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Dashboard() {
   const { conversations } = useLoaderData<typeof loader>();
   return (
-    <div className="flex h-full">
+    <div className="flex h-full bg-primary">
       <ConversationsList conversations={conversations} />
       <div className="flex-1 relative">
         <Outlet />
-        <div
-          className="absolute w-full h-screen left-0 top-0 border-l
-          border-slate-200 flex items-center justify-center"
-        >
+        <div className="absolute w-full h-screen left-0 top-0 bg-primary flex items-center justify-center ">
           <span className="text-lg text-gray-600">
             Choose conversation or create new one!
           </span>
