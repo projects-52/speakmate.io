@@ -1,5 +1,5 @@
 import type { Conversation, Explanation, Message } from '@prisma/client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { explainText } from '~/services/explanation.service';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 
@@ -48,7 +48,7 @@ export default function ExplanationPopup({
     setAddingToCards(false);
   };
 
-  const onSpeak = (e) => {
+  const onSpeak = (e: React.MouseEvent) => {
     e.nativeEvent.stopPropagation();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = conversation.language as string;
@@ -67,6 +67,7 @@ export default function ExplanationPopup({
       {explanation && !loading && !existingExplanation ? (
         <div>
           <p className="flex items-center gap-2">
+            {/** @ts-ignore */}
             {explanation.explanation?.original}{' '}
             <SpeakerWaveIcon
               className="w-10 h-10 cursor-pointer hover:bg-slate-100 rounded p-2"
@@ -74,7 +75,9 @@ export default function ExplanationPopup({
               data-button="card"
             />
           </p>
+          {/** @ts-ignore */}
           <p>{explanation.explanation?.translation}</p>
+          {/** @ts-ignore */}
           <p>{explanation.explanation?.explanation}</p>
           <button
             data-button="card"
@@ -88,6 +91,7 @@ export default function ExplanationPopup({
       {existingExplanation && !loading && !explanation ? (
         <div>
           <p className="flex items-center gap-2">
+            {/** @ts-ignore */}
             {existingExplanation.explanation?.original}{' '}
             <SpeakerWaveIcon
               className="w-10 h-10 cursor-pointer hover:bg-slate-100 rounded p-2"
@@ -95,7 +99,9 @@ export default function ExplanationPopup({
               data-button="card"
             />
           </p>
+          {/** @ts-ignore */}
           <p>{existingExplanation.explanation?.translation}</p>
+          {/** @ts-ignore */}
           <p>{existingExplanation.explanation?.explanation}</p>
           <button
             data-button="card"

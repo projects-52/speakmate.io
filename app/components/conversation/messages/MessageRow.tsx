@@ -9,17 +9,33 @@ interface MessageRowProps {
   message: Message;
   explanations: Explanation[];
   conversation: Conversation;
+  isLastByUser: boolean;
+  onEditMessage: (message: Message, nextMessage?: Message) => void;
+  nextMessage?: Message;
 }
 
 const MessageRow = React.forwardRef(
   (
-    { message, explanations, conversation }: MessageRowProps,
+    {
+      message,
+      explanations,
+      conversation,
+      isLastByUser,
+      onEditMessage,
+      nextMessage,
+    }: MessageRowProps,
     ref: LegacyRef<HTMLDivElement>
   ) => {
     return (
       <div ref={ref}>
         {message.role === 'user' ? (
-          <UserMessage message={message} key={message.id} />
+          <UserMessage
+            message={message}
+            key={message.id}
+            canBeEdited={isLastByUser}
+            onEditMessage={onEditMessage}
+            nextMessage={nextMessage}
+          />
         ) : (
           <AssistantMessage
             message={message}

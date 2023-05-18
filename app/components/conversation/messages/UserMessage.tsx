@@ -1,15 +1,25 @@
-import type { Feedback, Message } from '@prisma/client';
+import type { Feedback } from '@prisma/client';
+import type { Message } from '@prisma/client';
 import { useState } from 'react';
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
+import EditMessagePopup from '../popups/EditMessagePopup';
 import FeedbackPopup from '../popups/FeedbackPopup';
 
 interface UserMessageProps {
   message: Message;
+  nextMessage?: Message;
+  canBeEdited?: boolean;
+  onEditMessage: (message: Message, nextMessage?: Message) => void;
 }
 
-export default function UserMessage({ message }: UserMessageProps) {
+export default function UserMessage({
+  message,
+  canBeEdited,
+  onEditMessage,
+  nextMessage,
+}: UserMessageProps) {
   const [loading, setLoading] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [showEdit, setShowEdit] = useState(false);
 
   const getFedback = async (messageId: string) => {
     setLoading(messageId);
@@ -39,26 +49,36 @@ export default function UserMessage({ message }: UserMessageProps) {
       >
         {message.text}
 
-        {message.role === 'user' && (
-          <div className="mt-2">
+        <div className="mt-2 flex gap-2">
+          {canBeEdited && (
             <span
               className="text-xs text-gray-200 cursor-pointer"
-              onClick={() => getFedback(message.id)}
+              onClick={() => setShowEdit(true)}
             >
-              {loading === message.id ? (
-                'Loading...'
-              ) : (
-                <QuestionMarkCircleIcon className="w-4 h-4" />
-              )}
+              Edit
             </span>
-          </div>
-        )}
+          )}
+          <span
+            className="text-xs text-gray-200 cursor-pointer"
+            onClick={() => getFedback(message.id)}
+          >
+            {loading === message.id ? 'Loading...' : 'Feedback'}
+          </span>
+        </div>
       </div>
       <FeedbackPopup
         feedback={feedback}
         open={!!feedback}
         setOpen={() => setFeedback(null)}
       />
+      {showEdit && (
+        <EditMessagePopup
+          message={message}
+          nextMessage={nextMessage}
+          onClose={() => setShowEdit(false)}
+          onEditMessage={onEditMessage}
+        />
+      )}
     </div>
   );
 }

@@ -44,7 +44,7 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
             />
             {conversation.name}
             <EllipsisVerticalIcon
-              className="w-8 h-8 justify-self-end ml-auto text-slate-200 hover:bg-slate-300 rounded-full"
+              className="w-8 h-8 justify-self-end text-slate-200 hover:bg-slate-300 rounded-full ml-1"
               onClickCapture={(e) => {
                 e.preventDefault();
                 e.stopPropagation();

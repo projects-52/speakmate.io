@@ -62,6 +62,20 @@ export default function Conversation() {
     setMessageList((messages) => [...messages, message]);
   };
 
+  const onEditMessage = async (message: Message, nextMessage?: Message) => {
+    setMessageList((messages: Message[]) =>
+      messages.map((m) => {
+        if (m.id === message.id) {
+          return message;
+        }
+        if (m.id === nextMessage?.id) {
+          return nextMessage;
+        }
+        return m;
+      })
+    );
+  };
+
   return (
     <div className="h-screen flex flex-col border-l border-slate-200 bg-white z-10 relative">
       <div
@@ -69,12 +83,18 @@ export default function Conversation() {
         onScroll={onScroll}
         ref={scrollRef}
       >
-        {messageList.map((message: Message) => (
+        {messageList.map((message: Message, index) => (
           <MessageRow
             key={message.id}
             message={message}
             explanations={getExplanationsForMessage(message, explanations)}
             conversation={conversation}
+            isLastByUser={
+              messageList.filter((m) => m.role === 'user').pop()?.id ===
+              message.id
+            }
+            onEditMessage={onEditMessage}
+            nextMessage={messageList[index + 1]}
           />
         ))}
         <div ref={messagesEndRef} />

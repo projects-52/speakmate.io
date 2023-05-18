@@ -56,13 +56,17 @@ export default function FeedbackPopup({
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      {feedback.text.intro}
+                      {/** @ts-ignore */}
+                      {feedback.text?.intro}
                     </Dialog.Title>
                     <div className="mt-2">
                       <ul className="text-sm text-gray-500 text-left list-disc">
-                        {feedback.text.corrections.map((correction) => (
-                          <li key={correction}>{correction}</li>
-                        ))}
+                        {/** @ts-ignore */}
+                        {feedback.text?.corrections.map(
+                          (correction: string) => (
+                            <li key={correction}>{correction}</li>
+                          )
+                        )}
                       </ul>
                     </div>
                   </div>
