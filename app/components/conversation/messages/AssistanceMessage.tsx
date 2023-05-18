@@ -2,6 +2,7 @@ import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
 import ExplanationPopup from '../popups/ExplanationPopup';
 import LoadingSkeleton from './LoadingSkeleton';
+import { format } from 'date-fns';
 
 interface AssistantMessageProps {
   message: Message;
@@ -163,9 +164,7 @@ export default function AssistantMessage({
     <div
       key={message.id}
       ref={messageRef}
-      className={`relative flex items-start gap-2 ${
-        message.role === 'user' ? 'text-right' : 'text-left'
-      }`}
+      className="relative flex items-start gap-2 text-left mb-2"
     >
       <ExplanationPopup
         show={tooltipVisible}
@@ -192,13 +191,15 @@ export default function AssistantMessage({
             {wrapTextInSpans(message.text, explanations)}
           </p>
 
-          <p className="text-gray-500 text-xs text-right ">
+          <p className="text-gray-500 text-xs text-right flex mt-2">
             {canBeEdited && (
               <span className="mr-2 cursor-pointer" onClick={onEdit}>
                 I don't understand
               </span>
             )}
-            {new Date(message.createdAt).toLocaleTimeString()}
+            <span className="justify-end ml-auto">
+              {format(new Date(message.createdAt), 'HH:mm')}
+            </span>
           </p>
         </div>
       </div>

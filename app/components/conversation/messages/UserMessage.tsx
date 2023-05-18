@@ -3,6 +3,7 @@ import type { Message } from '@prisma/client';
 import { useState } from 'react';
 import EditMessagePopup from '../popups/EditMessagePopup';
 import FeedbackPopup from '../popups/FeedbackPopup';
+import { format } from 'date-fns';
 
 interface UserMessageProps {
   message: Message;
@@ -36,10 +37,7 @@ export default function UserMessage({
   };
 
   return (
-    <div
-      key={message.id}
-      className={`${message.role === 'user' ? 'text-right' : 'text-left'}`}
-    >
+    <div key={message.id} className="text-right mb-2">
       <div
         className={`${
           message.role === 'user'
@@ -63,6 +61,9 @@ export default function UserMessage({
             onClick={() => getFedback(message.id)}
           >
             {loading === message.id ? 'Loading...' : 'Feedback'}
+          </span>
+          <span className="text-xs text-gray-200 justify-end ml-auto">
+            {format(new Date(message.createdAt), 'HH:mm')}
           </span>
         </div>
       </div>
