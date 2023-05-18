@@ -32,7 +32,7 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
             to={`/app/dashboard/${conversation.id}`}
             key={conversation.id}
             className={({ isActive }) =>
-              `p-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-l max-w-sm ${
+              `p-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-lg max-w-sm mb-2 ${
                 isActive ? 'bg-gray-200' : ''
               }`
             }
