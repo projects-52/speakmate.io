@@ -1,6 +1,6 @@
 import type { Conversation, Message } from '@prisma/client';
 import { getConversationById } from './conversation.service';
-import { getAnswer } from './openai.service';
+import { getAnswer, regenerateAnswer } from './openai.service';
 import { prisma } from './prisma.service';
 
 export async function createMessage(
@@ -142,6 +142,34 @@ export async function editMessage(
   ]);
 
   return responses;
+}
+
+export async function regenerateResponse(messageId: string): Promise<Message> {
+  const message = await getMessageById(messageId);
+  const conversation = await getConversationById(
+    message?.conversationId as string
+  );
+  const messages = await getAllMessagesForConversationOrderedByDate(
+    conversation?.id as string
+  );
+
+  const newResponse = await regenerateAnswer(
+    messages,
+    conversation as Conversation
+  );
+
+  const lastMessage = messages[messages.length - 1];
+
+  const newMessage = await prisma.message.update({
+    where: {
+      id: lastMessage.id,
+    },
+    data: {
+      text: newResponse as string,
+    },
+  });
+
+  return newMessage;
 }
 
 // Client-side

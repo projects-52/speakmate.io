@@ -76,6 +76,17 @@ export default function Conversation() {
     );
   };
 
+  const onUpdateMessage = async (message: Message) => {
+    setMessageList((messages: Message[]) =>
+      messages.map((m) => {
+        if (m.id === message.id) {
+          return message;
+        }
+        return m;
+      })
+    );
+  }
+
   return (
     <div className="h-screen flex flex-col border-l border-slate-200 bg-white z-10 relative">
       <div
@@ -93,8 +104,12 @@ export default function Conversation() {
               messageList.filter((m) => m.role === 'user').pop()?.id ===
               message.id
             }
+            isLastByAssistant={
+              messageList.filter((m) => m.role === 'assistant').pop()?.id === message.id
+            }
             onEditMessage={onEditMessage}
             nextMessage={messageList[index + 1]}
+            onUpdateMessage={onUpdateMessage}
           />
         ))}
         <div ref={messagesEndRef} />

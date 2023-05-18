@@ -1,17 +1,22 @@
 import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
 import ExplanationPopup from '../popups/ExplanationPopup';
+import LoadingSkeleton from './LoadingSkeleton';
 
 interface AssistantMessageProps {
   message: Message;
   explanations: Explanation[];
   conversation: Conversation;
+  canBeEdited: boolean;
+  onUpdateMessage: (message: Message) => void;
 }
 
 export default function AssistantMessage({
   message,
   explanations,
   conversation,
+  canBeEdited,
+  onUpdateMessage,
 }: AssistantMessageProps) {
   const [selectedText, setSelectedText] = useState('');
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -20,15 +25,15 @@ export default function AssistantMessage({
     left: number;
   } | null>(null);
   const [explanation, setExplanation] = useState<Explanation>();
+  const [loading, setLoading] = useState(false);
   const messageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseUp = (e: MouseEvent) => {
       console.log('mouse up');
 
-      console.log(e.target.dataset);
-
-      if (e.target.dataset.button === 'card') {
+      // @ts-ignore
+      if (e.currentTarget?.dataset?.button === 'card') {
         return;
       }
       setExplanation(undefined);
@@ -136,6 +141,24 @@ export default function AssistantMessage({
     return components;
   }
 
+  const onEdit = async () => {
+    setLoading(true);
+
+    const response = await fetch('/api/messages/regenerate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ messageId: message.id }),
+    });
+
+    const newMessage = await response.json();
+
+    onUpdateMessage(newMessage);
+
+    setLoading(false);
+  };
+
   return (
     <div
       key={message.id}
@@ -162,8 +185,19 @@ export default function AssistantMessage({
           <p className="text-gray-500 text-sm mb-1">
             {conversation.character?.name}
           </p>
-          {wrapTextInSpans(message.text, explanations)}
-          <p className="text-gray-500 text-xs text-right">
+          <p className="relative">
+            {loading && (
+              <LoadingSkeleton className="absolute w-full h-full left-0 top-0 bg-gray-300 pb-4 box-content" />
+            )}
+            {wrapTextInSpans(message.text, explanations)}
+          </p>
+
+          <p className="text-gray-500 text-xs text-right ">
+            {canBeEdited && (
+              <span className="mr-2 cursor-pointer" onClick={onEdit}>
+                I don't understand
+              </span>
+            )}
             {new Date(message.createdAt).toLocaleTimeString()}
           </p>
         </div>

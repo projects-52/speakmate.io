@@ -10,8 +10,10 @@ interface MessageRowProps {
   explanations: Explanation[];
   conversation: Conversation;
   isLastByUser: boolean;
+  isLastByAssistant: boolean;
   onEditMessage: (message: Message, nextMessage?: Message) => void;
   nextMessage?: Message;
+  onUpdateMessage: (message: Message) => void;
 }
 
 const MessageRow = React.forwardRef(
@@ -23,6 +25,8 @@ const MessageRow = React.forwardRef(
       isLastByUser,
       onEditMessage,
       nextMessage,
+      isLastByAssistant,
+      onUpdateMessage,
     }: MessageRowProps,
     ref: LegacyRef<HTMLDivElement>
   ) => {
@@ -42,6 +46,8 @@ const MessageRow = React.forwardRef(
             key={message.id}
             explanations={explanations}
             conversation={conversation}
+            canBeEdited={isLastByAssistant}
+            onUpdateMessage={onUpdateMessage}
           />
         )}
       </div>

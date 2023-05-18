@@ -310,3 +310,58 @@ export async function getCardExplanation(
     return null;
   }
 }
+
+export async function regenerateAnswer(
+  messages: Message[],
+  conversation: Conversation
+) {
+  if (!messages || messages?.length === 0) {
+    return;
+  }
+
+  const messagesWithoutLast = messages.slice(0, messages.length - 1);
+  const lastMessage = messages[messages.length - 1];
+
+  const preparedMessages = messagesWithoutLast.map((m) => ({
+    role: m.role as ChatCompletionRequestMessageRoleEnum,
+    content: m.text,
+  }));
+
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: `
+    You're the language learning teacher. Your name is ${conversation.character?.name}.
+    Your personality is ${conversation.character?.personality}.
+    You will try to adapt to the user's level of language proficiency.
+    You will try to keep the conversation going.
+    You will try to keep the conversation interesting.
+    You will actively propose topics and questions to the user.
+    You wouldn't try to correct the user's mistakes.
+    User is learning ${conversation.language}.
+    User's level of language proficiency is ${conversation.level}.
+    User's native language is ${conversation.native}.
+
+    You already responsed with the following message: "${lastMessage.text}"
+    But user asked you to reprase i since it's not clear or maybe too complicated for the user
+    `,
+  };
+
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [propmptMessage, ...preparedMessages].map((m) => ({
+        role: m.role,
+        content: m.content,
+      })),
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
