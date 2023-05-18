@@ -42,9 +42,10 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
               src={`/characters/${conversation.character?.slug}.png`}
               alt={conversation.character?.name}
             />
-            {conversation.name}
+            <span className="mr-1">{conversation.name}</span>
+
             <EllipsisVerticalIcon
-              className="w-8 h-8 justify-self-end text-slate-200 hover:bg-slate-300 rounded-full ml-1"
+              className="w-8 h-8 justify-self-end text-slate-200 hover:bg-slate-300 rounded-full ml-auto"
               onClickCapture={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
