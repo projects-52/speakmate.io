@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex h-screen">
         {/* <nav className="flex flex-col h-screen bg-white flex-none w-16 border-r border-slate-200 items-center">
           <div className="w-10 h-10 bg-blue-300 rounded-full mt-4 mb-6" />
           <ul className="flex flex-1 flex-col gap-y-2 justify-center">

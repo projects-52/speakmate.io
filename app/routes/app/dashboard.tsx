@@ -18,14 +18,15 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return {
     conversations,
+    user,
   };
 };
 
 export default function Dashboard() {
-  const { conversations } = useLoaderData<typeof loader>();
+  const { conversations, user } = useLoaderData<typeof loader>();
   return (
     <div className="flex h-full bg-primary">
-      <ConversationsList conversations={conversations} />
+      <ConversationsList conversations={conversations} user={user} />
       <div className="flex-1 relative">
         <Outlet />
         <div className="absolute w-full h-screen left-0 top-0 bg-primary flex items-center justify-center ">

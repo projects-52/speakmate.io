@@ -1,12 +1,14 @@
-import type { Character, Conversation } from '@prisma/client';
+import type { Character, Conversation, User } from '@prisma/client';
 import { Link, NavLink } from '@remix-run/react';
 import { PlusIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import ConversationPopup from './popups/ConverstauionPopup';
 import { format, isToday, isYesterday } from 'date-fns';
+import { SettingsBlock } from '../settings/SettingsBlock';
 
 interface ConversationsListProps {
   conversations: Conversation[];
+  user: User;
 }
 
 type ConversationsForDay = {
@@ -58,7 +60,10 @@ function getUniqueCharacters(conversations: Conversation[]): Character[] {
   return result;
 }
 
-export function ConversationsList({ conversations }: ConversationsListProps) {
+export function ConversationsList({
+  conversations,
+  user,
+}: ConversationsListProps) {
   const [selectedConversationId, setSelectedConversationId] = useState<
     string | null
   >();
@@ -86,7 +91,7 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
   );
 
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col overflow-hidden">
       <div className="p-4 flex gap-2 items-center justify-between ">
         <div className="w-10 h-10 bg-blue-300 rounded-full  border-b border-slate-200" />
         <Link
@@ -173,6 +178,8 @@ export function ConversationsList({ conversations }: ConversationsListProps) {
           )
         )}
       </div>
+
+      <SettingsBlock user={user} />
       {selectedConversation && (
         <ConversationPopup
           conversation={selectedConversation as Conversation | null}
