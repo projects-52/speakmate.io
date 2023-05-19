@@ -101,34 +101,22 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   }, [handleKeyDown, handleKeyUp]);
 
   return (
-    <div className="flex items-center justify-center w-full">
-      <button
+    <div className="w-10 h-10 text-slate-500 p-2 rounded-full relative hover:bg-blue-200 hover:text-slate-50">
+      {isRecording && (
+        <div className="w-full h-full rounded-full bg-blue-300 absolute top-0 left-0 animate-ping"></div>
+      )}
+
+      {isLoading && (
+        <div className="w-full h-full rounded-full border-2 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute top-0 left-0 animate-spin"></div>
+      )}
+
+      <MicrophoneIcon
+        className="rounded-full z-10 relative cursor-pointer"
         onMouseDown={startRecording}
         onMouseUp={stopRecording}
         onTouchStart={startRecording}
         onTouchEnd={stopRecording}
-        className="font-bold p-4 rounded w-full "
-        disabled={isLoading}
-      >
-        {isRecording && (
-          <span className="flex items-center justify-center">
-            <MicrophoneIcon className="w-10 h-10 pulse" />
-            Listening...
-          </span>
-        )}
-        {isLoading && (
-          <span className="flex items-center justify-center ">
-            <ArrowPathIcon className="w-10 h-10 rotate" />
-            Processing...
-          </span>
-        )}
-        {!isRecording && !isLoading && (
-          <span className="flex items-center justify-center">
-            <MicrophoneIcon className="w-10 h-10" />
-            Hold Space to speak
-          </span>
-        )}
-      </button>
+      />
     </div>
   );
 };

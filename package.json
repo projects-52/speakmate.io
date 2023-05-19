@@ -28,6 +28,7 @@
     "prompt-engine": "^0.0.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-textarea-autosize": "^8.4.1",
     "remix-auth": "^3.4.0",
     "remix-auth-socials": "^2.0.5",
     "remix-i18next": "^5.1.0",

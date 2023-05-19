@@ -13,7 +13,7 @@ export function ChatInput({ conversation, onMessageReceived }: ChatInputProps) {
   const [type, setType] = useState<'text' | 'voice'>('voice');
   return (
     <div className="flex p-2">
-      <div className="flex flex-col gap-2 pr-4">
+      {/* <div className="flex flex-col gap-2 pr-4">
         <span
           onClick={() => setType('voice')}
           className={`p-2 w-10 h-10 rounded-full flex items-center justify-center cursor-pointer  ${
@@ -34,19 +34,17 @@ export function ChatInput({ conversation, onMessageReceived }: ChatInputProps) {
             className={`w-8 h-8 ${type === 'text' ? 'text-slate-100' : ''}`}
           />
         </span>
-      </div>
-      {type === 'text' && (
-        <TextInput
-          conversation={conversation}
-          onMessageReceived={onMessageReceived}
-        />
-      )}
-      {type === 'voice' && (
+      </div> */}
+      <TextInput
+        conversation={conversation}
+        onMessageReceived={onMessageReceived}
+      />
+      {/* {type === 'voice' && (
         <AudioRecorder
           conversation={conversation}
           onMessageReceived={onMessageReceived}
         />
-      )}
+      )} */}
     </div>
   );
 }

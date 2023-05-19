@@ -60,6 +60,16 @@
   }
 }
 
+@keyframes change-height {
+  0% {
+    transform: scaleY(0.3);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
 /* Animation classes */
 
 .rotate {
@@ -72,6 +82,20 @@
 
 .animate-opacity {
   animation: opacity 0.8s ease-in-out infinite alternate;
+}
+
+.animate-change-height-1 {
+  animation: change-height 0.6s ease-in-out infinite alternate;
+  animation-delay: 0.1;
+}
+.animate-change-height-2 {
+  animation: change-height 0.6s ease-in-out infinite alternate;
+  animation-delay: 0.2;
+}
+
+.animate-change-height-3 {
+  animation: change-height 0.6s ease-in-out infinite alternate;
+  animation-delay: 0.3;
 }
 
 .bg-primary {
