@@ -13,6 +13,8 @@ export function useScroll(
       messageList[messageList.length - 1].createdAt
     );
 
+    console.log(latestMessageDate.getTime(), latestMessageTimestamp.current);
+
     if (latestMessageDate.getTime() > latestMessageTimestamp.current) {
       latestMessageTimestamp.current = latestMessageDate.getTime();
       if (scrollRef.current) {

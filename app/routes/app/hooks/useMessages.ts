@@ -6,7 +6,8 @@ export function useMessages(
   conversation: Conversation,
   initialMessages: Message[]
 ) {
-  const [messageList, setMessageList] = useState<Message[]>(initialMessages);
+  const [messageList, setMessageList] =
+    useState<Partial<Message>[]>(initialMessages);
   const [loading, setLoading] = useState(false);
   const [startReached, setStartReached] = useState(false);
 
@@ -17,7 +18,10 @@ export function useMessages(
 
     setLoading(true);
 
-    const newMessages = await getMoreMessages(messageList, conversation);
+    const newMessages = await getMoreMessages(
+      messageList as Message[],
+      conversation
+    );
 
     const combinedMessages = [...newMessages, ...messageList];
 
@@ -45,8 +49,15 @@ export function useMessages(
   }, [conversation, initialMessages]);
 
   const sortedAndFilteredMessages = useMemo(() => {
-    return messageList.filter((message: Message) => message.role !== 'system');
+    return messageList.filter(
+      (message: Partial<Message>) => message.role !== 'system'
+    );
   }, [messageList]);
 
-  return { messageList: sortedAndFilteredMessages, loadMoreMessages, loading, setMessageList };
+  return {
+    messageList: sortedAndFilteredMessages,
+    loadMoreMessages,
+    loading,
+    setMessageList,
+  };
 }

@@ -40,6 +40,12 @@ export async function createConversation(
   topic: string,
   characterData: Character
 ) {
+  let voiceGender = characterData.gender;
+
+  if (voiceGender === 'non-binary') {
+    voiceGender = Math.random() > 0.5 ? 'male' : 'female';
+  }
+
   try {
     const conversationData = {
       userId,
@@ -53,6 +59,7 @@ export async function createConversation(
         slug: characterData.slug,
         name: characterData.name,
         personality: characterData.personality,
+        gender: characterData.gender,
       },
     };
     const data = await getInitialMesage(conversationData);

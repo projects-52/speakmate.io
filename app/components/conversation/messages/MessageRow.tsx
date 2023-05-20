@@ -3,6 +3,7 @@ import type { Conversation, Explanation, Message } from '@prisma/client';
 import type { LegacyRef } from 'react';
 import React from 'react';
 import AssistantMessage from './AssistanceMessage';
+import { LoadingMessage } from './LoadingMessage';
 import UserMessage from './UserMessage';
 
 interface MessageRowProps {
@@ -30,6 +31,10 @@ const MessageRow = React.forwardRef(
     }: MessageRowProps,
     ref: LegacyRef<HTMLDivElement>
   ) => {
+    if (message.role === 'loading') {
+      return <LoadingMessage conversation={conversation} />;
+    }
+
     return (
       <div ref={ref}>
         {message.role === 'user' ? (

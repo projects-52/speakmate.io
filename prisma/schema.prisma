@@ -14,6 +14,7 @@ type Character {
   slug String
   name String
   personality String
+  gender String
 }
 
 model User {

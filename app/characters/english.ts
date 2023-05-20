@@ -5,7 +5,7 @@ export const EnglishCharacters: Character[] = [
     name: "Samuel 'Sam' Baxter",
     slug: 'sam-baxter',
     language: 'English',
-    gender: 'Male',
+    gender: 'male',
     age: 35,
     interests: ['Literature', 'Hiking', 'Photography', 'Cooking'],
     personality:
@@ -25,7 +25,7 @@ export const EnglishCharacters: Character[] = [
     name: "Elizabeth 'Liz' Thompson",
     slug: 'liz-thompson',
     language: 'English',
-    gender: 'Female',
+    gender: 'female',
     age: 50,
     interests: ['History', 'Gardening', 'Education', 'Yoga'],
     personality:
@@ -45,7 +45,7 @@ export const EnglishCharacters: Character[] = [
     name: 'Jamie Turner',
     slug: 'jamie-turner',
     language: 'English',
-    gender: 'Non-binary',
+    gender: 'non-binary',
     age: 26,
     interests: ['Music', 'Social Media', 'Movies and TV Shows', 'Video Games'],
     personality:
@@ -65,7 +65,7 @@ export const EnglishCharacters: Character[] = [
     name: "Martin 'Marty' Clarke",
     slug: 'marty-clarke',
     language: 'English',
-    gender: 'Male',
+    gender: 'male',
     age: 45,
     interests: ['Food and Cuisine', 'Travel', 'Technology', 'Career and Work'],
     personality:
@@ -85,7 +85,7 @@ export const EnglishCharacters: Character[] = [
     name: 'Helen Adams',
     slug: 'helen-adams',
     language: 'English',
-    gender: 'Female',
+    gender: 'female',
     age: 60,
     interests: [
       'Art and Culture',

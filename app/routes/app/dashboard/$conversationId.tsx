@@ -2,14 +2,16 @@ import type { Message } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { addSeconds } from 'date-fns';
 import { useEffect, useRef } from 'react';
-import { ChatInput } from '~/components/conversation/ChatInput';
 import MessageRow from '~/components/conversation/messages/MessageRow';
+import { TextInput } from '~/components/TextInput';
 import { authenticator } from '~/services/auth.service';
 import { getConversationById } from '~/services/conversation.service';
 import { getAllExplanationsForConversation } from '~/services/explanation.service';
 import { getMessagesBeforeDate } from '~/services/message.service';
 import { getNextMessageForConversation } from '~/services/response.service';
+import { speak } from '~/services/speak.service';
 import { getExplanationsForMessage } from '~/utils/explanations';
 import { useMessages } from '../hooks/useMessages';
 import { useScroll } from '../hooks/useScroll';
@@ -45,10 +47,21 @@ export default function Conversation() {
     messages
   );
 
-  const { onScroll } = useScroll(scrollRef, messageList, loadMoreMessages);
+  const { onScroll } = useScroll(
+    scrollRef,
+    messageList as Message[],
+    loadMoreMessages
+  );
 
   useEffect(() => {
     setMessageList(messages);
+    if (messages.length === 1) {
+      speak(
+        messages[0].text,
+        conversation.character.gender,
+        conversation.language
+      );
+    }
   }, [conversation, messages, setMessageList]);
 
   useEffect(() => {
@@ -58,11 +71,33 @@ export default function Conversation() {
   }, [scrollRef]);
 
   const getResponse = async () => {
-    const message = await getNextMessageForConversation(conversation.id);
-    setMessageList((messages) => [...messages, message]);
+    setMessageList((messages: Partial<Message>[]) => [
+      ...messages,
+      {
+        role: 'loading',
+        createdAt: addSeconds(
+          new Date(messages[messages.length - 1].createdAt as Date) as Date,
+          1
+        ).toISOString(),
+      } as unknown as Partial<Message>,
+    ]);
+    const message = (await getNextMessageForConversation(
+      conversation.id
+    )) as Message;
+    speak(message.text, conversation.character.gender, conversation.language);
+    // @ts-ignore
+    setMessageList((messages: Partial<Message>[]) => [
+      ...messages.map((m: Partial<Message>) => {
+        if (m.role === 'loading') {
+          return message as unknown as Partial<Message>;
+        }
+        return m as unknown as Partial<Message>;
+      }),
+    ]);
   };
 
   const onEditMessage = async (message: Message, nextMessage?: Message) => {
+    // @ts-ignore
     setMessageList((messages: Message[]) =>
       messages.map((m) => {
         if (m.id === message.id) {
@@ -77,6 +112,7 @@ export default function Conversation() {
   };
 
   const onUpdateMessage = async (message: Message) => {
+    // @ts-ignore
     setMessageList((messages: Message[]) =>
       messages.map((m) => {
         if (m.id === message.id) {
@@ -99,6 +135,7 @@ export default function Conversation() {
         onScroll={onScroll}
         ref={scrollRef}
       >
+        {/** @ts-ignore */}
         {messageList.map((message: Message, index) => (
           <MessageRow
             key={message.id}
@@ -114,7 +151,7 @@ export default function Conversation() {
               message.id
             }
             onEditMessage={onEditMessage}
-            nextMessage={messageList[index + 1]}
+            nextMessage={messageList[index + 1] as Message}
             onUpdateMessage={onUpdateMessage}
           />
         ))}
@@ -122,7 +159,7 @@ export default function Conversation() {
       </div>
 
       <div className="">
-        <ChatInput
+        <TextInput
           conversation={conversation}
           onMessageReceived={(message: Message) => {
             setMessageList((messages) => [...messages, message]);

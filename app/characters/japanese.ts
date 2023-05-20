@@ -5,7 +5,7 @@ export const JapaneseCharacters: Character[] = [
     name: 'Taro Yamada',
     slug: 'taro-yamada',
     language: 'Japanese',
-    gender: 'Male',
+    gender: 'male',
     age: 30,
     interests: [
       'Music',
@@ -30,7 +30,7 @@ export const JapaneseCharacters: Character[] = [
     name: 'Yoko Suzuki',
     slug: 'yoko-suzuki',
     language: 'Japanese',
-    gender: 'Female',
+    gender: 'female',
     age: 45,
     interests: ['Food and Cuisine', 'Travel', 'Art and Culture', 'Hobbies'],
     personality:
@@ -50,7 +50,7 @@ export const JapaneseCharacters: Character[] = [
     name: 'Kazuki Tanaka',
     slug: 'kazuki-tanaka',
     language: 'Japanese',
-    gender: 'Male',
+    gender: 'male',
     age: 50,
     interests: ['History', 'Literature', 'Education', 'Environment'],
     personality:
@@ -70,7 +70,7 @@ export const JapaneseCharacters: Character[] = [
     name: 'Miyu Saito',
     slug: 'miyu-saito',
     language: 'Japanese',
-    gender: 'Female',
+    gender: 'female',
     age: 35,
     interests: ['Sports', 'Health and Wellness', 'Current Events', 'Travel'],
     personality:
@@ -90,7 +90,7 @@ export const JapaneseCharacters: Character[] = [
     name: 'Naoki Watanabe',
     slug: 'naoki-watanabe',
     language: 'Japanese',
-    gender: 'Male',
+    gender: 'male',
     age: 40,
     interests: [
       'Technology',

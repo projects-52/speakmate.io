@@ -1,15 +1,17 @@
 import type { Conversation, Message } from '@prisma/client';
 import React, { useState, useEffect, useCallback } from 'react';
-import { MicrophoneIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon } from '@heroicons/react/24/outline';
 
 type AudioRecorderProps = {
   onMessageReceived: (message: Message) => void;
   conversation: Conversation;
+  disabled?: boolean;
 };
 
 const AudioRecorder: React.FC<AudioRecorderProps> = ({
   onMessageReceived,
   conversation,
+  disabled,
 }) => {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
     null
@@ -73,11 +75,11 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === ' ' && !isRecording) {
+      if (e.key === ' ' && !isRecording && !disabled) {
         startRecording();
       }
     },
-    [isRecording]
+    [isRecording, disabled]
   );
 
   const handleKeyUp = useCallback(

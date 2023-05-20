@@ -12,6 +12,7 @@ type TextInputProps = {
 export function TextInput({ conversation, onMessageReceived }: TextInputProps) {
   const [text, setText] = useState<string>('');
   const [focused, setFocused] = useState<boolean>(false);
+  const [audioDisabled, setAudioDisabled] = useState<boolean>(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,10 +35,12 @@ export function TextInput({ conversation, onMessageReceived }: TextInputProps) {
 
   const onFocus = () => {
     setFocused(true);
+    setAudioDisabled(true);
   };
 
   const onBlur = () => {
     setFocused(false);
+    setAudioDisabled(false);
   };
 
   return (
@@ -51,11 +54,16 @@ export function TextInput({ conversation, onMessageReceived }: TextInputProps) {
         <AudioRecorder
           conversation={conversation}
           onMessageReceived={onMessageReceived}
+          disabled={audioDisabled}
         />
       </div>
       <TextareaAutosize
         className="w-full resize-none border-0 outline-none bg-slate-50"
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          e.stopPropagation();
+          setText(e.target.value);
+        }}
+        onMouseUpCapture={(e) => e.stopPropagation()}
         value={text}
         maxRows={3}
         minRows={2}

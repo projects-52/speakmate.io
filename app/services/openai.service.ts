@@ -64,13 +64,15 @@ export async function getInitialMesage(conversation: Partial<Conversation>) {
         : "User didn't specify a topic."
     }
 
-    Response with a message to start the conversation. You can introduce yourself and kick off the conversation. 
+    Response with a message to start the conversation. 
+    You can introduce yourself and kick off the conversation. 
+    Use ${conversation.language}.
     Also provide name for the conversation. Response exactly with JSON object with 'message' and 'name' properties.
 
     Example:
 
     {
-      "message": "<initial message tokick off conversation>",
+      "message": "<initial message to kick off conversation>",
       "name": "<Funny and memorable name for conversation>"
     }
     `,
