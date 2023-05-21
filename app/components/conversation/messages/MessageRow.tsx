@@ -1,27 +1,26 @@
 /* eslint-disable react/display-name */
-import type { Conversation, Explanation, Message } from '@prisma/client';
+import type { Conversation } from '@prisma/client';
 import type { LegacyRef } from 'react';
 import React from 'react';
+import type { UIMessage } from '~/types/message.types';
 import AssistantMessage from './AssistanceMessage';
 import { LoadingMessage } from './LoadingMessage';
 import UserMessage from './UserMessage';
 
 interface MessageRowProps {
-  message: Message;
-  explanations: Explanation[];
+  message: UIMessage;
   conversation: Conversation;
   isLastByUser: boolean;
   isLastByAssistant: boolean;
-  onEditMessage: (message: Message, nextMessage?: Message) => void;
-  nextMessage?: Message;
-  onUpdateMessage: (message: Message) => void;
+  onEditMessage: (message: UIMessage, nextMessage?: UIMessage) => void;
+  nextMessage?: UIMessage;
+  onUpdateMessage: (message: UIMessage) => void;
 }
 
 const MessageRow = React.forwardRef(
   (
     {
       message,
-      explanations,
       conversation,
       isLastByUser,
       onEditMessage,
@@ -42,14 +41,15 @@ const MessageRow = React.forwardRef(
             message={message}
             key={message.id}
             canBeEdited={isLastByUser}
+            // @ts-ignore
             onEditMessage={onEditMessage}
+            // @ts-ignore
             nextMessage={nextMessage}
           />
         ) : (
           <AssistantMessage
             message={message}
             key={message.id}
-            explanations={explanations}
             conversation={conversation}
             canBeEdited={isLastByAssistant}
             onUpdateMessage={onUpdateMessage}

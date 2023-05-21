@@ -1,4 +1,5 @@
 import type { Conversation, Message } from '@prisma/client';
+import type { UIMessage } from '~/types/message.types';
 import { getConversationById } from './conversation.service';
 import { getAnswer, regenerateAnswer } from './openai.service';
 import { prisma } from './prisma.service';
@@ -34,6 +35,10 @@ export async function getAllMessagesForConversationOrderedByDate(
       orderBy: {
         createdAt: 'asc',
       },
+      include: {
+        explanations: true,
+        feedbacks: true,
+      },
     });
 
     return messages;
@@ -48,6 +53,10 @@ export async function getMessageById(id: string) {
     return await prisma.message.findUnique({
       where: {
         id,
+      },
+      include: {
+        explanations: true,
+        feedbacks: true,
       },
     });
   } catch (error) {
@@ -72,6 +81,10 @@ export async function getMessagesBeforeDate(
       take: limit,
       orderBy: {
         createdAt: 'desc',
+      },
+      include: {
+        explanations: true,
+        feedbacks: true,
       },
     });
 
@@ -175,12 +188,12 @@ export async function regenerateResponse(messageId: string): Promise<Message> {
 // Client-side
 
 export async function getMoreMessages(
-  messages: Message[],
+  messages: UIMessage[],
   conversation: Conversation
 ): Promise<Message[]> {
   let url = new URL('/api/messages/more', window.location.origin);
 
-  const oldestMessage = messages.sort((a: Message, b: Message) =>
+  const oldestMessage = messages.sort((a: UIMessage, b: UIMessage) =>
     a.createdAt < b.createdAt ? -1 : 1
   )[0];
 

@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import FormData from 'form-data';
 import { ChatCompletionRequestMessageRoleEnum } from 'openai';
-import { buildContextForChat } from './chat.service';
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY as string;
 

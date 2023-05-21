@@ -1,20 +1,19 @@
-import type { Conversation, Explanation, Message } from '@prisma/client';
+import type { Conversation, Explanation } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
 import ExplanationPopup from '../popups/ExplanationPopup';
 import LoadingSkeleton from './LoadingSkeleton';
 import { format } from 'date-fns';
+import type { UIMessage } from '~/types/message.types';
 
 interface AssistantMessageProps {
-  message: Message;
-  explanations: Explanation[];
+  message: UIMessage;
   conversation: Conversation;
   canBeEdited: boolean;
-  onUpdateMessage: (message: Message) => void;
+  onUpdateMessage: (message: UIMessage) => void;
 }
 
 export default function AssistantMessage({
   message,
-  explanations,
   conversation,
   canBeEdited,
   onUpdateMessage,
@@ -170,6 +169,7 @@ export default function AssistantMessage({
         show={tooltipVisible}
         text={selectedText}
         position={tooltipPosition}
+        // @ts-ignore
         message={message}
         existingExplanation={explanation}
         conversation={conversation}
@@ -184,11 +184,12 @@ export default function AssistantMessage({
           <p className="text-gray-500 text-sm mb-1">
             {conversation.character?.name}
           </p>
-          <p className="relative">
+          <p className="relative whitespace-pre-line">
             {loading && (
               <LoadingSkeleton className="absolute w-full h-full left-0 top-0 bg-gray-300 pb-4 box-content" />
             )}
-            {wrapTextInSpans(message.text, explanations)}
+            {/** @ts-ignore */}
+            {wrapTextInSpans(message.text, message.explanations)}
           </p>
 
           <p className="text-gray-500 text-xs text-right flex mt-2">

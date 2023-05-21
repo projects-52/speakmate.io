@@ -57,7 +57,7 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
         </Form>
         <div className="flex items-center gap-6 px-4 py-1"></div>
       </div>
-      <div className="flex items-center gap-4 z-10 relative bg-primary p-3">
+      <div className="flex items-center gap-4 z-10 relative bg-primary p-3 py-6">
         <Cog6ToothIcon
           className={`w-10 h-10 transition duration-300 rounded-full p-1 ${
             open ? 'rotate-180 bg-primary-dark' : ''

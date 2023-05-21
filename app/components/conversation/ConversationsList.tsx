@@ -91,7 +91,7 @@ export function ConversationsList({
   );
 
   return (
-    <div className="h-full flex flex-col overflow-hidden">
+    <div className="h-full flex flex-col overflow-hidden flex-auto max-w-[280px]">
       <div className="p-4 flex gap-2 items-center justify-between ">
         <div className="w-10 h-10 bg-blue-300 rounded-full  border-b border-slate-200" />
         <Link

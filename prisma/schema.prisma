@@ -11,10 +11,10 @@ datasource db {
 }
 
 type Character {
-  slug String
-  name String
+  slug        String
+  name        String
   personality String
-  gender String
+  gender      String
 }
 
 model User {
@@ -53,8 +53,8 @@ model Message {
   role           String
   conversationId String        @db.ObjectId
   conversation   Conversation  @relation(fields: [conversationId], references: [id])
-  Explanation    Explanation[]
-  Feedback       Feedback[]
+  explanations   Explanation[]
+  feedbacks      Feedback[]
 }
 
 model Explanation {

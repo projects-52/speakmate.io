@@ -1,13 +1,15 @@
 import type { Conversation, Message } from '@prisma/client';
+import { addSeconds } from 'date-fns';
 import { useState, useEffect, useMemo } from 'react';
 import { getMoreMessages } from '~/services/message.service';
+import { getNextMessageForConversation } from '~/services/response.service';
+import type { UIMessage } from '~/types/message.types';
 
 export function useMessages(
   conversation: Conversation,
-  initialMessages: Message[]
+  initialMessages: UIMessage[]
 ) {
-  const [messageList, setMessageList] =
-    useState<Partial<Message>[]>(initialMessages);
+  const [messageList, setMessageList] = useState<UIMessage[]>(initialMessages);
   const [loading, setLoading] = useState(false);
   const [startReached, setStartReached] = useState(false);
 
@@ -19,7 +21,7 @@ export function useMessages(
     setLoading(true);
 
     const newMessages = await getMoreMessages(
-      messageList as Message[],
+      messageList as UIMessage[],
       conversation
     );
 
@@ -38,10 +40,61 @@ export function useMessages(
     if (newMessages.length === 0) {
       setStartReached(true);
     } else {
-      setMessageList(uniqueMessages);
+      setMessageList(uniqueMessages as UIMessage[]);
     }
 
     setLoading(false);
+  };
+
+  const onEditMessage = async (message: UIMessage, nextMessage?: UIMessage) => {
+    setMessageList((messages: UIMessage[]) =>
+      messages.map((m: UIMessage) => {
+        if (m.id === message.id) {
+          return message as UIMessage;
+        }
+        if (m.id === nextMessage?.id) {
+          return nextMessage as UIMessage;
+        }
+        return m;
+      })
+    );
+  };
+
+  const onUpdateMessage = async (message: UIMessage) => {
+    setMessageList((messages: UIMessage[]) =>
+      messages.map((m) => {
+        if (m.id === message.id) {
+          return message;
+        }
+        return m;
+      })
+    );
+  };
+
+  const onGetResponse = async () => {
+    setMessageList((messages: UIMessage[]) => [
+      ...messages,
+      {
+        role: 'loading',
+        createdAt: addSeconds(
+          new Date(messages[messages.length - 1].createdAt as Date) as Date,
+          1
+        ).toISOString(),
+      } as UIMessage,
+    ]);
+    const message = (await getNextMessageForConversation(
+      conversation.id
+    )) as Message;
+    setMessageList((messages: UIMessage[]) => [
+      ...messages.map((m: UIMessage) => {
+        if (m.role === 'loading') {
+          return message as UIMessage;
+        }
+        return m as UIMessage;
+      }),
+    ]);
+
+    return message;
   };
 
   useEffect(() => {
@@ -50,7 +103,7 @@ export function useMessages(
 
   const sortedAndFilteredMessages = useMemo(() => {
     return messageList.filter(
-      (message: Partial<Message>) => message.role !== 'system'
+      (message: UIMessage) => message.role !== 'system'
     );
   }, [messageList]);
 
@@ -59,5 +112,8 @@ export function useMessages(
     loadMoreMessages,
     loading,
     setMessageList,
+    onEditMessage,
+    onUpdateMessage,
+    onGetResponse,
   };
 }
