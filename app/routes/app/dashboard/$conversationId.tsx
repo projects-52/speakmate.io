@@ -55,7 +55,6 @@ export default function Conversation() {
   );
 
   useEffect(() => {
-    setMessageList(messages);
     if (messages.length === 1) {
       speak(messages[0].text);
     }

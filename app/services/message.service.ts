@@ -16,6 +16,10 @@ export async function createMessage(
         text,
         role,
       },
+      include: {
+        explanations: true,
+        feedbacks: true,
+      },
     });
     return message;
   } catch (error) {

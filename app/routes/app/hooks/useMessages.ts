@@ -101,11 +101,9 @@ export function useMessages(
     setMessageList(initialMessages);
   }, [conversation, initialMessages]);
 
-  const sortedAndFilteredMessages = useMemo(() => {
-    return messageList.filter(
-      (message: UIMessage) => message.role !== 'system'
-    );
-  }, [messageList]);
+  const sortedAndFilteredMessages = messageList.filter(
+    (message: UIMessage) => message.role !== 'system'
+  );
 
   return {
     messageList: sortedAndFilteredMessages,
