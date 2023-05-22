@@ -1,9 +1,10 @@
-import type { Conversation, Explanation } from '@prisma/client';
+import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
-import ExplanationPopup from '../popups/ExplanationPopup';
+import ExplanationTooltip from '../popups/ExplanationTooltip';
 import LoadingSkeleton from './LoadingSkeleton';
 import { format } from 'date-fns';
 import type { UIMessage } from '~/types/message.types';
+import ExplanationPopup from '../popups/ExplanationPopup';
 
 interface AssistantMessageProps {
   message: UIMessage;
@@ -25,13 +26,17 @@ export default function AssistantMessage({
     left: number;
   } | null>(null);
   const [explanation, setExplanation] = useState<Explanation>();
+  const [explanations, setExplanations] = useState<Explanation[]>(
+    // @ts-ignore
+    message.explanations as Explanation[]
+  );
   const [loading, setLoading] = useState(false);
   const messageRef = useRef<HTMLDivElement>(null);
 
+  const [showExplanation, setShowExplanation] = useState(false);
+
   useEffect(() => {
     const handleMouseUp = (e: MouseEvent) => {
-      console.log('mouse up');
-
       // @ts-ignore
       if (e.currentTarget?.dataset?.button === 'card') {
         return;
@@ -69,47 +74,36 @@ export default function AssistantMessage({
     }
   }, []);
 
+  const onShowExplanation = () => {
+    setShowExplanation(true);
+    setTooltipVisible(false);
+  };
+
   const onExplanationClick = async (explanation: Explanation, element: any) => {
-    if (window.getSelection) {
-      const range = document.createRange();
-      range.selectNodeContents(element);
-      const selection = window.getSelection();
-
-      if (selection) {
-        selection.removeAllRanges();
-        selection.addRange(range);
-
-        const position = range.getBoundingClientRect();
-        const messageRect = messageRef.current?.getBoundingClientRect();
-
-        setTooltipPosition({
-          // @ts-ignore
-          bottom: messageRect.bottom - position.bottom,
-          // @ts-ignore
-          left: position.left - messageRect.left,
-        });
-
-        // @ts-ignore
-        const selectedText = selection.toString();
-
-        setSelectedText(selectedText);
-        setTooltipVisible(!!selectedText);
-        setExplanation(explanation);
-      }
-    }
+    setExplanation(explanation);
+    setShowExplanation(true);
   };
 
   function wrapTextInSpans(
     text: string,
     explanations: Explanation[]
   ): React.ReactNode[] {
+    // Deduplicate explanations
+    const uniqueExplanations = explanations.filter(
+      (explanation, index, self) =>
+        self.findIndex((e) => e.id === explanation.id) === index
+    );
     // Create an array of {index, explanation} objects
     let indices = [];
-    for (let explanation of explanations) {
-      let index = text.indexOf(explanation.textToExplain);
-      while (index !== -1) {
-        indices.push({ index: index, explanation: explanation });
-        index = text.indexOf(explanation.textToExplain, index + 1);
+    for (let explanation of uniqueExplanations) {
+      let original = explanation.textToExplain;
+      if (original) {
+        // ensure it's not an empty string
+        let index = text.indexOf(original);
+        while (index !== -1) {
+          indices.push({ index: index, explanation: explanation });
+          index = text.indexOf(original, index + original.length); // advance the index
+        }
       }
     }
 
@@ -159,20 +153,33 @@ export default function AssistantMessage({
     setLoading(false);
   };
 
+  const onAddExplanation = async (explanation: Explanation) => {
+    setExplanations((explanations) => [...explanations, explanation]);
+  };
+
   return (
     <div
       key={message.id}
       ref={messageRef}
       className="relative flex items-start gap-2 text-left mb-2"
     >
-      <ExplanationPopup
+      <ExplanationTooltip
         show={tooltipVisible}
-        text={selectedText}
         position={tooltipPosition}
-        // @ts-ignore
-        message={message}
-        existingExplanation={explanation}
+        onClose={() => setTooltipVisible(false)}
+        onButtonClick={onShowExplanation}
+      />
+      <ExplanationPopup
+        explanation={explanation}
+        show={showExplanation}
+        onClose={() => {
+          setShowExplanation(false);
+          setExplanation(undefined);
+        }}
         conversation={conversation}
+        text={selectedText}
+        message={message as Message}
+        onAddExplanation={onAddExplanation}
       />
       <img
         src={`/characters/${conversation.character?.slug}.png`}
@@ -189,7 +196,7 @@ export default function AssistantMessage({
               <LoadingSkeleton className="absolute w-full h-full left-0 top-0 bg-gray-300 pb-4 box-content" />
             )}
             {/** @ts-ignore */}
-            {wrapTextInSpans(message.text, message.explanations)}
+            {wrapTextInSpans(message.text, explanations)}
           </p>
 
           <p className="text-gray-500 text-xs text-right flex mt-2">
