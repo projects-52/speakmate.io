@@ -122,7 +122,7 @@ export default function AssistantMessage({
       components.unshift(
         <span
           key={index}
-          className="underline cursor-pointer hover:text-blue-400"
+          className="underline cursor-pointer hover:text-blue-400 underline-offset-4 decoration-blue-400"
           onClick={(e) => onExplanationClick(explanation, e.currentTarget)}
         >
           {original}

@@ -43,6 +43,7 @@ model Conversation {
   topic       String?
   character   Character?
   deleted     Boolean       @default(false)
+  sound       Boolean       @default(false)
 }
 
 model Message {

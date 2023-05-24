@@ -1,3 +1,4 @@
+import type { Conversation } from '@prisma/client';
 import type { Character } from '~/types/character.type';
 import { createMessage } from './message.service';
 import { getInitialMesage } from './openai.service';
@@ -91,6 +92,25 @@ export async function deleteConversation(id: string) {
     },
     data: {
       deleted: true,
+    },
+  });
+}
+
+export async function toggleSoundForConversation(
+  conversationId: string
+): Promise<Conversation> {
+  const conversation = await getConversationById(conversationId);
+
+  if (!conversation) {
+    throw new Error('Conversation not found');
+  }
+
+  return await prisma.conversation.update({
+    where: {
+      id: conversationId,
+    },
+    data: {
+      sound: !conversation.sound,
     },
   });
 }

@@ -35,7 +35,7 @@ export default function Conversation() {
   const { conversation, messages } = useLoaderData<typeof loader>();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const [soundEnabled, setSoundEnabled] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(conversation.sound);
 
   const {
     messageList,
@@ -79,7 +79,11 @@ export default function Conversation() {
         <p className="text-gray-600 h-10 flex items-center justify-center w-full p-2">
           {conversation.name}
 
-          <SpeakToggle onChange={setSoundEnabled} value={soundEnabled} />
+          <SpeakToggle
+            onChange={setSoundEnabled}
+            value={soundEnabled}
+            conversation={conversation}
+          />
         </p>
       </div>
       <div
