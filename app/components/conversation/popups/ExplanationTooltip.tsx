@@ -1,3 +1,4 @@
+import type { MutableRefObject } from 'react';
 import useClickOutside from '~/routes/app/hooks/useClickOutside';
 
 interface ExplanationTooltipProps {
@@ -13,7 +14,9 @@ export default function ExplanationTooltip({
   onButtonClick,
   onClose,
 }: ExplanationTooltipProps) {
-  useClickOutside(() => onClose());
+  const ref: MutableRefObject<HTMLDivElement | null> = useClickOutside(() =>
+    onClose()
+  );
 
   const style = position
     ? {
@@ -23,7 +26,11 @@ export default function ExplanationTooltip({
     : {};
 
   return show ? (
-    <div className="absolute bg-white border p-4 rounded z-10" style={style}>
+    <div
+      className="absolute bg-white border p-4 rounded z-10"
+      style={style}
+      ref={ref}
+    >
       <button
         data-button="card"
         onClick={onButtonClick}

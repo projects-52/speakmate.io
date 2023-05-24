@@ -4,9 +4,11 @@ import {
 } from '@heroicons/react/24/outline';
 import type { User } from '@prisma/client';
 import { Form } from '@remix-run/react';
+import type { MutableRefObject } from 'react';
 import { useState } from 'react';
 import LanguagePopup from './LanguagesPopup';
 import { useTranslation } from 'react-i18next';
+import useClickOutside from '~/routes/app/hooks/useClickOutside';
 
 interface SettingsBlockProps {
   user: User;
@@ -22,10 +24,15 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
   const [open, setOpen] = useState(false);
   const [showLangiagePopup, setShowLanguagePopup] = useState(false);
 
+  const ref: MutableRefObject<HTMLDivElement | null> = useClickOutside(() =>
+    setOpen(false)
+  );
+
   return (
     <div
       className="mt-auto w-full relative cursor-pointer"
       onClick={() => setOpen((open) => !open)}
+      ref={ref}
     >
       <div
         className={`w-full bg-primary absolute left-0 z-0 transition-all duration-300 ${

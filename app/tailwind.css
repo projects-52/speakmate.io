@@ -118,6 +118,10 @@
   background-color: #e2e0db;
 }
 
+.bg-primary-light {
+  background-color: #f9f8f6;
+}
+
 .message-loading {
   animation: message-loading 0.6s ease-in-out infinite alternate;
 }
