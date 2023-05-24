@@ -45,6 +45,7 @@ const MessageRow = React.forwardRef(
             onEditMessage={onEditMessage}
             // @ts-ignore
             nextMessage={nextMessage}
+            conversation={conversation}
           />
         ) : (
           <AssistantMessage

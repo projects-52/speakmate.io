@@ -1,11 +1,11 @@
-import type { Feedback } from '@prisma/client';
-import type { Message } from '@prisma/client';
+import type { Message, Conversation } from '@prisma/client';
 import { useState } from 'react';
 import EditMessagePopup from '../popups/EditMessagePopup';
 import FeedbackPopup from '../popups/FeedbackPopup';
 import { format } from 'date-fns';
 
 interface UserMessageProps {
+  conversation: Conversation;
   message: Message;
   nextMessage?: Message;
   canBeEdited?: boolean;
@@ -17,24 +17,10 @@ export default function UserMessage({
   canBeEdited,
   onEditMessage,
   nextMessage,
+  conversation,
 }: UserMessageProps) {
-  const [loading, setLoading] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [showEdit, setShowEdit] = useState(false);
-
-  const getFedback = async (messageId: string) => {
-    setLoading(messageId);
-    const response = await fetch('/api/ai/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ messageId }),
-    });
-    const feedback = await response.json();
-    setFeedback(feedback);
-    setLoading(null);
-  };
+  const [showFeedback, setFeedback] = useState<boolean>(false);
 
   return (
     <div key={message.id} className="text-right mb-2">
@@ -52,20 +38,24 @@ export default function UserMessage({
           )}
           <span
             className="text-xs text-gray-200 cursor-pointer"
-            onClick={() => getFedback(message.id)}
+            onClick={() => setFeedback(true)}
           >
-            {loading === message.id ? 'Loading...' : 'Feedback'}
+            Feedback
           </span>
           <span className="text-xs text-gray-200 justify-end ml-auto">
             {format(new Date(message.createdAt), 'HH:mm')}
           </span>
         </div>
       </div>
-      <FeedbackPopup
-        feedback={feedback}
-        open={!!feedback}
-        setOpen={() => setFeedback(null)}
-      />
+      {showFeedback && (
+        <FeedbackPopup
+          show={showFeedback}
+          onClose={() => setFeedback(false)}
+          message={message}
+          conversation={conversation}
+        />
+      )}
+
       {showEdit && (
         <EditMessagePopup
           message={message}

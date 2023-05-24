@@ -1,25 +1,46 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/24/outline';
-import type { Feedback } from '@prisma/client';
+import type { Conversation, Feedback, Message } from '@prisma/client';
 
 interface FeedbackPopupProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  feedback: Feedback | null;
+  conversation: Conversation;
+  message: Message;
+  onClose: () => void;
+  show: boolean;
 }
 
 export default function FeedbackPopup({
-  open,
-  setOpen,
-  feedback,
+  onClose,
+  conversation,
+  show,
+  message,
 }: FeedbackPopupProps) {
-  if (!feedback) {
-    return null;
-  }
+  const [loading, setLoading] = useState(false);
+  const [feedback, setFeedback] = useState<Feedback | undefined>();
+
+  useEffect(() => {
+    if (!feedback) {
+      onGetFeedback();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show]);
+
+  const onGetFeedback = async () => {
+    setLoading(true);
+    const response = await fetch(`/api/ai/feedback`, {
+      method: 'POST',
+      body: JSON.stringify({
+        messageId: message?.id,
+      }),
+    });
+    const feedback = await response.json();
+    setFeedback(feedback);
+    setLoading(false);
+  };
+
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+    <Transition.Root show={show} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,42 +64,34 @@ export default function FeedbackPopup({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                    <CheckIcon
-                      className="h-6 w-6 text-green-600"
-                      aria-hidden="true"
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-primary px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <div className="flex flex-col items-center">
+                  <div className="relative">
+                    <img
+                      className="w-28 h-28 rounded-full bg-slate-300 text-white flex items-center justify-center"
+                      src={`/characters/${conversation.character?.slug}.png`}
+                      alt={conversation.character?.name}
                     />
+                    {loading ? (
+                      <div className="w-full h-full rounded-full border-4 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute -top-1 -left-1 animate-spin box-content"></div>
+                    ) : null}
                   </div>
-                  <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
-                    >
-                      {/** @ts-ignore */}
-                      {feedback.text?.intro}
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <ul className="text-sm text-gray-500 text-left list-disc">
+                  {feedback ? (
+                    <div>
+                      <p className="text-slate-500 text-xl my-2">
                         {/** @ts-ignore */}
-                        {feedback.text?.corrections.map(
-                          (correction: string) => (
-                            <li key={correction}>{correction}</li>
-                          )
-                        )}
+                        {feedback?.text.intro}
+                      </p>
+                      <ul className="list-disc ml-3">
+                        {/** @ts-ignore */}
+                        {feedback?.text.corrections.map((correction: any) => (
+                          <li className="mb-2" key={correction}>
+                            {correction}
+                          </li>
+                        ))}
                       </ul>
                     </div>
-                  </div>
-                </div>
-                <div className="mt-5 sm:mt-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => setOpen(false)}
-                  >
-                    Got it!
-                  </button>
+                  ) : null}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

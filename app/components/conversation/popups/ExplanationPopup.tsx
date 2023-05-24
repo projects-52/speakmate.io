@@ -58,6 +58,7 @@ export default function ExplanationPopup({
   const { speak } = useSpeak(conversation, true);
 
   const onSpeak = () => {
+    // @ts-ignore
     speak(explanation.explanation.original);
   };
 
@@ -101,7 +102,9 @@ export default function ExplanationPopup({
                   </div>
                   {existingExplanation ? (
                     <div>
+                      {/** @ts-ignore */}
                       <p className="text-slate-500 text-2xl font-bold flex justify-between">
+                        {/** @ts-ignore */}
                         {existingExplanation?.explanation.original}
 
                         <SpeakerWaveIcon
@@ -110,9 +113,11 @@ export default function ExplanationPopup({
                         />
                       </p>
                       <p className="text-slate-500 text-md font-bold">
+                        {/** @ts-ignore */}
                         {existingExplanation?.explanation.translation}
                       </p>
                       <p className="text-slate-500 text-sm">
+                        {/** @ts-ignore */}
                         {existingExplanation?.explanation.explanation}
                       </p>
                     </div>
