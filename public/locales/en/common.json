@@ -1,10 +1,14 @@
 {
+  "conversations": {
+    "new": "Start New Chat",
+    "all": "All"
+  },
   "language": {
     "practice": {
-      "title": "Practice Language"
+      "title": "What Language Do You Want to Practice?"
     },
     "native": {
-      "title": "Native Language"
+      "title": "What Language Do You Speak?"
     }
   },
   "level": {
@@ -12,6 +16,24 @@
     "beginner": "Just Starting",
     "intermediate": "Getting There",
     "advanced": "Pretty Good"
+  },
+  "message": {
+    "dontUnderstand": "Oops, didn't get that.",
+    "edit": {
+      "title": "Edit",
+      "loading": "Loading...",
+      "send": "Send Message"
+    },
+    "feedback": "Give me feedback"
+  },
+  "conversation": {
+    "delete": {
+      "close": "Close Conversation"
+    },
+    "explanationTooltip": {
+      "button": "What is this?"
+    },
+    "start": "Let's Get Talking"
   },
   "topic": {
     "literature": "Books 'n Stories",
@@ -37,11 +59,23 @@
     "chooseTopic": "Pick Your Interest",
     "noTopic": "Chill Chat"
   },
+  "settings": {
+    "language": {
+      "title": "Language Settings"
+    },
+    "logout": "Log Out",
+    "title": "Account Settings"
+  },
   "meta": {
     "title": "Speakmate"
   },
-  "conversation": {
-    "start": "Let's Get Talking"
+  "card": {
+    "word": "Word",
+    "translation": "Translation",
+    "explanation": "Explanation"
+  },
+  "dashboard": {
+    "selectConversation": "Select a Conversation"
   },
   "auth": {
     "title": "Welcome Back!",

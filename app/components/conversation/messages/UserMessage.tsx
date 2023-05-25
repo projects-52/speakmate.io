@@ -3,6 +3,7 @@ import { useState } from 'react';
 import EditMessagePopup from '../popups/EditMessagePopup';
 import FeedbackPopup from '../popups/FeedbackPopup';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 interface UserMessageProps {
   conversation: Conversation;
@@ -22,6 +23,8 @@ export default function UserMessage({
   const [showEdit, setShowEdit] = useState(false);
   const [showFeedback, setFeedback] = useState<boolean>(false);
 
+  const { t } = useTranslation();
+
   return (
     <div key={message.id} className="text-right mb-2">
       <div className="text-white bg-blue-300 inline-block rounded-md px-4 py-2 m-1 max-w-lg">
@@ -33,14 +36,14 @@ export default function UserMessage({
               className="text-xs text-gray-200 cursor-pointer"
               onClick={() => setShowEdit(true)}
             >
-              Edit
+              {t('message.edit.title')}
             </span>
           )}
           <span
             className="text-xs text-gray-200 cursor-pointer"
             onClick={() => setFeedback(true)}
           >
-            Feedback
+            {t('message.feedback')}
           </span>
           <span className="text-xs text-gray-200 justify-end ml-auto">
             {format(new Date(message.createdAt), 'HH:mm')}

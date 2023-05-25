@@ -5,6 +5,7 @@ import LoadingSkeleton from './LoadingSkeleton';
 import { format } from 'date-fns';
 import type { UIMessage } from '~/types/message.types';
 import ExplanationPopup from '../popups/ExplanationPopup';
+import { useTranslation } from 'react-i18next';
 
 interface AssistantMessageProps {
   message: UIMessage;
@@ -34,6 +35,8 @@ export default function AssistantMessage({
   const messageRef = useRef<HTMLDivElement>(null);
 
   const [showExplanation, setShowExplanation] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleMouseUp = (e: MouseEvent) => {
@@ -202,7 +205,7 @@ export default function AssistantMessage({
           <p className="text-gray-500 text-xs text-right flex mt-2">
             {canBeEdited && (
               <span className="mr-2 cursor-pointer" onClick={onEdit}>
-                I don't understand
+                {t('message.dontUnderstand')}
               </span>
             )}
             <span className="justify-end ml-auto">

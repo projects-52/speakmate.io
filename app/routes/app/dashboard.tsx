@@ -4,6 +4,7 @@ import { Outlet, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth.service';
 import { getAllConversationsForUser } from '~/services/conversation.service';
 import { ConversationsList } from '~/components/conversation/ConversationsList';
+import { useTranslation } from 'react-i18next';
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request, {
@@ -24,6 +25,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Dashboard() {
   const { conversations, user } = useLoaderData<typeof loader>();
+
+  const { t } = useTranslation();
+
   return (
     <div className="flex h-full bg-primary">
       <ConversationsList conversations={conversations} user={user} />
@@ -31,7 +35,7 @@ export default function Dashboard() {
         <Outlet />
         <div className="absolute w-full h-screen left-0 top-0 bg-primary flex items-center justify-center ">
           <span className="text-lg text-gray-600">
-            Choose conversation or create new one!
+            {t('dashboard.selectConversation')}
           </span>
         </div>
       </div>

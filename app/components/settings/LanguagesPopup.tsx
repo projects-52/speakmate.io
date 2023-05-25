@@ -17,6 +17,8 @@ export default function LanguagePopup({ open, setOpen }: LanguagePopupProps) {
   const { i18n } = useTranslation();
   const [redirectTo, setRedirectTo] = useState<string>('/');
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (window) {
       setRedirectTo(window.location.pathname);
@@ -52,7 +54,7 @@ export default function LanguagePopup({ open, setOpen }: LanguagePopupProps) {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-primary px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    Select language
+                    {t('settings.language.title')}
                   </h3>
                   <div className="mt-4 flex flex-col gap-4">
                     {Object.keys(languages).map((lng) => (

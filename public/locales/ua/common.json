@@ -1,10 +1,14 @@
 {
+  "conversations": {
+    "new": "Почати новий чат",
+    "all": "Всі"
+  },
   "language": {
     "practice": {
-      "title": "Практика мови"
+      "title": "Яку мову ви хочете практикувати?"
     },
     "native": {
-      "title": "Рідна мова"
+      "title": "Якою мовою ви розмовляєте?"
     }
   },
   "level": {
@@ -12,6 +16,24 @@
     "beginner": "Тільки починаю",
     "intermediate": "В процесі",
     "advanced": "Добре справляюся"
+  },
+  "message": {
+    "dontUnderstand": "Ой, я не розумію.",
+    "edit": {
+      "title": "Змінити",
+      "loading": "Завантаження...",
+      "send": "Надіслати повідомлення"
+    },
+    "feedback": "Дайте мені відгук"
+  },
+  "conversation": {
+    "delete": {
+      "close": "Закрити розмову"
+    },
+    "explanationTooltip": {
+      "button": "Не розумію"
+    },
+    "start": "Почнемо розмову"
   },
   "topic": {
     "literature": "Книги та історії",
@@ -24,8 +46,8 @@
     "yoga": "Йога",
     "music": "Музика",
     "socialMedia": "Соціальні медіа",
-    "moviesAndTvShows": "Фільми та ТБ шоу",
-    "videoGames": "Відео ігри",
+    "moviesAndTvShows": "Фільми та телешоу",
+    "videoGames": "Відеоігри",
     "foodAndCuisine": "Їжа та кухня",
     "travel": "Подорожі",
     "technology": "Технології",
@@ -37,11 +59,23 @@
     "chooseTopic": "Вибрати тему",
     "noTopic": "Просто спілкування"
   },
+  "settings": {
+    "language": {
+      "title": "Обрати мови"
+    },
+    "logout": "Вийти",
+    "title": "Налаштування"
+  },
   "meta": {
     "title": "Speakmate"
   },
-  "conversation": {
-    "start": "Почнемо розмову"
+  "card": {
+    "word": "Слово",
+    "translation": "Переклад",
+    "explanation": "Пояснення"
+  },
+  "dashboard": {
+    "selectConversation": "Вибрати розмову"
   },
   "auth": {
     "title": "Ласкаво просимо назад!",

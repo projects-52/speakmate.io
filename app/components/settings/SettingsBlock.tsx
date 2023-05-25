@@ -24,6 +24,8 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
   const [open, setOpen] = useState(false);
   const [showLangiagePopup, setShowLanguagePopup] = useState(false);
 
+  const { t } = useTranslation();
+
   const ref: MutableRefObject<HTMLDivElement | null> = useClickOutside(() =>
     setOpen(false)
   );
@@ -59,7 +61,7 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
         <Form method="post" action="/api/auth/logout">
           <button type="submit" className="flex items-center gap-6 px-4 py-1">
             <ArrowRightOnRectangleIcon className="w-10 h-10 p-1" />
-            Logout
+            {t('settings.logout')}
           </button>
         </Form>
         <div className="flex items-center gap-6 px-4 py-1"></div>
@@ -70,7 +72,7 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
             open ? 'rotate-180 bg-primary-dark' : ''
           }`}
         />
-        <span>Settings</span>
+        <span>{t('settings.title')}</span>
       </div>
       <LanguagePopup
         open={showLangiagePopup}

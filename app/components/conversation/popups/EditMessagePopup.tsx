@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import type { Message } from '@prisma/client';
+import { useTranslation } from 'react-i18next';
 
 interface EditMessagePopupProps {
   message: Message | null;
@@ -18,6 +19,8 @@ export default function EditMessagePopup({
   const [text, setText] = useState(message?.text || '');
 
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const onEdit = async () => {
     setLoading(true);
@@ -89,7 +92,7 @@ export default function EditMessagePopup({
                   onClick={onEdit}
                   disabled={loading || text === message.text}
                 >
-                  {loading ? 'Loading...' : 'Send'}
+                  {loading ? t('message.edit.loading') : t('message.edit.send')}
                 </button>
               </Dialog.Panel>
             </Transition.Child>

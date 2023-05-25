@@ -1,5 +1,6 @@
 import type { MutableRefObject } from 'react';
 import useClickOutside from '~/routes/app/hooks/useClickOutside';
+import { useTranslation } from 'react-i18next';
 
 interface ExplanationTooltipProps {
   show: boolean;
@@ -17,6 +18,8 @@ export default function ExplanationTooltip({
   const ref: MutableRefObject<HTMLDivElement | null> = useClickOutside(() =>
     onClose()
   );
+
+  const { t } = useTranslation();
 
   const style = position
     ? {
@@ -36,7 +39,7 @@ export default function ExplanationTooltip({
         onClick={onButtonClick}
         className="bg-blue-500 text-white px-4 py-1 rounded"
       >
-        What is it?
+        {t('conversation.explanationTooltip.button')}
       </button>
     </div>
   ) : null;

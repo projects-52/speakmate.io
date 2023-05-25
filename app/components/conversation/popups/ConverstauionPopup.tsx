@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import type { Conversation } from '@prisma/client';
 import { Form } from '@remix-run/react';
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface FeedbackPopupProps {
   conversation: Conversation | null;
@@ -14,6 +14,8 @@ export default function ConversationPopup({
   conversation,
 }: FeedbackPopupProps) {
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!conversation) {
@@ -78,14 +80,14 @@ export default function ConversationPopup({
                           type="submit"
                           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                         >
-                          Confirm
+                          {t('conversation.delete.confirm')}
                         </button>
                       </Form>
                       <button
                         className="inline-flex w-full justify-center rounded-md text-indigo-600 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         onClick={() => setIsDeleting(false)}
                       >
-                        Cancel
+                        {t('conversation.delete.cancel')}
                       </button>
                     </div>
                   ) : (
@@ -94,14 +96,14 @@ export default function ConversationPopup({
                         onClick={() => setIsDeleting(true)}
                         className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                       >
-                        Delete
+                        {t('conversation.delete')}
                       </button>
                       <button
                         type="button"
                         className="inline-flex w-full justify-center rounded-md text-indigo-600 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         onClick={onClose}
                       >
-                        Close
+                        {t('conversation.delete.close')}
                       </button>
                     </div>
                   )}

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ConversationPopup from './popups/ConverstauionPopup';
 import { format, isToday, isYesterday } from 'date-fns';
 import { SettingsBlock } from '../settings/SettingsBlock';
+import { useTranslation } from 'react-i18next';
 
 interface ConversationsListProps {
   conversations: Conversation[];
@@ -75,6 +76,8 @@ export function ConversationsList({
     (conversation: Conversation) => conversation.id === selectedConversationId
   );
 
+  const { t } = useTranslation();
+
   const uniqueCharacters = getUniqueCharacters(conversations);
 
   const groupedConversations = groupByDay(
@@ -99,7 +102,7 @@ export function ConversationsList({
           className="p-2 rounded  flex items-center justify-center gap-2 text-slate-500"
         >
           <PlusIcon className="w-6 h-6" />
-          New conversation
+          {t('conversations.new')}
         </Link>
       </div>
 
@@ -111,7 +114,7 @@ export function ConversationsList({
             }`}
             onClick={() => setSelectedCharacter(null)}
           >
-            All
+            {t('conversations.all')}
           </div>
           {uniqueCharacters.map((character) => (
             <div
