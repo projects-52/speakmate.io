@@ -28,7 +28,8 @@
   },
   "conversation": {
     "delete": {
-      "close": "Закрити розмову"
+      "title": "Видалити",
+      "close": "Закрит"
     },
     "explanationTooltip": {
       "button": "Не розумію"

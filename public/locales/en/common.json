@@ -28,7 +28,8 @@
   },
   "conversation": {
     "delete": {
-      "close": "Close Conversation"
+      "title": "Delete",
+      "close": "Close"
     },
     "explanationTooltip": {
       "button": "What is this?"
