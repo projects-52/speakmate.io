@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Character } from '~/types/character.type';
+import type { Language } from '~/types/language.type';
 import { Characters } from '../../characters';
 
 interface CharacterSelectProps {
-  onChange: (slug: string) => void;
-  language: string;
-  nativeLanguage: string;
+  onChange: (character: Character) => void;
+  language: Language | null;
+  nativeLanguage: Language | null;
 }
 
 export function CharacterSelect({
@@ -13,22 +14,24 @@ export function CharacterSelect({
   nativeLanguage,
   onChange,
 }: CharacterSelectProps) {
-  const [selectedCharacter, setSelectedCharacter] = useState<string>('');
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
+    null
+  );
 
-  const onSetCharacter = (slug: string) => {
-    setSelectedCharacter(slug);
-    onChange(slug);
+  const onSetCharacter = (character: Character) => {
+    setSelectedCharacter(character);
+    onChange(character);
   };
 
   if (!language) {
     return null;
   }
 
-  const character = Characters[language].find(
-    (c: Character) => c.slug === selectedCharacter
+  const character = Characters[language.slug].find(
+    (c: Character) => c.slug === selectedCharacter?.slug
   );
 
-  const languageToUse = nativeLanguage || language;
+  const languageToUse = nativeLanguage?.slug || language?.slug;
 
   return (
     <div className="p-8">
@@ -49,12 +52,12 @@ export function CharacterSelect({
       )}
 
       <div className="flex flex-wrap gap-2">
-        {Characters[language]
-          .filter((character) => character.slug !== selectedCharacter)
+        {Characters[language.slug]
+          .filter((character) => character.slug !== selectedCharacter?.slug)
           .map((character: Character) => (
             <div
               key={character.slug}
-              onClick={() => onSetCharacter(character.slug)}
+              onClick={() => onSetCharacter(character)}
               className="flex flex-col items-center justify-center p-4 cursor-pointer gap-4"
             >
               <img

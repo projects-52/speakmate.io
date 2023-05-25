@@ -1,13 +1,50 @@
 {
-  "meta": {
-    "title": "App"
+  "language": {
+    "practice": {
+      "title": "Practice Language"
+    },
+    "native": {
+      "title": "Native Language"
+    }
   },
-  "profile": {
-    "logout": "Logout",
-    "language": "Language"
+  "level": {
+    "title": "Skill Level",
+    "beginner": "Just Starting",
+    "intermediate": "Getting There",
+    "advanced": "Pretty Good"
+  },
+  "topic": {
+    "literature": "Books 'n Stories",
+    "hiking": "Trail Blazing",
+    "photography": "Snap 'n Share",
+    "cooking": "Chef's Corner",
+    "history": "Blast from the Past",
+    "gardening": "Green Thumbs",
+    "education": "Learning is Fun",
+    "yoga": "Stretch 'n Relax",
+    "music": "Groovy Tunes",
+    "socialMedia": "#Trending",
+    "moviesAndTvShows": "Popcorn Time",
+    "videoGames": "Game On",
+    "foodAndCuisine": "Foodie Haven",
+    "travel": "Jetsetter",
+    "technology": "Tech Talk",
+    "careerAndWork": "Office Chatter",
+    "artAndCulture": "Artsy Vibe",
+    "environment": "Green Planet",
+    "healthAndWellness": "Fit 'n Fab",
+    "hobbies": "Fun Time",
+    "chooseTopic": "Pick Your Interest",
+    "noTopic": "Chill Chat"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "conversation": {
+    "start": "Let's Get Talking"
   },
   "auth": {
-    "title": "Sign in to your account",
-    "google": "Sign in with Google"
+    "title": "Welcome Back!",
+    "google": "Continue with Google"
   }
 }

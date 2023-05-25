@@ -17,5 +17,9 @@
   },
   "hello": {
     "world": "Hello, world!"
+  },
+  "profile": {
+    "logout": "Logout",
+    "language": "Language"
   }
 }

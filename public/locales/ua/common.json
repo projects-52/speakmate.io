@@ -1,13 +1,50 @@
 {
-  "meta": {
-    "title": "Додаток"
+  "language": {
+    "practice": {
+      "title": "Практика мови"
+    },
+    "native": {
+      "title": "Рідна мова"
+    }
   },
-  "profile": {
-    "logout": "Вийти",
-    "language": "Мова"
+  "level": {
+    "title": "Рівень вмінь",
+    "beginner": "Тільки починаю",
+    "intermediate": "В процесі",
+    "advanced": "Добре справляюся"
+  },
+  "topic": {
+    "literature": "Книги та історії",
+    "hiking": "Походи",
+    "photography": "Фотографія",
+    "cooking": "Кулінарія",
+    "history": "Історія",
+    "gardening": "Садівництво",
+    "education": "Освіта",
+    "yoga": "Йога",
+    "music": "Музика",
+    "socialMedia": "Соціальні медіа",
+    "moviesAndTvShows": "Фільми та ТБ шоу",
+    "videoGames": "Відео ігри",
+    "foodAndCuisine": "Їжа та кухня",
+    "travel": "Подорожі",
+    "technology": "Технології",
+    "careerAndWork": "Кар'єра та робота",
+    "artAndCulture": "Мистецтво та культура",
+    "environment": "Довкілля",
+    "healthAndWellness": "Здоров'я та благополуччя",
+    "hobbies": "Хобі",
+    "chooseTopic": "Вибрати тему",
+    "noTopic": "Просто спілкування"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "conversation": {
+    "start": "Почнемо розмову"
   },
   "auth": {
-    "title": "Увійти у свій аккаунт",
-    "google": "Увійти з Google"
+    "title": "Ласкаво просимо назад!",
+    "google": "Продовжити з Google"
   }
 }

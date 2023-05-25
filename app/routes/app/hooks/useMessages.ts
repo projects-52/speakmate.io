@@ -1,6 +1,6 @@
 import type { Conversation, Message } from '@prisma/client';
 import { addSeconds } from 'date-fns';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { getMoreMessages } from '~/services/message.service';
 import { getNextMessageForConversation } from '~/services/response.service';
 import type { UIMessage } from '~/types/message.types';

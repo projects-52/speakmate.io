@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { LanguageLevel } from '~/types/conversation.type';
+import { useTranslation } from 'react-i18next';
 
 interface LevelSelectProps {
   onChange: (level: string) => void;
@@ -8,47 +9,46 @@ interface LevelSelectProps {
 export default function LevelSelect({ onChange }: LevelSelectProps) {
   const [level, setLevel] = useState<string>(LanguageLevel.Beginner.toString());
 
+  const { t } = useTranslation();
+
   const onSetLevel = (level: string) => {
-    console.log(level === LanguageLevel.Beginner.toString());
     setLevel(level);
     onChange(level);
   };
 
   return (
     <div className="mt-4">
-      <p className="block text-lg font-medium leading-6 text-gray-900 mb-2">
-        Choose level
-      </p>
+      <h3 className="mb-4">{t('level.title')}</h3>
       <div className="flex flex-wrap gap-2">
         <div
-          className={`border-2  p-2 rounded-lg mb-2 cursor-pointer ${
+          className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Beginner.toString()
-              ? 'border-blue-500'
-              : 'border-slate-300'
+              ? 'bg-primary-dark shadow-md'
+              : 'bg-primary text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Beginner.toString())}
         >
-          <p className="text-lg">Begginer</p>
+          {t('level.beginner')}
         </div>
         <div
-          className={`border-2  p-2 rounded-lg mb-2 cursor-pointer ${
+          className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Intermediate.toString()
-              ? 'border-blue-500'
-              : 'border-slate-300'
+              ? 'bg-primary-dark shadow-md'
+              : 'bg-primary text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Intermediate.toString())}
         >
-          <p className="text-lg">Intermediate</p>
+          {t('level.intermediate')}
         </div>
         <div
-          className={`border-2  p-2 rounded-lg mb-2 cursor-pointer ${
+          className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Advanced.toString()
-              ? 'border-blue-500'
-              : 'border-slate-300'
+              ? 'bg-primary-dark shadow-md'
+              : 'bg-primary text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Advanced.toString())}
         >
-          <p className="text-lg">Advanced</p>
+          {t('level.advanced')}
         </div>
       </div>
     </div>

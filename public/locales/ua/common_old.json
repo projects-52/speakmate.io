@@ -17,5 +17,9 @@
   },
   "hello": {
     "world": "Привіт світ"
+  },
+  "profile": {
+    "logout": "Вийти",
+    "language": "Мова"
   }
 }

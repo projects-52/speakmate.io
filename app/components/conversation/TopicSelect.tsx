@@ -1,64 +1,70 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import type { Topic } from '~/types/topic.type';
 
 interface TopicSelectProps {
-  onChange: (level: string) => void;
+  onChange: (topic: Topic | null) => void;
 }
 
-const TOPICS = [
-  'Literature',
-  'Hiking',
-  'Photography',
-  'Cooking',
-  'History',
-  'Gardening',
-  'Education',
-  'Yoga',
-  'Music',
-  'Social Media',
-  'Movies and TV Shows',
-  'Video Games',
-  'Food and Cuisine',
-  'Travel',
-  'Technology',
-  'Career and Work',
-  'Art and Culture',
-  'Environment',
-  'Health and Wellness',
-  'Hobbies',
-];
-
 export default function TopicSelect({ onChange }: TopicSelectProps) {
-  const [selectedTopic, setTopic] = useState<string>('');
+  const [selectedTopic, setTopic] = useState<Topic | null>(null);
 
-  const onSetTopic = (topic: string) => {
+  const onSetTopic = (topic: Topic | null) => {
     setTopic(topic);
     onChange(topic);
   };
 
+  const { t } = useTranslation();
+
+  const TOPICS: Topic[] = [
+    { name: 'Literature', key: t('topic.literature') },
+    { name: 'Hiking', key: t('topic.hiking') },
+    { name: 'Photography', key: t('topic.photography') },
+    { name: 'Cooking', key: t('topic.cooking') },
+    { name: 'History', key: t('topic.history') },
+    { name: 'Gardening', key: t('topic.gardening') },
+    { name: 'Education', key: t('topic.education') },
+    { name: 'Yoga', key: t('topic.yoga') },
+    { name: 'Music', key: t('topic.music') },
+    { name: 'Social Media', key: t('topic.socialMedia') },
+    { name: 'Movies and TV Shows', key: t('topic.moviesAndTvShows') },
+    { name: 'Video Games', key: t('topic.videoGames') },
+    { name: 'Food and Cuisine', key: t('topic.foodAndCuisine') },
+    { name: 'Travel', key: t('topic.travel') },
+    { name: 'Technology', key: t('topic.technology') },
+    { name: 'Career and Work', key: t('topic.careerAndWork') },
+    { name: 'Art and Culture', key: t('topic.artAndCulture') },
+    { name: 'Environment', key: t('topic.environment') },
+    { name: 'Health and Wellness', key: t('topic.healthAndWellness') },
+    { name: 'Hobbies', key: t('topic.hobbies') },
+  ];
+
   return (
     <div className="mt-4">
-      <p className="block text-lg font-medium leading-6 text-gray-900 mb-2">
-        Choose topic
-      </p>
+      <h3 className="mb-4 mt-2">{t('topic.chooseTopic')}</h3>
       <div className="flex flex-wrap gap-2">
         <div
           key="No topic"
-          className={`border-2  p-2 rounded-lg mb-2 cursor-pointer ${
-            selectedTopic === '' ? 'border-blue-500' : 'border-slate-300'
+          className={`p-2 rounded-lg mb-2 cursor-pointer ${
+            selectedTopic === null
+              ? 'bg-primary-dark shadow-md'
+              : 'border-slate-300'
           }`}
-          onClick={() => onSetTopic('')}
+          onClick={() => onSetTopic(null)}
         >
-          <p className="text-lg">No topic</p>
+          {t('topic.noTopic')}
         </div>
         {TOPICS.map((topic) => (
           <div
-            key={topic}
-            className={`border-2  p-2 rounded-lg mb-2 cursor-pointer ${
-              topic === selectedTopic ? 'border-blue-500' : 'border-slate-300'
+            key={topic.name}
+            className={`p-2 rounded-lg mb-2 cursor-pointer ${
+              topic.name === selectedTopic?.name
+                ? 'bg-primary-dark shadow-md'
+                : 'border-slate-300'
             }`}
             onClick={() => onSetTopic(topic)}
           >
-            <p className="text-lg">{topic}</p>
+            {topic.key}
           </div>
         ))}
       </div>
