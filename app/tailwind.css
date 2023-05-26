@@ -118,6 +118,10 @@
   background-color: #e2e0db;
 }
 
+.hover:bg-primary-dark {
+  background-color: #e2e0db;
+}
+
 .bg-primary-light {
   background-color: #f9f8f6;
 }

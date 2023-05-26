@@ -1,6 +1,10 @@
 import type { Character, Conversation, User } from '@prisma/client';
 import { Link, NavLink } from '@remix-run/react';
-import { PlusIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import {
+  PlusIcon,
+  EllipsisVerticalIcon,
+  BookmarkIcon,
+} from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import ConversationPopup from './popups/ConverstauionPopup';
 import { format, isToday, isYesterday } from 'date-fns';
@@ -106,10 +110,17 @@ export function ConversationsList({
         </Link>
       </div>
 
+      <div className="p-2 px-3 flex gap-2 items-center text-slate-500 hover:bg-yellow-600 hover:text-white m-2 rounded-lg cursor-pointer">
+        <BookmarkIcon className="w-8 h-8" />
+        <Link to="/app/cards" className="p- w-full">
+          {t('cards.link')}
+        </Link>
+      </div>
+
       {uniqueCharacters.length > 1 && (
         <div className="flex py-2 px-4">
           <div
-            className={`flex flex-col items-center justify-center mr-2 cursor-pointer w-10 h-10 bg-slate-200 rounded-full border-2 ${
+            className={`flex flex-col items-center justify-center mr-2 cursor-pointer w-10 h-10 bg-slate-200 rounded-full border-2 flex-shrink-0 ${
               selectedCharacter === null ? 'border-blue-500' : ''
             }`}
             onClick={() => setSelectedCharacter(null)}

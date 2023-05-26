@@ -3,6 +3,11 @@
     "new": "Start New Chat",
     "all": "All"
   },
+  "cards": {
+    "link": "Cards",
+    "check": "Check cards",
+    "add": "Add to cards"
+  },
   "language": {
     "practice": {
       "title": "What Language Do You Want to Practice?"
@@ -37,10 +42,6 @@
       "button": "What is this?"
     },
     "start": "Let's Get Talking"
-  },
-  "cards": {
-    "check": "Check cards",
-    "add": "Add to cards"
   },
   "topic": {
     "literature": "Books 'n Stories",
