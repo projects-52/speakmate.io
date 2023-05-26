@@ -11,6 +11,7 @@ import { NativeLanguageSelect } from '~/components/conversation/NativeLanguageSe
 import type { Language } from '~/types/language.type';
 import type { Topic } from '~/types/topic.type';
 import type { Character } from '~/types/character.type';
+import { Button } from '~/components/ui/Button';
 
 export default function NewConversation() {
   const [level, setLevel] = useState<string>(LanguageLevel.Beginner.toString());
@@ -60,12 +61,12 @@ export default function NewConversation() {
         <input type="hidden" name="level" value={level} />
         <input type="hidden" name="topic" value={topic?.name} />
         <input type="hidden" name="character" value={character?.slug} />
-        <button
+        <Button
           disabled={disabled}
           className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg disabled:bg-slate-300"
         >
           {t('conversation.start')}
-        </button>
+        </Button>
       </Form>
     </div>
   );

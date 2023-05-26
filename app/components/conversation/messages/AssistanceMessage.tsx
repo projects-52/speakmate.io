@@ -172,18 +172,20 @@ export default function AssistantMessage({
         onClose={() => setTooltipVisible(false)}
         onButtonClick={onShowExplanation}
       />
-      <ExplanationPopup
-        explanation={explanation}
-        show={showExplanation}
-        onClose={() => {
-          setShowExplanation(false);
-          setExplanation(undefined);
-        }}
-        conversation={conversation}
-        text={selectedText}
-        message={message as Message}
-        onAddExplanation={onAddExplanation}
-      />
+      {showExplanation && (
+        <ExplanationPopup
+          explanation={explanation}
+          show={showExplanation}
+          onClose={() => {
+            setShowExplanation(false);
+            setExplanation(undefined);
+          }}
+          conversation={conversation}
+          text={selectedText}
+          message={message as Message}
+          onAddExplanation={onAddExplanation}
+        />
+      )}
       <img
         src={`/characters/${conversation.character?.slug}.png`}
         className="w-12 h-12 rounded-full"

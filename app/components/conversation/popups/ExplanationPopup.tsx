@@ -1,8 +1,11 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import type { Conversation, Explanation, Message } from '@prisma/client';
+import type { Card, Conversation, Explanation, Message } from '@prisma/client';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 import { useSpeak } from '~/routes/app/hooks/useSpeak';
+import { Button } from '~/components/ui/Button';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from '@remix-run/react';
 
 interface ExplanationPopupProps {
   conversation: Conversation;
@@ -24,13 +27,24 @@ export default function ExplanationPopup({
   onAddExplanation,
 }: ExplanationPopupProps) {
   const [loading, setLoading] = useState(false);
+  const [addingToCards, setAddingToCards] = useState(false);
+  const [doesCardExist, setDoesCardExist] = useState<
+    'checking' | 'exists' | 'not-exists'
+  >('checking');
   const [existingExplanation, setExistingExplanation] = useState<
     Explanation | undefined
   >(explanation);
 
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!explanation) {
       onGetExplanation();
+    }
+
+    if (doesCardExist === 'checking') {
+      onGetCard(text);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
@@ -50,9 +64,49 @@ export default function ExplanationPopup({
       }),
     });
     const explanation = await response.json();
+
     onAddExplanation(explanation);
+    setDoesCardExist('not-exists');
     setExistingExplanation(explanation);
     setLoading(false);
+  };
+
+  const onGetCard = async (text: string) => {
+    // @ts-ignore
+    if (!existingExplanation?.explanation.original) return;
+    const response = await fetch(`/api/card/fetch`, {
+      method: 'POST',
+      body: JSON.stringify({
+        // @ts-ignore
+        text: existingExplanation?.explanation.original,
+      }),
+    });
+
+    const card = await response.json();
+    if (card) {
+      setDoesCardExist('exists');
+    } else {
+      setDoesCardExist('not-exists');
+    }
+  };
+
+  const onAddToCards = async () => {
+    if (doesCardExist !== 'not-exists') {
+      navigate('/app/cards');
+      return;
+    }
+
+    setAddingToCards(true);
+    await fetch('/api/card/add', {
+      method: 'POST',
+      body: JSON.stringify({
+        messageId: message?.id,
+        // @ts-ignore
+        text: existingExplanation?.explanation.original,
+      }),
+    });
+    setDoesCardExist('exists');
+    setAddingToCards(false);
   };
 
   const { speak } = useSpeak(conversation, true);
@@ -100,7 +154,7 @@ export default function ExplanationPopup({
                       <div className="w-full h-full rounded-full border-4 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute -top-1 -left-1 animate-spin box-content"></div>
                     ) : null}
                   </div>
-                  {existingExplanation ? (
+                  {existingExplanation && doesCardExist !== 'checking' ? (
                     <div>
                       {/** @ts-ignore */}
                       <p className="text-slate-500 text-2xl font-bold flex justify-between">
@@ -120,6 +174,12 @@ export default function ExplanationPopup({
                         {/** @ts-ignore */}
                         {existingExplanation?.explanation.explanation}
                       </p>
+
+                      <Button onClick={onAddToCards} loading={addingToCards}>
+                        {doesCardExist === 'exists'
+                          ? t('cards.check')
+                          : t('cards.add')}
+                      </Button>
                     </div>
                   ) : null}
                 </div>

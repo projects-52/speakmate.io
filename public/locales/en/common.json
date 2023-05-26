@@ -28,6 +28,8 @@
   },
   "conversation": {
     "delete": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
       "title": "Delete",
       "close": "Close"
     },
@@ -35,6 +37,10 @@
       "button": "What is this?"
     },
     "start": "Let's Get Talking"
+  },
+  "cards": {
+    "check": "Check cards",
+    "add": "Add to cards"
   },
   "topic": {
     "literature": "Books 'n Stories",
@@ -65,7 +71,7 @@
       "title": "Language Settings"
     },
     "logout": "Log Out",
-    "title": "Account Settings"
+    "title": "Settings"
   },
   "meta": {
     "title": "Speakmate"

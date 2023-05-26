@@ -52,3 +52,22 @@ export async function getAllCardsByUserId(userId: string): Promise<Card[]> {
 
   return cards;
 }
+
+export async function getCardByText(
+  text: string,
+  userId: string
+): Promise<Card | null> {
+  try {
+    const card = await prisma.card.findFirst({
+      where: {
+        text,
+        userId,
+      },
+    });
+
+    return card;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
