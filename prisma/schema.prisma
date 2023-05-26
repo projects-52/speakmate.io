@@ -44,6 +44,7 @@ model Conversation {
   character   Character?
   deleted     Boolean       @default(false)
   sound       Boolean       @default(false)
+  style       String       
 }
 
 model Message {

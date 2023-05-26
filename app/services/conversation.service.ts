@@ -3,6 +3,8 @@ import type { Character } from '~/types/character.type';
 import { createMessage } from './message.service';
 import { getInitialMesage } from './openai.service';
 import { prisma } from './prisma.service';
+import { initialMessageParser } from '../prompts';
+import { getRandomeLearningStyle } from '~/prompts/learningStyles';
 
 export async function getAllConversationsForUser(userId: string) {
   try {
@@ -47,6 +49,8 @@ export async function createConversation(
     voiceGender = Math.random() > 0.5 ? 'male' : 'female';
   }
 
+  const style = getRandomeLearningStyle();
+
   try {
     const conversationData = {
       userId,
@@ -56,6 +60,7 @@ export async function createConversation(
       level,
       topic,
       deleted: false,
+      style,
       character: {
         slug: characterData.slug,
         name: characterData.name,
@@ -65,7 +70,7 @@ export async function createConversation(
     };
     const data = await getInitialMesage(conversationData);
 
-    const parsedData = JSON.parse(data as string);
+    const parsedData = await initialMessageParser.parse(data as string);
 
     const conversation = await prisma.conversation.create({
       data: { ...conversationData, name: parsedData.name },
