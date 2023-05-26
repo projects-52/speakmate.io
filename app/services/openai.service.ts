@@ -1,5 +1,6 @@
 import type { Conversation, Message } from '@prisma/client';
 import axios from 'axios';
+import type { ChatCompletionRequestMessage } from 'openai';
 import { Configuration, OpenAIApi } from 'openai';
 import FormData from 'form-data';
 import { ChatCompletionRequestMessageRoleEnum } from 'openai';
@@ -48,6 +49,24 @@ export async function transcribeAudio(buffer: Buffer, file: File) {
   }
 }
 
+export async function getResponse(
+  messages: ChatCompletionRequestMessage[]
+): Promise<string | null> {
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages,
+      max_tokens: 1000,
+    });
+
+    const { data } = response;
+
+    return data.choices[0].message?.content ?? null;
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function getInitialMesage(conversation: Partial<Conversation>) {
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
@@ -63,23 +82,12 @@ export async function getInitialMesage(conversation: Partial<Conversation>) {
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }
 
 export async function getAnswer(
@@ -109,23 +117,12 @@ export async function getAnswer(
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage, ...preparedMessages].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage, ...preparedMessages].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }
 
 export async function getFeedback(
@@ -151,23 +148,12 @@ export async function getFeedback(
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }
 
 export async function getExplanation(
@@ -195,23 +181,12 @@ export async function getExplanation(
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }
 
 export async function getCardExplanation(
@@ -239,23 +214,12 @@ export async function getCardExplanation(
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }
 
 export async function regenerateAnswer(
@@ -289,21 +253,10 @@ export async function regenerateAnswer(
     }),
   };
 
-  try {
-    const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [propmptMessage, ...preparedMessages].map((m) => ({
-        role: m.role,
-        content: m.content,
-      })),
-      max_tokens: 1000,
-    });
-
-    const { data } = response;
-
-    return data.choices[0].message?.content;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return await getResponse(
+    [propmptMessage, ...preparedMessages].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
 }

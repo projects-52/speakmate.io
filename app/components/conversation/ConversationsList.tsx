@@ -118,7 +118,7 @@ export function ConversationsList({
       </div>
 
       {uniqueCharacters.length > 1 && (
-        <div className="flex py-2 px-4">
+        <div className="flex py-2 px-4 flex-wrap">
           <div
             className={`flex flex-col items-center justify-center mr-2 cursor-pointer w-10 h-10 bg-slate-200 rounded-full border-2 flex-shrink-0 ${
               selectedCharacter === null ? 'border-blue-500' : ''
@@ -130,7 +130,7 @@ export function ConversationsList({
           {uniqueCharacters.map((character) => (
             <div
               key={character.slug}
-              className="flex flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center flex-shrink-0 "
               onClick={() => setSelectedCharacter(character)}
             >
               <img

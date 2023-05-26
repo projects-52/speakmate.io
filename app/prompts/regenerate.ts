@@ -31,7 +31,9 @@ Student's native language is {nativeLanguage}.
 Student selected topic for conversation is {topic}.
 
 You already responsed with the following message: {message_text}
-    But user asked you to reprase i since it's not clear or maybe too complicated for the user
+But user asked you to reprase i since it's not clear or maybe too complicated for the user
+Make sure, that you don't refer to the previous message and just provide new message as a replacemnet for the old one
+Make sure, that new message is more clear and simple for the user
 
 `,
   inputVariables: [

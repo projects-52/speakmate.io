@@ -31,7 +31,10 @@ Student's native language is {nativeLanguage}.
 Student selected topic for conversation is {topic}.
 
 Response with a message to start the conversation. 
-You can introduce yourself and kick off the conversation. 
+You can introduce yourself and kick off the conversation.
+Also provide the name for the conversation.
+Make sure, that you're using only student's native language or language, that student is learning for name of the conversation and for initial message.
+Make sure, that you choose language for the name of the conversation and for initial message based on the language proficiency level of student.
 Use {languageToLearn}.
 
 {format_instructions}
@@ -43,7 +46,7 @@ Use {languageToLearn}.
     'languageLevel',
     'nativeLanguage',
     'topic',
-    'learning_style'
+    'learning_style',
   ],
   partialVariables: { format_instructions: formatInstructions },
 });
