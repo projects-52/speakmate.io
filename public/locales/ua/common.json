@@ -1,12 +1,12 @@
 {
-  "conversations": {
-    "new": "Почати новий чат",
-    "all": "Всі"
+  "card": {
+    "word": "Слово",
+    "translation": "Переклад",
+    "explanation": "Пояснення"
   },
-  "cards": {
-    "link": "Картки",
-    "check": "Подивитися картки",
-    "add": "Додати картку"
+  "conversations": {
+    "all": "Всі",
+    "new": "Почати новий чат"
   },
   "language": {
     "practice": {
@@ -43,6 +43,10 @@
     },
     "start": "Почнемо розмову"
   },
+  "cards": {
+    "check": "Подивитися картки",
+    "add": "Додати картку"
+  },
   "topic": {
     "literature": "Книги та історії",
     "hiking": "Походи",
@@ -74,13 +78,12 @@
     "logout": "Вийти",
     "title": "Налаштування"
   },
+  "common": {
+    "today": "Сьогодні",
+    "yesterday": "Вчора"
+  },
   "meta": {
     "title": "Speakmate"
-  },
-  "card": {
-    "word": "Слово",
-    "translation": "Переклад",
-    "explanation": "Пояснення"
   },
   "dashboard": {
     "selectConversation": "Вибрати розмову"

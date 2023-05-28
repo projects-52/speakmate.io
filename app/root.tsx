@@ -57,7 +57,7 @@ export default function App() {
   useChangeLanguage(locale);
 
   return (
-    <html lang={locale} dir={i18n.dir()} className="bg-primary h-full">
+    <html lang={locale} dir={i18n.dir()} className="bg-light-shades-500 h-full">
       <head>
         <Meta />
         <Links />

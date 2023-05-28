@@ -23,8 +23,8 @@ export default function LevelSelect({ onChange }: LevelSelectProps) {
         <div
           className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Beginner.toString()
-              ? 'bg-primary-dark shadow-md'
-              : 'bg-primary text-slate-500'
+              ? 'bg-light-accent-500 shadow-md text-slate-100'
+              : 'bg-light-shades-500 text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Beginner.toString())}
         >
@@ -33,8 +33,8 @@ export default function LevelSelect({ onChange }: LevelSelectProps) {
         <div
           className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Intermediate.toString()
-              ? 'bg-primary-dark shadow-md'
-              : 'bg-primary text-slate-500'
+              ? 'bg-light-accent-500 shadow-md text-slate-100'
+              : 'bg-light-shades-500 text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Intermediate.toString())}
         >
@@ -43,8 +43,8 @@ export default function LevelSelect({ onChange }: LevelSelectProps) {
         <div
           className={`py-2 px-4 rounded-lg mb-2 cursor-pointer ${
             level === LanguageLevel.Advanced.toString()
-              ? 'bg-primary-dark shadow-md'
-              : 'bg-primary text-slate-500'
+              ? 'bg-light-accent-500 shadow-md text-slate-100'
+              : 'bg-light-shades-500 text-slate-500'
           }`}
           onClick={() => onSetLevel(LanguageLevel.Advanced.toString())}
         >

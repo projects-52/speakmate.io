@@ -29,11 +29,11 @@ export default function Dashboard() {
   const { t } = useTranslation();
 
   return (
-    <div className="flex h-full bg-primary">
+    <div className="flex h-full bg-light-shades-500">
       <ConversationsList conversations={conversations} user={user} />
       <div className="flex-1 relative">
         <Outlet />
-        <div className="absolute w-full h-screen left-0 top-0 bg-primary flex items-center justify-center ">
+        <div className="absolute w-full h-screen left-0 top-0 bg-light-shades-500 flex items-center justify-center ">
           <span className="text-lg text-gray-600">
             {t('dashboard.selectConversation')}
           </span>

@@ -30,8 +30,8 @@ export function LanguageForPracticeSelect({
             <span
               className={`py-2 px-4 flex gap-2 rounded-lg cursor-pointer ${
                 selectedLanguage?.slug === language.slug
-                  ? 'bg-primary-dark shadow-md'
-                  : 'bg-primary text-slate-500'
+                  ? 'bg-light-accent-500 shadow-md text-slate-100'
+                  : 'bg-light-shades-500 text-slate-500'
               }`}
               key={language.slug}
               onClick={() => onLanguageSelect(language)}

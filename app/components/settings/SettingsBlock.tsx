@@ -37,42 +37,52 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
       ref={ref}
     >
       <div
-        className={`w-full bg-primary absolute left-0 z-0 transition-all duration-300 ${
+        className={`w-full bg-light-shades-500 absolute left-0 z-0 transition-all duration-300 ${
           open ? '-translate-y-full' : 'translate-y-0'
         }`}
       >
-        <div className="flex px-4 py-2 items-center gap-4">
+        <div className="flex px-4 py-2 items-center gap-4 justify-center md:justify-normal">
           <img
             src={user.picture}
             alt="user"
             className="w-10 h-10 rounded-full"
           />
-          <span className="text-ellipsis overflow-hidden">{user.email}</span>
+          <span className="text-ellipsis overflow-hidden hidden md:block">
+            {user.email}
+          </span>
         </div>
         <div
-          className="flex items-center gap-6 px-4 py-1"
+          className="flex items-center gap-6 px-4 py-1 justify-center md:justify-normal"
           onClick={() => setShowLanguagePopup((show) => !show)}
         >
           <span className="w-10 h-10 p-1 text-4xl flex items-center justify-center">
             {languages[i18n.resolvedLanguage].icon}
           </span>
-          <span> {languages[i18n.resolvedLanguage].nativeName}</span>
+          <span className="hidden md:block">
+            {' '}
+            {languages[i18n.resolvedLanguage].nativeName}
+          </span>
         </div>
         <Form method="post" action="/api/auth/logout">
-          <button type="submit" className="flex items-center gap-6 px-4 py-1">
+          <button
+            type="submit"
+            className="flex items-center gap-6 px-4 py-1 justify-center md:justify-normal"
+          >
             <ArrowRightOnRectangleIcon className="w-10 h-10 p-1" />
-            {t('settings.logout')}
+            <span className="hidden md:block">{t('settings.logout')}</span>
           </button>
         </Form>
         <div className="flex items-center gap-6 px-4 py-1"></div>
       </div>
-      <div className="flex items-center gap-4 z-10 relative bg-primary p-3 py-6">
+      <div className="flex items-center gap-4 z-10 relative bg-light-shades-500 p-3 py-6 justify-center md:justify-normal">
         <Cog6ToothIcon
-          className={`w-10 h-10 transition duration-300 rounded-full p-1 ${
-            open ? 'rotate-180 bg-primary-dark' : ''
+          className={`w-10 h-10 transition duration-300 rounded-full p-1 hover:bg-light-shades-700 ${
+            open
+              ? 'rotate-180 bg-light-shades-900 hover:bg-light-shades-900'
+              : ''
           }`}
         />
-        <span>{t('settings.title')}</span>
+        <span className="hidden md:block">{t('settings.title')}</span>
       </div>
       <LanguagePopup
         open={showLangiagePopup}

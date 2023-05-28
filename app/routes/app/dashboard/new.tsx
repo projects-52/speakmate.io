@@ -1,5 +1,5 @@
 import { Form, useTransition } from '@remix-run/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CharacterSelect } from '~/components/conversation/CharacterSelect';
 import LevelSelect from '~/components/conversation/LevelSelect';
 import TopicSelect from '~/components/conversation/TopicSelect';
@@ -24,11 +24,19 @@ export default function NewConversation() {
 
   const transition = useTransition();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (transition.state === 'submitting') {
+      setIsSubmitting(true);
+    }
+  }, [transition.state]);
+
   const disabled = !language || !nativeLanguage || !level || !character;
 
-  if (transition.state === 'submitting') {
+  if (isSubmitting) {
     return (
-      <div className="h-screen bg-primary relative z-10 p-4 overflow-y-auto flex justify-center items-center">
+      <div className="h-screen bg-light-shades-500 relative z-10 p-4 overflow-y-auto flex justify-center items-center">
         <div className="relative w-60 h-60">
           <div className="w-full h-full rounded-full border-4 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute -top-1 -left-1 animate-spin box-content"></div>
           <img
@@ -42,7 +50,7 @@ export default function NewConversation() {
   }
 
   return (
-    <div className="h-screen bg-primary relative z-10 p-4 overflow-y-auto">
+    <div className="h-screen bg-light-shades-500 relative z-10 p-4 overflow-y-auto">
       <LanguageForPracticeSelect onChange={(value) => setLanguage(value)} />
       <NativeLanguageSelect onChange={(value) => setNativeLanguage(value)} />
       <LevelSelect onChange={(value) => setLevel(value)} />

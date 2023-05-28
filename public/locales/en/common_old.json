@@ -21,5 +21,8 @@
   "profile": {
     "logout": "Logout",
     "language": "Language"
+  },
+  "cards": {
+    "link": "Cards"
   }
 }

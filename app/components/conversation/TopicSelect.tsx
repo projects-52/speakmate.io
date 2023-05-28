@@ -45,10 +45,10 @@ export default function TopicSelect({ onChange }: TopicSelectProps) {
       <div className="flex flex-wrap gap-2">
         <div
           key="No topic"
-          className={`p-2 rounded-lg mb-2 cursor-pointer ${
+          className={`p-2 px-4 rounded-lg mb-2 cursor-pointer ${
             selectedTopic === null
-              ? 'bg-primary-dark shadow-md'
-              : 'border-slate-300'
+              ? 'bg-light-accent-500 shadow-md text-slate-100'
+              : 'bg-light-shades-500 text-slate-500'
           }`}
           onClick={() => onSetTopic(null)}
         >
@@ -57,10 +57,10 @@ export default function TopicSelect({ onChange }: TopicSelectProps) {
         {TOPICS.map((topic) => (
           <div
             key={topic.name}
-            className={`p-2 rounded-lg mb-2 cursor-pointer ${
+            className={`p-2 px-4 rounded-lg mb-2 cursor-pointer ${
               topic.name === selectedTopic?.name
-                ? 'bg-primary-dark shadow-md'
-                : 'border-slate-300'
+                ? 'bg-light-accent-500 shadow-md text-slate-100'
+                : 'bg-light-shades-500 text-slate-500'
             }`}
             onClick={() => onSetTopic(topic)}
           >

@@ -52,7 +52,7 @@ export default function ConversationPopup({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-light-shades-500 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div className="flex">
                   <img
                     className="w-20 h-20 rounded-full bg-slate-300 text-white flex items-center justify-center mr-2"
@@ -78,13 +78,13 @@ export default function ConversationPopup({
                       >
                         <button
                           type="submit"
-                          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                          className="inline-flex w-full justify-center rounded-md bg-dark-accent-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-dark-accent-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-accent-700"
                         >
                           {t('conversation.delete.confirm')}
                         </button>
                       </Form>
                       <button
-                        className="inline-flex w-full justify-center rounded-md text-indigo-600 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="inline-flex w-full justify-center rounded-md text-dark-accent-500 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:dark-accent-500"
                         onClick={() => setIsDeleting(false)}
                       >
                         {t('conversation.delete.cancel')}
@@ -94,13 +94,13 @@ export default function ConversationPopup({
                     <div className="flex gap-4">
                       <button
                         onClick={() => setIsDeleting(true)}
-                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                        className="inline-flex w-full justify-center rounded-md bg-dark-accent-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-dark-accent-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-accent-700"
                       >
                         {t('conversation.delete.title')}
                       </button>
                       <button
                         type="button"
-                        className="inline-flex w-full justify-center rounded-md text-indigo-600 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="inline-flex w-full justify-center rounded-md text-dark-accent-500 px-3 py-2 text-sm font-semibold hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark-accent-7s00"
                         onClick={onClose}
                       >
                         {t('conversation.delete.close')}

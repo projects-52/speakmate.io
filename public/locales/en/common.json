@@ -1,12 +1,12 @@
 {
-  "conversations": {
-    "new": "Start New Chat",
-    "all": "All"
+  "card": {
+    "word": "Word",
+    "translation": "Translation",
+    "explanation": "Explanation"
   },
-  "cards": {
-    "link": "Cards",
-    "check": "Check cards",
-    "add": "Add to cards"
+  "conversations": {
+    "all": "All",
+    "new": "Start New Chat"
   },
   "language": {
     "practice": {
@@ -43,6 +43,10 @@
     },
     "start": "Let's Get Talking"
   },
+  "cards": {
+    "check": "Check cards",
+    "add": "Add to cards"
+  },
   "topic": {
     "literature": "Books 'n Stories",
     "hiking": "Trail Blazing",
@@ -74,13 +78,12 @@
     "logout": "Log Out",
     "title": "Settings"
   },
+  "common": {
+    "today": "Today",
+    "yesterday": "Yesterday"
+  },
   "meta": {
     "title": "Speakmate"
-  },
-  "card": {
-    "word": "Word",
-    "translation": "Translation",
-    "explanation": "Explanation"
   },
   "dashboard": {
     "selectConversation": "Select a Conversation"

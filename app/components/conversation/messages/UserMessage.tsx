@@ -27,7 +27,7 @@ export default function UserMessage({
 
   return (
     <div key={message.id} className="text-right mb-2">
-      <div className="text-white bg-blue-300 inline-block rounded-md px-4 py-2 m-1 max-w-lg">
+      <div className="text-slate-100 bg-light-accent-300 inline-block rounded-md px-4 py-2 m-1 max-w-lg">
         {message.text}
 
         <div className="mt-2 flex gap-2">

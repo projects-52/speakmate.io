@@ -37,7 +37,6 @@ export default function Conversation() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(conversation.sound);
 
-
   const {
     messageList,
     loadMoreMessages,
@@ -75,7 +74,7 @@ export default function Conversation() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-primary z-10 relative">
+    <div className="h-screen flex flex-col bg-light-shades-500 z-10 relative">
       <div className="p-4 flex items-center justify-center">
         <p className="text-gray-600 h-10 flex items-center justify-center w-full p-2">
           {conversation.name}
