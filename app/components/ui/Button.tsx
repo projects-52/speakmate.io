@@ -37,7 +37,7 @@ export function Button({
       className="mt-4 bg-dark-accent-500 text-white px-4 py-2 rounded-lg disabled:bg-slate-300 relative overflow-hidden"
     >
       {loadingState !== 'idle' && (
-        <span className="absolute w-full h-full bg-accent-500 flex items-center justify-center top-0 left-0">
+        <span className="absolute w-full h-full bg-dark-accent-500 flex items-center justify-center top-0 left-0">
           {loadingState === 'loading' && (
             <ArrowPathIcon className="w-10 h-10 p-2 rotate" />
           )}

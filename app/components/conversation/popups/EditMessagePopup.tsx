@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import type { Message } from '@prisma/client';
 import { useTranslation } from 'react-i18next';
+import { Button } from '~/components/ui/Button';
 
 interface EditMessagePopupProps {
   message: Message | null;
@@ -74,26 +75,26 @@ export default function EditMessagePopup({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
-                <div className="bg-blue-500 text-white inline-block rounded-md px-4 py-2 w-full">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-light-shades-500 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                <div className="bg-light-accent-300 text-white inline-block rounded-md px-4 py-2 w-full">
                   {message.text}
                 </div>
 
                 <div className="mt-4">
                   <textarea
-                    className="w-full rounded-lg border-slate-500 border p-4"
+                    className="w-full rounded-lg border-slate-500 p-4 resize-none focus:outline-blue-300 border-0 shadow-sm"
                     onChange={(e) => setText(e.target.value)}
                     value={text}
                   />
                 </div>
 
-                <button
-                  className="mt-4 bg-blue-500 text-white inline-block rounded-md px-4 py-2 w-full disabled:bg-slate-300"
+                <Button
                   onClick={onEdit}
                   disabled={loading || text === message.text}
+                  loading={loading}
                 >
-                  {loading ? t('message.edit.loading') : t('message.edit.send')}
-                </button>
+                  {t('message.edit.send')}
+                </Button>
               </Dialog.Panel>
             </Transition.Child>
           </div>
