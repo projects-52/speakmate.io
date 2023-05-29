@@ -1,7 +1,8 @@
+import { BookmarkIcon } from '@heroicons/react/24/outline';
 import type { Message } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { NavLink, useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import MessageRow from '~/components/conversation/messages/MessageRow';
 import { SpeakToggle } from '~/components/conversation/SpeakToggle';
@@ -46,7 +47,11 @@ export default function Conversation() {
     onGetResponse,
   } = useMessages(conversation, messages);
 
-  const { speak } = useSpeak(conversation, soundEnabled);
+  const { speak } = useSpeak(
+    conversation.language,
+    conversation.character.gender,
+    soundEnabled
+  );
 
   const { onScroll } = useScroll(
     scrollRef,
@@ -76,8 +81,19 @@ export default function Conversation() {
   return (
     <div className="h-screen flex flex-col bg-light-shades-500 z-10 relative">
       <div className="p-4 flex items-center justify-center">
-        <p className="text-gray-600 h-10 flex items-center justify-center w-full p-2">
-          {conversation.name}
+        <p className="text-gray-600 items-center w-full p-2 grid grid-cols-8">
+          <span className="col-start-1 col-end-6">{conversation.name}</span>
+
+          <NavLink
+            to="/app/cards"
+            className={({ isActive }) =>
+              `justify-self-end col-start-7 col-end-8 rounded-full ${
+                isActive ? 'bg-gray-200' : ''
+              }`
+            }
+          >
+            <BookmarkIcon className="w-10 h-10 p-2" />
+          </NavLink>
 
           <SpeakToggle
             onChange={setSoundEnabled}

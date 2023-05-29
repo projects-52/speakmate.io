@@ -42,6 +42,7 @@ Example of a good response:
 
 {{
   "text": "<original part of the message to explain>",
+  "transcription": "<original part of the message transcribed according to the rules of the phonetic transcription>",
   "translation": "<original part of the message translated to the user's native language>",
   "explanation": "<Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns>"
 }}

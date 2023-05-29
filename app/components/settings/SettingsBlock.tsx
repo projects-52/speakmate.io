@@ -67,6 +67,7 @@ export function SettingsBlock({ user }: SettingsBlockProps) {
           <button
             type="submit"
             className="flex items-center gap-6 px-4 py-1 justify-center md:justify-normal"
+            tabIndex={-1}
           >
             <ArrowRightOnRectangleIcon className="w-10 h-10 p-1" />
             <span className="hidden md:block">{t('settings.logout')}</span>

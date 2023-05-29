@@ -1,11 +1,10 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import type { Conversation, Explanation, Message } from '@prisma/client';
-import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
-import { useSpeak } from '~/routes/app/hooks/useSpeak';
 import { Button } from '~/components/ui/Button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from '@remix-run/react';
+import { SpeakIcon } from '~/components/ui/SpeakIcon';
 
 interface ExplanationPopupProps {
   conversation: Conversation;
@@ -109,13 +108,6 @@ export default function ExplanationPopup({
     setAddingToCards(false);
   };
 
-  const { speak } = useSpeak(conversation, true);
-
-  const onSpeak = () => {
-    // @ts-ignore
-    speak(explanation.explanation.original);
-  };
-
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
@@ -157,14 +149,20 @@ export default function ExplanationPopup({
                   {existingExplanation && doesCardExist !== 'checking' ? (
                     <div>
                       {/** @ts-ignore */}
-                      <p className="text-slate-500 text-2xl font-bold flex justify-between">
+                      <p className="text-slate-500 text-2xl font-bold flex justify-between items-center">
                         {/** @ts-ignore */}
                         {existingExplanation?.explanation.original}
 
-                        <SpeakerWaveIcon
-                          className="w-10 h-10 p-2 rounded-full hover:bg-slate-300 hover:text-slate-50 cursor-pointer"
-                          onClick={onSpeak}
+                        <SpeakIcon
+                          language={conversation.language as string}
+                          gender={conversation.character?.gender as string}
+                          // @ts-ignore
+                          text={existingExplanation?.explanation.original}
                         />
+                      </p>
+                      <p className="text-slate-500 text-lg">
+                        {/** @ts-ignore */}[
+                        {existingExplanation?.explanation.transcription}]
                       </p>
                       <p className="text-slate-500 text-md font-bold">
                         {/** @ts-ignore */}

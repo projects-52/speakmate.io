@@ -47,7 +47,7 @@ export function TextInput({ conversation, onMessageReceived }: TextInputProps) {
     <div className="p-4 bg-primary">
       <form
         className={`flex w-full gap-4 rounded-3xl py-2 px-4 resize-none overflow-hidden bg-slate-50 border-2 items-center shadow-sm ${
-          focused ? 'border-blue-300' : 'border-transparent'
+          focused ? 'border-blue-400' : 'border-transparent'
         }`}
         onSubmit={onSubmit}
       >

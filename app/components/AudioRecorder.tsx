@@ -103,13 +103,13 @@ const AudioRecorder: React.FC<AudioRecorderProps> = ({
   }, [handleKeyDown, handleKeyUp]);
 
   return (
-    <div className="w-10 h-10 text-slate-500 p-2 rounded-full relative hover:bg-blue-200 hover:text-slate-50">
+    <div className="w-10 h-10 text-slate-500 p-2 rounded-full relative hover:bg-blue-400 hover:text-slate-50">
       {isRecording && (
-        <div className="w-full h-full rounded-full bg-blue-300 absolute top-0 left-0 animate-ping"></div>
+        <div className="w-full h-full rounded-full bg-blue-400 absolute top-0 left-0 animate-ping"></div>
       )}
 
       {isLoading && (
-        <div className="w-full h-full rounded-full border-2 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute top-0 left-0 animate-spin"></div>
+        <div className="w-full h-full rounded-full border-2 border-l-blue-400 border-r-transparent border-t-transparent border-b-transparent absolute top-0 left-0 animate-spin"></div>
       )}
 
       <MicrophoneIcon

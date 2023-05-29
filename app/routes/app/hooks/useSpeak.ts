@@ -1,4 +1,3 @@
-import type { Conversation } from '@prisma/client';
 import { useEffect, useRef, useState } from 'react';
 
 type Voice = SpeechSynthesisVoice & { lang: string; gender: string };
@@ -109,16 +108,31 @@ const pickVoice = (
   });
 };
 
-export function useSpeak(conversation: Conversation, enabled: boolean) {
+export function useSpeak(
+  language: string,
+  gender: string = 'female',
+  enabled: boolean
+) {
   const [voice, setVoice] = useState<Voice | null>(null);
+  const [speaking, setSpeaking] = useState<boolean>(false);
+  const [isAvailable, setIsAvailable] = useState<boolean>(false);
   const synth = useRef<SpeechSynthesis | null>(null);
 
   useEffect(() => {
     synth.current = window.speechSynthesis;
+
+    const initializeVoice = async () => {
+      const newVoice = await pickVoice(gender, language);
+      setVoice(newVoice);
+      setIsAvailable(!!newVoice);
+    };
+
+    initializeVoice();
+
     return () => {
       synth.current = null;
     };
-  }, [conversation]);
+  }, [language, gender]);
 
   const onPickVoice = async (language: string, gender: string) => {
     if (voice) {
@@ -140,10 +154,7 @@ export function useSpeak(conversation: Conversation, enabled: boolean) {
       return;
     }
 
-    const voice = await onPickVoice(
-      conversation.character?.gender as string,
-      conversation.language as string
-    );
+    const voice = await onPickVoice(gender as string, language as string);
 
     if (voice === null) {
       return;
@@ -151,6 +162,8 @@ export function useSpeak(conversation: Conversation, enabled: boolean) {
 
     let utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = voice;
+    utterance.onstart = () => setSpeaking(true);
+    utterance.onend = () => setSpeaking(false);
     synth.current?.speak(utterance);
   };
 
@@ -158,5 +171,5 @@ export function useSpeak(conversation: Conversation, enabled: boolean) {
     synth.current?.cancel();
   };
 
-  return { speak, cancel };
+  return { speak, cancel, speaking, isAvailable };
 }

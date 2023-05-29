@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import type { UIMessage } from '~/types/message.types';
 import ExplanationPopup from '../popups/ExplanationPopup';
 import { useTranslation } from 'react-i18next';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 interface AssistantMessageProps {
   message: UIMessage;
@@ -198,7 +199,9 @@ export default function AssistantMessage({
           </p>
           <p className="relative whitespace-pre-line">
             {loading && (
-              <LoadingSkeleton className="absolute w-full h-full left-0 top-0 bg-gray-300 pb-4 box-content" />
+              <div className="absolute w-full h-full bg-gray-200 box-content pb-6 flex items-center justify-center text-slate-500 top-0 left-0">
+                <ArrowPathIcon className="w-12 h-12 p-2 rotate" />
+              </div>
             )}
             {/** @ts-ignore */}
             {wrapTextInSpans(message.text, explanations)}

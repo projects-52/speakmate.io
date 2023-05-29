@@ -21,7 +21,7 @@ export default function Cards() {
   const { conversations, user, cards } = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex h-full bg-primary">
+    <div className="flex h-full bg-light-shades-500">
       <ConversationsList conversations={conversations} user={user} />
       <div className="flex-1 relative overflow-y-auto">
         {cards.map((card: Card) => (
