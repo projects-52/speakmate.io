@@ -1,4 +1,5 @@
 import type { Explanation, Message } from '@prisma/client';
+import { explanationParser } from '~/prompts';
 import { generateHash } from '~/utils/hash';
 import { getConversationById } from './conversation.service';
 import { getMessageById } from './message.service';
@@ -25,11 +26,9 @@ export async function createExplanation(
 
   const existingExplanation = await getExplanationByHash(hash);
 
-
   if (existingExplanation) {
     return existingExplanation;
   }
-
   const explanationString = await getExplanation(
     message,
     conversation,

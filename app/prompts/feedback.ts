@@ -1,14 +1,22 @@
 import { PromptTemplate } from 'langchain/prompts';
+import { z } from 'zod';
 
-// import { StructuredOutputParser } from 'langchain/output_parsers';
+import { StructuredOutputParser } from 'langchain/output_parsers';
 
-// export const feedbackParser =
-//   StructuredOutputParser.fromNamesAndDescriptions({
-//     message: 'Initial message to kick off conversation',
-//     name: 'Funny and memorable name for conversation. Use language that student is learning or native language of student based on the language proficiency level of student',
-//   });
+export const feedbackParser = StructuredOutputParser.fromZodSchema(
+  z.object({
+    intro: z
+      .string()
+      .describe(
+        "General overview of the message. Depends on the user's level, you can use either target or native language. Make sure, that you're not correcting specific mistakes here"
+      ),
+    corrections: z
+      .array(z.string())
+      .describe("Corrections for the use's message"),
+  })
+);
 
-// const formatInstructions = feedbackParser.getFormatInstructions();
+const formatInstructions = feedbackParser.getFormatInstructions();
 
 export const feedbackPrompt = new PromptTemplate({
   template: `
@@ -32,19 +40,10 @@ Student selected topic for conversation is {topic}.
 
 Please correct the user's mistakes and give them advice on how to improve.
 Keep in mind, that this is the recognized speech, so avoid correcting the user's mistakes that are caused by the speech recognition errors.
-Response only with JSON and nothing else besides JSON
 
 User: {message_text}
 
-Example of a good response:
-
-{{
-  "intro": "<General overview of the message. Depends on the user's level, you can use either target or native language. Make sure, that you're not correcting specific mistakes here>",
-  "corrections": [
-    <Text of the first correction>,
-    <Text of the second correction>,
-  ]
-}}
+{format_instructions}
 
 `,
   inputVariables: [
@@ -57,5 +56,5 @@ Example of a good response:
     'learning_style',
     'message_text',
   ],
-  // partialVariables: { format_instructions: formatInstructions },
+  partialVariables: { format_instructions: formatInstructions },
 });

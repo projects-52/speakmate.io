@@ -1,4 +1,5 @@
 import type { Card } from '@prisma/client';
+import { cardExplanationParser } from '~/prompts';
 import { getConversationById } from './conversation.service';
 import { getMessageById } from './message.service';
 import { getCardExplanation } from './openai.service';
@@ -28,8 +29,12 @@ export async function createCard(
       conversation,
       text
     );
-    explanation = JSON.parse(explanationString as string);
+    explanation = (await cardExplanationParser.parse(
+      explanationString as string
+    )) as any;
   } catch (error) {}
+
+  console.log('explanation', explanation);
 
   const card = prisma.card.create({
     data: {

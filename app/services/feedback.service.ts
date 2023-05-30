@@ -1,4 +1,5 @@
 import type { Feedback } from '@prisma/client';
+import { feedbackParser } from '~/prompts';
 import { getConversationById } from './conversation.service';
 import { getMessageById } from './message.service';
 import { getFeedback } from './openai.service';
@@ -29,7 +30,7 @@ export async function createFeedback(
 
   try {
     const feedbackText = await getFeedback(message, conversation);
-    text = JSON.parse(feedbackText as string);
+    text = await feedbackParser.parse(feedbackText as string);
   } catch (error) {
     console.error(error);
     return null;

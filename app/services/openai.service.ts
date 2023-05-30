@@ -52,6 +52,7 @@ export async function transcribeAudio(buffer: Buffer, file: File) {
 export async function getResponse(
   messages: ChatCompletionRequestMessage[]
 ): Promise<string | null> {
+  console.log(messages);
   try {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
@@ -68,6 +69,7 @@ export async function getResponse(
 }
 
 export async function getInitialMesage(conversation: Partial<Conversation>) {
+  console.time('getInitialMesage');
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
 
@@ -82,18 +84,22 @@ export async function getInitialMesage(conversation: Partial<Conversation>) {
     }),
   };
 
-  return await getResponse(
+  const response = await getResponse(
     [propmptMessage].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+  console.timeEnd('getInitialMesage');
+  console.log('getInitialMesage length', response?.length);
+  return response;
 }
 
 export async function getAnswer(
   messages: Message[],
   conversation: Conversation
 ) {
+  console.time('getAnswer');
   if (!messages || messages?.length === 0) {
     return;
   }
@@ -117,18 +123,22 @@ export async function getAnswer(
     }),
   };
 
-  return await getResponse(
+  const response = await getResponse(
     [propmptMessage, ...preparedMessages].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+  console.timeEnd('getAnswer');
+  console.log('getAnswer length', response?.length);
+  return response;
 }
 
 export async function getFeedback(
   message: Message,
   conversation: Conversation
 ) {
+  console.time('getFeedback');
   if (!message) {
     return;
   }
@@ -148,12 +158,15 @@ export async function getFeedback(
     }),
   };
 
-  return await getResponse(
+  const response = await getResponse(
     [propmptMessage].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+  console.timeEnd('getFeedback');
+  console.log('getFeedback length', response?.length);
+  return response;
 }
 
 export async function getExplanation(
@@ -161,6 +174,7 @@ export async function getExplanation(
   conversation: Conversation,
   text: string
 ) {
+  console.time('getExplanation');
   if (!message) {
     return;
   }
@@ -181,12 +195,35 @@ export async function getExplanation(
     }),
   };
 
-  return await getResponse(
-    [propmptMessage].map((m) => ({
+  const response = await getResponse(
+    [
+      propmptMessage,
+      {
+        role: ChatCompletionRequestMessageRoleEnum.User,
+        content: `
+        Can you please explain what does "${text}" mean in the context of this message: "${message.text}"
+        Keep your response clear and short
+        Answer with JSON following the format:
+
+        {
+          original: "${text}},
+          transcription:
+            <${text} transcribed according to the rules of the phonetic transcription in the ${conversation.language}',
+          translation:
+            <${text} translated to the user's native language>,
+          explanation:
+            <Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns. Make sure, that you use only one of those languages>,
+        }
+      `,
+      },
+    ].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+  console.timeEnd('getExplanation');
+  console.log('getExplanation length', response?.length);
+  return response;
 }
 
 export async function getCardExplanation(
@@ -194,6 +231,7 @@ export async function getCardExplanation(
   conversation: Conversation,
   text: string
 ) {
+  console.time('getCardExplanation');
   if (!message) {
     return;
   }
@@ -214,18 +252,22 @@ export async function getCardExplanation(
     }),
   };
 
-  return await getResponse(
+  const response = await getResponse(
     [propmptMessage].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+  console.timeEnd('getCardExplanation');
+  console.log('getCardExplanation length', response?.length);
+  return response;
 }
 
 export async function regenerateAnswer(
   messages: Message[],
   conversation: Conversation
 ) {
+  console.time('regenerateAnswer');
   if (!messages || messages?.length === 0) {
     return;
   }
@@ -253,10 +295,14 @@ export async function regenerateAnswer(
     }),
   };
 
-  return await getResponse(
+  const response = await getResponse(
     [propmptMessage, ...preparedMessages].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
+
+  console.timeEnd('regenerateAnswer');
+  console.log('regenerateAnswer length', response?.length);
+  return response;
 }

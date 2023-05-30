@@ -12,11 +12,13 @@ export const action: ActionFunction = async ({ request }) => {
   });
 
   if (request.method === 'POST') {
+    console.time('explanation');
+
     const body = await request.json();
 
     const { text, messageId } = body;
-
     const explanation = await createExplanation(text, messageId);
+    console.timeEnd('explanation');
 
     return json(explanation);
   }
