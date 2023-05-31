@@ -1,6 +1,6 @@
-# Welcome to Remix!
+# Welcome to Speakmate
 
-- [Remix Docs](https://remix.run/docs)
+[![Fly Deploy](https://github.com/projects-52/speakmate.io/actions/workflows/fly.yml/badge.svg)](https://github.com/projects-52/speakmate.io/actions/workflows/fly.yml)
 
 ## Fly Setup
 
