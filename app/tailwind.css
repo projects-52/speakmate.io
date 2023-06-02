@@ -125,3 +125,13 @@
 .animation-delay-3 {
   animation-delay: 0.3s;
 }
+
+.editable-conversation svg {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .editable-conversation svg {
+    display: block;
+  }
+}

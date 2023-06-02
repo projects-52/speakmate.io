@@ -74,14 +74,14 @@ export function ConversationsList({
 
   return (
     <div className="h-screen flex flex-col overflow-hidden flex-auto max-w-[80px] md:max-w-[280px]">
-      <div className="p-4 flex gap-2 items-center justify-center md:justify-between md:flex-nowrap flex-wrap">
+      <div className="p-4 pr-8 flex gap-2 items-center justify-center md:justify-between md:flex-nowrap flex-wrap">
         <div className="w-10 h-10 bg-main-500 rounded-full" />
         <Link
           to="/app/dashboard/new"
-          className="md:p-2 rounded flex items-center justify-center gap-2 text-slate-500"
+          className="md:p-2 flex items-center justify-center gap-2 text-slate-500 bg-slate-300 rounded-full"
         >
           <PlusIcon className="md:w-6 md:h-6 w-8 h-8 " />
-          <span className="hidden md:block">{t('conversations.new')}</span>
+          {/* <span className="hidden md:block">{t('conversations.new')}</span> */}
         </Link>
       </div>
 
@@ -108,8 +108,8 @@ export function ConversationsList({
                     className={({ isActive }) =>
                       `p-2 text-sm text-gray-700 flex items-center rounded-lg max-w-sm mb-2 justify-center md:justify-normal ${
                         isActive
-                          ? 'bg-light-shades-700 hover:bg-light-shades-700'
-                          : 'hover:bg-light-shades-600'
+                          ? 'bg-light-shades-700 hover:bg-light-shades-700 editable-conversation'
+                          : 'hover:bg-light-shades-600 non-editable-conversation'
                       }`
                     }
                   >
@@ -123,7 +123,7 @@ export function ConversationsList({
                     </span>
 
                     <EllipsisVerticalIcon
-                      className="w-8 h-8 justify-self-end text-slate-200 hover:text-slate-400 rounded-full ml-auto flex-shrink-0 hidden md:block"
+                      className="w-8 h-8 justify-self-end text-slate-200 hover:text-slate-400 rounded-full ml-auto flex-shrink-0 hidden"
                       onClickCapture={(e) => {
                         e.preventDefault();
                         e.stopPropagation();

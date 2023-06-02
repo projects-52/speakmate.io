@@ -2,7 +2,6 @@ import type { Message, Conversation } from '@prisma/client';
 import { useState } from 'react';
 import EditMessagePopup from '../popups/EditMessagePopup';
 import FeedbackPopup from '../popups/FeedbackPopup';
-import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 
 interface UserMessageProps {
@@ -44,9 +43,6 @@ export default function UserMessage({
             onClick={() => setFeedback(true)}
           >
             {t('message.feedback')}
-          </span>
-          <span className="text-xs text-gray-200 justify-end ml-auto">
-            {format(new Date(message.createdAt), 'HH:mm')}
           </span>
         </div>
       </div>

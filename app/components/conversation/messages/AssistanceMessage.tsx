@@ -212,9 +212,6 @@ export default function AssistantMessage({
                 {t('message.dontUnderstand')}
               </span>
             )}
-            <span className="justify-end ml-auto">
-              {format(new Date(message.createdAt), 'HH:mm')}
-            </span>
           </p>
         </div>
       </div>
