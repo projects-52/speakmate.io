@@ -1,5 +1,6 @@
 import { Form } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
+import { Logo } from '~/components/ui/Logo';
 
 export default function Auth() {
   const { t } = useTranslation();
@@ -7,18 +8,17 @@ export default function Auth() {
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img
-          className="mx-auto h-16 bg-slate-50 w-16 p-3 rounded-full shadow"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
-        />
+        <div className="flex justify-center">
+          <Logo />
+        </div>
+
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
           {t('auth.title')}
         </h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+        <div className="px-4 py-8 sm:rounded-lg sm:px-10">
           <div>
             <Form method="post" action="/api/auth/google">
               <button
@@ -36,28 +36,6 @@ export default function Auth() {
                 {t('auth.google')}
               </button>
             </Form>
-
-            {/* <Form method="post" action="/api/auth/facebook">
-              <button
-                type="submit"
-                className="mt-8 w-full inline-flex items-center gap-x-2 rounded-md bg-blue-500 px-3.5 py-2.5 text-base font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
-              >
-                <svg
-                  className="w-10 h-10 pr-2 box-border border-r border-blue-600"
-                  fill="#fff"
-                  width="800px"
-                  height="800px"
-                  viewBox="0 0 1920 1920"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1168.737 487.897c44.672-41.401 113.824-36.889 118.9-36.663l289.354-.113 6.317-417.504L1539.65 22.9C1511.675 16.02 1426.053 0 1237.324 0 901.268 0 675.425 235.206 675.425 585.137v93.97H337v451.234h338.425V1920h451.234v-789.66h356.7l62.045-451.233H1126.66v-69.152c0-54.937 14.214-96.112 42.078-122.058"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-                {t('auth.facebook')}
-              </button>
-            </Form> */}
           </div>
         </div>
       </div>
