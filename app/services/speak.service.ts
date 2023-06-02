@@ -80,10 +80,7 @@ const pickVoice = (
         }
       } else {
         const voicesList = gender === 'male' ? maleVoices : femaleVoices;
-        const langVoices = voices.filter((voice) =>
-          voice.lang.startsWith(language)
-        );
-        console.log(langVoices);
+
         let selectedVoice = voices.find(
           (voice) =>
             voice.lang.startsWith(language) && voicesList.includes(voice.name)

@@ -151,7 +151,7 @@ export default function ExplanationPopup({
                       {/** @ts-ignore */}
                       <p className="text-slate-500 text-2xl font-bold flex justify-between items-center">
                         {/** @ts-ignore */}
-                        {existingExplanation?.explanation.original}
+                        {existingExplanation?.explanation.highlighted}
 
                         <SpeakIcon
                           language={conversation.language as string}

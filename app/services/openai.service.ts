@@ -52,7 +52,6 @@ export async function transcribeAudio(buffer: Buffer, file: File) {
 export async function getResponse(
   messages: ChatCompletionRequestMessage[]
 ): Promise<string | null> {
-  console.log(messages);
   try {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
@@ -73,15 +72,7 @@ export async function getInitialMesage(conversation: Partial<Conversation>) {
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
 
-    content: await initialMessagePrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-    }),
+    content: await initialMessagePrompt(conversation as Conversation),
   };
 
   const response = await getResponse(
@@ -91,7 +82,6 @@ export async function getInitialMesage(conversation: Partial<Conversation>) {
     }))
   );
   console.timeEnd('getInitialMesage');
-  console.log('getInitialMesage length', response?.length);
   return response;
 }
 
@@ -175,54 +165,23 @@ export async function getExplanation(
   text: string
 ) {
   console.time('getExplanation');
+  console.log('text', text);
   if (!message) {
     return;
   }
 
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
-
-    content: await explanationPrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-      message_text: message.text,
-      text,
-    }),
+    content: await explanationPrompt(conversation, message, text),
   };
 
   const response = await getResponse(
-    [
-      propmptMessage,
-      {
-        role: ChatCompletionRequestMessageRoleEnum.User,
-        content: `
-        Can you please explain what does "${text}" mean in the context of this message: "${message.text}"
-        Keep your response clear and short
-        Answer with JSON following the format:
-
-        {
-          original: "${text}},
-          transcription:
-            <${text} transcribed according to the rules of the phonetic transcription in the ${conversation.language}',
-          translation:
-            <${text} translated to the user's native language>,
-          explanation:
-            <Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns. Make sure, that you use only one of those languages>,
-        }
-      `,
-      },
-    ].map((m) => ({
+    [propmptMessage].map((m) => ({
       role: m.role,
       content: m.content,
     }))
   );
   console.timeEnd('getExplanation');
-  console.log('getExplanation length', response?.length);
   return response;
 }
 
@@ -282,17 +241,7 @@ export async function regenerateAnswer(
 
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
-
-    content: await regeneratePrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-      message_text: lastMessage.text,
-    }),
+    content: await regeneratePrompt(conversation, lastMessage),
   };
 
   const response = await getResponse(
@@ -303,6 +252,5 @@ export async function regenerateAnswer(
   );
 
   console.timeEnd('regenerateAnswer');
-  console.log('regenerateAnswer length', response?.length);
   return response;
 }

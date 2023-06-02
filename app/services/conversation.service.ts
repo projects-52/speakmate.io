@@ -90,7 +90,6 @@ export async function createConversation(
 }
 
 export async function deleteConversation(id: string) {
-  console.log('DELETING CONVERSATION', id);
   return await prisma.conversation.update({
     where: {
       id,

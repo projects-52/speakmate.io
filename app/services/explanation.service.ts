@@ -42,7 +42,7 @@ export async function createExplanation(
   let explanationText;
 
   try {
-    explanationText = JSON.parse(explanationString);
+    explanationText = await explanationParser.parse(explanationString);
   } catch (error) {
     console.error(error);
     return null;
@@ -52,7 +52,7 @@ export async function createExplanation(
     data: {
       textToExplain,
       messageId,
-      explanation: explanationText,
+      explanation: explanationText as any,
       hash,
       conversationId: conversation.id,
     },

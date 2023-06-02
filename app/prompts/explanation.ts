@@ -1,50 +1,57 @@
 import { PromptTemplate } from 'langchain/prompts';
 
 import { StructuredOutputParser } from 'langchain/output_parsers';
+import type { Conversation, Message } from '@prisma/client';
+import { createPrompt } from './languages';
+
+const TRANSCRIPTIONS: Record<string, string> = {
+  'en-US': 'Please use IPA for the phonetic transcription.',
+  'es-ES': 'Please use IPA for the phonetic transcription.',
+  'fr-FR': 'Please use IPA for the phonetic transcription.',
+  'de-DE': 'Please use IPA for the phonetic transcription.',
+  'nl-NL': 'Please use IPA for the phonetic transcription.',
+  'jp-UK': 'Please use Hepburn romanization for the phonetic transcription.',
+};
 
 export const explanationParser =
   StructuredOutputParser.fromNamesAndDescriptions({
-    original: 'original part of the message to explain',
+    highlighted: 'Highlighted text that the student wants to understand',
     transcription:
-      'original part of the message transcribed according to the rules of the phonetic transcription in the {languageToLearn}',
+      'Phonetic transcription of the highlighted text in the language the student is learning',
     translation:
-      "original part of the message translated to the user's native language",
-    explanation:
-      'Explanation of the meaning, considering context of the message. Depends on the level, you should use either native language or the one user learns. Make sure, that you use only one of those languages',
+      "Translation of the highlighted text to the student's native language",
+    explanation: 'Explanation of the meaning of the highlighted text',
   });
 
 const formatInstructions = explanationParser.getFormatInstructions();
 
-export const explanationPrompt = new PromptTemplate({
+const taskPrompt = new PromptTemplate({
   template: `
-You're the world-class language learning teacher. 
-Your name is {characterName}.
-You will have personality: {charcaterPersonality}.
-You will try to adapt to the student's level of language proficiency.
-Make sure, that you're using only student's native language or language, that student is learning.
-Make sure, that you will adapt length of you messages to the student's level of language proficiency and conversational style of the student 
-Make sure to keep the conversation interesting.
-You wouldn't try to correct the students's mistakes unless he asks you to do so.
-Your conversation with student is fully chat based, so make sure you avoid corrections, that can be just typo
-
-{learning_style}
-
-Student is learning {languageToLearn}.
-Student's level of language proficiency is {languageLevel}.
-Student's native language is {nativeLanguage}.
-
-Student selected topic for conversation is {topic}.
-
-{format_instructions}
+  The student asked for an explanation of the specific phrase "{highlight}" within the context of your full message: "{message_text}".
+  Focusing strictly on the highlighted phrase, please:
+  1. Repeat the highlighted text.
+  2. {transcription}.
+  3. Translate just the highlighted text to the student's native language.
+  4. Provide an explanation of just the highlighted text, taking into account the context of the full message, in a language suitable for the student's proficiency level.
 `,
-  inputVariables: [
-    'characterName',
-    'charcaterPersonality',
-    'languageToLearn',
-    'languageLevel',
-    'nativeLanguage',
-    'topic',
-    'learning_style',
-  ],
-  partialVariables: { format_instructions: formatInstructions },
+  inputVariables: ['message_text', 'highlight', 'transcription'],
 });
+
+export const explanationPrompt = async (
+  conversation: Conversation,
+  message: Message,
+  highlight: string
+): Promise<string> => {
+  const prompt = await createPrompt(conversation);
+
+  const transcription = TRANSCRIPTIONS[conversation.language as string] ?? '';
+
+  return await prompt.format({
+    format_instructions: formatInstructions,
+    task: await taskPrompt.format({
+      message_text: message.text,
+      highlight,
+      transcription,
+    }),
+  });
+};

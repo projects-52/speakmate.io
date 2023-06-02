@@ -23,8 +23,6 @@ export const action: ActionFunction = async ({ request }) => {
   const character = formData.get('character') as string;
   const name = `${language} ${level}`;
 
-  console.log(character);
-
   const characterData = Characters[language].find(
     (c: Character) => c.slug === character
   ) as Character;
