@@ -81,25 +81,27 @@ export default function Conversation() {
   return (
     <div className="h-screen flex flex-col bg-light-shades-500 z-10 relative">
       <div className="p-4 flex items-center justify-center">
-        <p className="text-gray-600 items-center w-full p-2 grid grid-cols-8">
+        <p className="text-gray-600 items-center w-full p-2 grid grid-cols-6">
           <span className="col-start-1 col-end-6">{conversation.name}</span>
 
-          <NavLink
-            to="/app/cards"
-            className={({ isActive }) =>
-              `justify-self-end col-start-7 col-end-8 rounded-full ${
-                isActive ? 'bg-gray-200' : ''
-              }`
-            }
-          >
-            <BookmarkIcon className="w-10 h-10 p-2" />
-          </NavLink>
+          <div className="col-start-6 col-end-7 flex gap-2 justify-end">
+            <NavLink
+              to="/app/cards"
+              className={({ isActive }) =>
+                `justify-self-end  rounded-full w-max-[80px] ${
+                  isActive ? 'bg-gray-200' : ''
+                }`
+              }
+            >
+              <BookmarkIcon className="w-10 h-10 p-2" />
+            </NavLink>
 
-          <SpeakToggle
-            onChange={setSoundEnabled}
-            value={soundEnabled}
-            conversation={conversation}
-          />
+            <SpeakToggle
+              onChange={setSoundEnabled}
+              value={soundEnabled}
+              conversation={conversation}
+            />
+          </div>
         </p>
       </div>
       <div

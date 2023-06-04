@@ -111,7 +111,7 @@ const pickVoice = (
 export function useSpeak(
   language: string,
   gender: string = 'female',
-  enabled: boolean
+  enabled: boolean = true
 ) {
   const [voice, setVoice] = useState<Voice | null>(null);
   const [speaking, setSpeaking] = useState<boolean>(false);

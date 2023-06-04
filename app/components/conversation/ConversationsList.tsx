@@ -4,9 +4,9 @@ import { PlusIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import ConversationPopup from './popups/ConverstauionPopup';
 import { SettingsBlock } from '../settings/SettingsBlock';
-import { useTranslation } from 'react-i18next';
 import { CharactersFilter } from './CharactersFilter';
 import { DateComponent } from '../ui/Date';
+import { Logo } from '../ui/Logo';
 
 interface ConversationsListProps {
   conversations: Conversation[];
@@ -57,8 +57,6 @@ export function ConversationsList({
     (conversation: Conversation) => conversation.id === selectedConversationId
   );
 
-  const { t } = useTranslation();
-
   const groupedConversations = groupByDay(
     [...conversations]
       .sort(
@@ -74,13 +72,13 @@ export function ConversationsList({
 
   return (
     <div className="h-screen flex flex-col overflow-hidden flex-auto max-w-[80px] md:max-w-[280px]">
-      <div className="p-4 pr-8 flex gap-2 items-center justify-center md:justify-between md:flex-nowrap flex-wrap">
-        <div className="w-10 h-10 bg-main-500 rounded-full" />
+      <div className="p-4 flex gap-2 items-center justify-center md:justify-between md:flex-nowrap flex-wrap md:pr-8">
+        <Logo />
         <Link
           to="/app/dashboard/new"
-          className="md:p-2 flex items-center justify-center gap-2 text-slate-500 bg-slate-300 rounded-full"
+          className="flex items-center justify-center gap-2 text-light-shades-500 bg-light-accent-100 hover:bg-light-accent-300 rounded-full"
         >
-          <PlusIcon className="md:w-6 md:h-6 w-8 h-8 " />
+          <PlusIcon className="w-10 h-10 p-2" />
           {/* <span className="hidden md:block">{t('conversations.new')}</span> */}
         </Link>
       </div>

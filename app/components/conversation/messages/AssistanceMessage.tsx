@@ -1,7 +1,6 @@
 import type { Conversation, Explanation, Message } from '@prisma/client';
 import { useState, useRef, useEffect } from 'react';
 import ExplanationTooltip from '../popups/ExplanationTooltip';
-import { format } from 'date-fns';
 import type { UIMessage } from '~/types/message.types';
 import ExplanationPopup from '../popups/ExplanationPopup';
 import { useTranslation } from 'react-i18next';

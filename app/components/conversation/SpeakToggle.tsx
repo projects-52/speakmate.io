@@ -1,6 +1,7 @@
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline';
 import type { Conversation } from '@prisma/client';
 import { useState } from 'react';
+import { useSpeak } from '~/routes/app/hooks/useSpeak';
 
 interface SpeakToggleProps {
   onChange: (value: boolean) => void;
@@ -15,6 +16,11 @@ export function SpeakToggle({
 }: SpeakToggleProps) {
   const [loading, setLoading] = useState(false);
 
+  const { isAvailable } = useSpeak(
+    conversation.language as string,
+    conversation.character?.gender as string
+  );
+
   const onToggle = async (value: boolean) => {
     setLoading(true);
     await fetch('/api/settings/conversation', {
@@ -27,8 +33,12 @@ export function SpeakToggle({
     onChange(value);
   };
 
+  if (!isAvailable) {
+    return null;
+  }
+
   return (
-    <div className="relative justify-self-end ml-auto w-10 h-10">
+    <div className="relative w-10 h-10">
       {loading && (
         <div className="w-full h-full rounded-full border-4 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute -top-1 -left-1 animate-spin box-content"></div>
       )}
