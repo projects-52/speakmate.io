@@ -67,6 +67,7 @@ export async function createConversation(
         personality: characterData.personality,
         gender: characterData.gender,
       },
+      summary: '',
     };
     const data = await getInitialMesage(conversationData);
 
@@ -115,6 +116,26 @@ export async function toggleSoundForConversation(
     },
     data: {
       sound: !conversation.sound,
+    },
+  });
+}
+
+export async function updateConversationSummary(
+  conversationId: string,
+  summary: string
+) {
+  const conversation = await getConversationById(conversationId);
+
+  if (!conversation) {
+    throw new Error('Conversation not found');
+  }
+
+  return await prisma.conversation.update({
+    where: {
+      id: conversationId,
+    },
+    data: {
+      summary,
     },
   });
 }

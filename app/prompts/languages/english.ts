@@ -25,6 +25,8 @@ export const baseEnglishPrompt = new PromptTemplate({
   If no topic is given, for beginners, guide the conversation towards universally relatable themes such as food, hobbies, or weather. 
   For advanced learners, steer the discussions towards more abstract themes like culture, global news, or technology.  
 
+  {context}
+  
   {task}
   
   {format_instructions}
@@ -37,5 +39,6 @@ export const baseEnglishPrompt = new PromptTemplate({
     'teaching_style',
     'task',
     'format_instructions',
+    'context',
   ],
 });

@@ -11,6 +11,7 @@ import {
   initialMessagePrompt,
   regeneratePrompt,
   responsePrompt,
+  summaryPrompt,
 } from '../prompts';
 import { getLearningStyle } from '~/prompts/learningStyles';
 
@@ -94,24 +95,22 @@ export async function getAnswer(
     return;
   }
 
-  const preparedMessages = messages.map((m) => ({
+  const startIndex = Math.max(messages.length - 5, 0);
+
+  const preparedMessages = messages.slice(startIndex).map((m) => ({
     role: m.role as ChatCompletionRequestMessageRoleEnum,
     content: m.text,
   }));
 
+  const propmpt = await responsePrompt(conversation as Conversation);
+
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
 
-    content: await responsePrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-    }),
+    content: propmpt,
   };
+
+  console.log('-- MESSAGES', [propmptMessage, ...preparedMessages]);
 
   const response = await getResponse(
     [propmptMessage, ...preparedMessages].map((m) => ({
@@ -120,7 +119,46 @@ export async function getAnswer(
     }))
   );
   console.timeEnd('getAnswer');
-  console.log('getAnswer length', response?.length);
+  return response;
+}
+
+export async function createSummary(
+  messages: Message[],
+  conversation: Conversation
+) {
+  const startIndex = Math.max(messages.length - 5, 0);
+  const lastFiveMessages = messages.slice(startIndex);
+
+  const propmpt = await summaryPrompt.format({
+    summary: conversation.summary || '',
+    messages: lastFiveMessages
+      .filter((m) => m.role !== ChatCompletionRequestMessageRoleEnum.System)
+      .map(
+        (m) =>
+          `${
+            m.role === ChatCompletionRequestMessageRoleEnum.User
+              ? 'Student'
+              : 'Teacher'
+          }: ${m.text}`
+      )
+      .join('\n'),
+  });
+
+  console.log('-- SUMMARY PROMPT', propmpt);
+
+  const propmptMessage = {
+    role: ChatCompletionRequestMessageRoleEnum.System,
+
+    content: propmpt,
+  };
+
+  const response = await getResponse(
+    [propmptMessage].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+  );
+
   return response;
 }
 
@@ -155,7 +193,6 @@ export async function getFeedback(
     }))
   );
   console.timeEnd('getFeedback');
-  console.log('getFeedback length', response?.length);
   return response;
 }
 
@@ -165,7 +202,6 @@ export async function getExplanation(
   text: string
 ) {
   console.time('getExplanation');
-  console.log('text', text);
   if (!message) {
     return;
   }
@@ -218,7 +254,6 @@ export async function getCardExplanation(
     }))
   );
   console.timeEnd('getCardExplanation');
-  console.log('getCardExplanation length', response?.length);
   return response;
 }
 

@@ -45,6 +45,7 @@ model Conversation {
   deleted     Boolean       @default(false)
   sound       Boolean       @default(false)
   style       String       
+  summary     String?
 }
 
 model Message {

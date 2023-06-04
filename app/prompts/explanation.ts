@@ -48,6 +48,7 @@ export const explanationPrompt = async (
 
   return await prompt.format({
     format_instructions: formatInstructions,
+    context: '',
     task: await taskPrompt.format({
       message_text: message.text,
       highlight,

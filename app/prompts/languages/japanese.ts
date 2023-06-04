@@ -25,6 +25,8 @@ export const baseJapanesePrompt = new PromptTemplate({
   If no topic is given, for beginners, guide the conversation towards universally relatable themes such as food, hobbies, or weather. 
   For advanced learners, steer the discussions towards more abstract themes like Japanese culture, current events in Japan, or technology.
 
+  {context}
+
   {task}
 
   {format_instructions}
@@ -37,6 +39,7 @@ export const baseJapanesePrompt = new PromptTemplate({
     'teaching_style',
     'task',
     'format_instructions',
+    'context',
   ],
 });
 

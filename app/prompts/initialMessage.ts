@@ -18,5 +18,6 @@ export const initialMessagePrompt = async (
   return await prompt.format({
     format_instructions: formatInstructions,
     task: '',
+    context: '',
   });
 };

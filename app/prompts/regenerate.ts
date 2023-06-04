@@ -21,6 +21,7 @@ export const regeneratePrompt = async (
 
   return await prompt.format({
     format_instructions: '',
+    context: '',
     task: await taskPrompt.format({ message_text: message.text }),
   });
 };

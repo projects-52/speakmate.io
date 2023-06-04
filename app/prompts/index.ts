@@ -4,3 +4,4 @@ export * from './feedback';
 export * from './explanation';
 export * from './cardExplanation';
 export * from './regenerate';
+export * from './summary';

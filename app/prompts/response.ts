@@ -1,44 +1,31 @@
-import { PromptTemplate } from 'langchain/prompts';
-
 // import { StructuredOutputParser } from 'langchain/output_parsers';
+import type { Conversation } from '@prisma/client';
+import { createPrompt } from './languages';
 
-// export const responseParser =
-//   StructuredOutputParser.fromNamesAndDescriptions({
-//     message: 'Initial message to kick off conversation',
-//     name: 'Funny and memorable name for conversation. Use language that student is learning or native language of student based on the language proficiency level of student',
-//   });
+// export const responseParser = StructuredOutputParser.fromNamesAndDescriptions({
+//   text: "Response to the student's message",
+//   summary:
+//     'Summary of the conversation with the student. Keep all the important information here. So you will be able to use it in the next messages.',
+// });
 
 // const formatInstructions = responseParser.getFormatInstructions();
 
-export const responsePrompt = new PromptTemplate({
-  template: `
-You're the world-class language learning teacher. 
-Your name is {characterName}.
-You will have personality: {charcaterPersonality}.
-You will try to adapt to the student's level of language proficiency. 
-Make sure, that you're using only student's native language or language, that student is learning.
-Make sure, that you will adapt length of you messages to the student's level of language proficiency and conversational style of the student 
-Make sure to keep the conversation interesting.
-You wouldn't try to correct the students's mistakes unless he asks you to do so.
-Your conversation with student is fully chat based, so make sure you avoid corrections, that can be just typo
+export const responsePrompt = async (
+  conversation: Conversation
+): Promise<string> => {
+  const prompt = await createPrompt(conversation);
 
-{learning_style}
+  console.log('SUMMARY', conversation.summary);
 
-Student is learning {languageToLearn}.
-Student's level of language proficiency is {languageLevel}.
-Student's native language is {nativeLanguage}.
-
-Student selected topic for conversation is {topic}.
-
-`,
-  inputVariables: [
-    'characterName',
-    'charcaterPersonality',
-    'languageToLearn',
-    'languageLevel',
-    'nativeLanguage',
-    'topic',
-    'learning_style',
-  ],
-  // partialVariables: { format_instructions: formatInstructions },
-});
+  return await prompt.format({
+    format_instructions: '',
+    context: `
+      ${
+        conversation.summary !== ''
+          ? `Summary of the previous convesration: ${conversation.summary}`
+          : ''
+      }
+    `,
+    task: '',
+  });
+};

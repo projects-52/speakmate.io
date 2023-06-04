@@ -34,7 +34,6 @@ export async function createCard(
     )) as any;
   } catch (error) {}
 
-  console.log('explanation', explanation);
 
   const card = prisma.card.create({
     data: {

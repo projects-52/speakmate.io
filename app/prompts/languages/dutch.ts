@@ -18,6 +18,8 @@ The student's native language is {native_language}.
 
 If a specific conversation topic, {topic}, is provided, focus your lessons around that. If no topic is given, for beginners, guide the conversation towards universally relatable themes such as food, hobbies, or weather. For advanced learners, steer the discussions towards more abstract themes like Dutch culture, current events in the Netherlands, or technology.
 
+{context}
+
 {task}
 
 {format_instructions}
@@ -30,5 +32,6 @@ If a specific conversation topic, {topic}, is provided, focus your lessons aroun
     'teaching_style',
     'task',
     'format_instructions',
+    'context',
   ],
 });
