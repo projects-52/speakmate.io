@@ -77,19 +77,8 @@ export default function FeedbackPopup({
                     ) : null}
                   </div>
                   {feedback ? (
-                    <div>
-                      <p className="text-slate-500 text-xl my-2">
-                        {/** @ts-ignore */}
-                        {feedback?.text.intro}
-                      </p>
-                      <ul className="list-disc ml-3">
-                        {/** @ts-ignore */}
-                        {feedback?.text.corrections.map((correction: any) => (
-                          <li className="mb-2" key={correction}>
-                            {correction}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="w-full mt-4 whitespace-pre-line">
+                      {feedback?.text}
                     </div>
                   ) : null}
                 </div>

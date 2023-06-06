@@ -13,7 +13,6 @@ import {
   responsePrompt,
   summaryPrompt,
 } from '../prompts';
-import { getLearningStyle } from '~/prompts/learningStyles';
 
 const OPEN_AI_API_KEY = process.env.OPEN_AI_API_KEY as string;
 
@@ -174,16 +173,7 @@ export async function getFeedback(
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
 
-    content: await feedbackPrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-      message_text: message.text,
-    }),
+    content: await feedbackPrompt(conversation, message),
   };
 
   const response = await getResponse(
@@ -233,18 +223,7 @@ export async function getCardExplanation(
 
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,
-
-    content: await cardExplanationPrompt.format({
-      languageToLearn: conversation.language,
-      languageLevel: conversation.level,
-      nativeLanguage: conversation.native,
-      topic: conversation.topic,
-      characterName: conversation.character?.name,
-      charcaterPersonality: conversation.character?.personality,
-      learning_style: getLearningStyle(conversation.style as string),
-      message_text: message.text,
-      text,
-    }),
+    content: await cardExplanationPrompt(conversation, message, text),
   };
 
   const response = await getResponse(

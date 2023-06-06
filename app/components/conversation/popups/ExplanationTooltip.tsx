@@ -30,7 +30,7 @@ export default function ExplanationTooltip({
 
   return show ? (
     <div
-      className="absolute bg-white border p-4 rounded z-10"
+      className="absolute bg-white border p-1 rounded z-10"
       style={style}
       ref={ref}
     >

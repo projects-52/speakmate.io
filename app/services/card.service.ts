@@ -32,14 +32,20 @@ export async function createCard(
     explanation = (await cardExplanationParser.parse(
       explanationString as string
     )) as any;
-  } catch (error) {}
-
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 
   const card = prisma.card.create({
     data: {
       text,
       explanation,
-      userId: conversation.userId,
+      user: {
+        connect: {
+          id: conversation.userId,
+        },
+      },
       language: conversation.language as string,
     },
   });

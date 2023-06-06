@@ -1,8 +1,8 @@
-import { BookmarkIcon } from '@heroicons/react/24/outline';
+// import { BookmarkIcon } from '@heroicons/react/24/outline';
 import type { Message } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
-import { NavLink, useLoaderData } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import { useEffect, useRef, useState } from 'react';
 import MessageRow from '~/components/conversation/messages/MessageRow';
 import { SpeakToggle } from '~/components/conversation/SpeakToggle';
@@ -85,7 +85,7 @@ export default function Conversation() {
           <span className="col-start-1 col-end-6">{conversation.name}</span>
 
           <div className="col-start-6 col-end-7 flex gap-2 justify-end">
-            <NavLink
+            {/* <NavLink
               to="/app/cards"
               className={({ isActive }) =>
                 `justify-self-end  rounded-full w-max-[80px] ${
@@ -94,7 +94,7 @@ export default function Conversation() {
               }
             >
               <BookmarkIcon className="w-10 h-10 p-2" />
-            </NavLink>
+            </NavLink> */}
 
             <SpeakToggle
               onChange={setSoundEnabled}

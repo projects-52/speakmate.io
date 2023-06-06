@@ -77,7 +77,7 @@ model Feedback {
   id             String       @id @default(auto()) @map("_id") @db.ObjectId
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-  text           Json
+  text           String
   messageId      String       @db.ObjectId
   message        Message      @relation(fields: [messageId], references: [id])
   conversationId String       @db.ObjectId

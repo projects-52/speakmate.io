@@ -1,6 +1,8 @@
 import { PromptTemplate } from 'langchain/prompts';
 
 import { StructuredOutputParser } from 'langchain/output_parsers';
+import type { Conversation, Message } from '@prisma/client';
+import { createPrompt } from './languages';
 
 export const cardExplanationParser =
   StructuredOutputParser.fromNamesAndDescriptions({
@@ -15,46 +17,30 @@ export const cardExplanationParser =
 
 const formatInstructions = cardExplanationParser.getFormatInstructions();
 
-export const cardExplanationPrompt = new PromptTemplate({
+const taskPrompt = new PromptTemplate({
   template: `
-You're the world-class language learning teacher. 
-Your name is {characterName}.
-You will have personality: {charcaterPersonality}.
-You will try to adapt to the student's level of language proficiency. 
-Make sure, that you're using only student's native language or language, that student is learning.
-Make sure, that you will adapt length of you messages to the student's level of language proficiency and conversational style of the student 
-Make sure to keep the conversation interesting.
-You wouldn't try to correct the students's mistakes unless he asks you to do so.
-Your conversation with student is fully chat based, so make sure you avoid corrections, that can be just typo
+  User wants to add a dictionary item for the following text: {text}
 
-{learning_style}
+  User wants to keep those cards to learcn language more efficiently.
 
-Student is learning {languageToLearn}.
-Student's level of language proficiency is {languageLevel}.
-Student's native language is {nativeLanguage}.
-
-Student selected topic for conversation is {topic}.
-
-
-User wants to add a dictionary item for the following text: {text}
-
-User wants to keep those cards to learcn language more efficiently.
-
-This text is the part of the following message: {message_text}
-
-
-{format_instructions}
-`,
-  inputVariables: [
-    'characterName',
-    'charcaterPersonality',
-    'languageToLearn',
-    'languageLevel',
-    'nativeLanguage',
-    'topic',
-    'learning_style',
-    'message_text',
-    'text',
-  ],
-  partialVariables: { format_instructions: formatInstructions },
+  This text is the part of the following message: {message_text}
+  `,
+  inputVariables: ['message_text', 'text'],
 });
+
+export const cardExplanationPrompt = async (
+  conversation: Conversation,
+  message: Message,
+  text: string
+): Promise<string> => {
+  const prompt = await createPrompt(conversation);
+
+  return await prompt.format({
+    format_instructions: formatInstructions,
+    context: '',
+    task: await taskPrompt.format({
+      message_text: message.text,
+      text,
+    }),
+  });
+};

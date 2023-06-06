@@ -3,6 +3,7 @@ import { PromptTemplate } from 'langchain/prompts';
 export const summaryPrompt = new PromptTemplate({
   template: `
     Progressively summarize the lines of conversation provided, adding onto the previous summary returning a new summary.
+    Catch all the important facts, that can be used in the conversation later.
 
     EXAMPLE
     Current summary:

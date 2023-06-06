@@ -17,7 +17,13 @@ export const initialMessagePrompt = async (
 
   return await prompt.format({
     format_instructions: formatInstructions,
-    task: '',
+    task: `
+      Start a conversation with the student.
+      Provide:
+      - A funny and memorable name for the conversation. 
+        Use language that student is learning or native language of student based on the language proficiency level of student
+      - Initial message to kick off conversation
+    `,
     context: '',
   });
 };

@@ -17,7 +17,7 @@ export const explanationParser =
   StructuredOutputParser.fromNamesAndDescriptions({
     highlighted: 'Highlighted text that the student wants to understand',
     transcription:
-      'Phonetic transcription of the highlighted text in the language the student is learning',
+      'Phonetic transcription of the highlighted text and the highlighted text only in the language the student is learning',
     translation:
       "Translation of the highlighted text to the student's native language",
     explanation: 'Explanation of the meaning of the highlighted text',
@@ -33,6 +33,7 @@ const taskPrompt = new PromptTemplate({
   2. {transcription}.
   3. Translate just the highlighted text to the student's native language.
   4. Provide an explanation of just the highlighted text, taking into account the context of the full message, in a language suitable for the student's proficiency level.
+  5. Keep the explanation short and simple to improve response time
 `,
   inputVariables: ['message_text', 'highlight', 'transcription'],
 });

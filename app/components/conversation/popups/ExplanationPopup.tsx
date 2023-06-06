@@ -16,6 +16,15 @@ interface ExplanationPopupProps {
   onAddExplanation: (explanation: Explanation) => void;
 }
 
+function wrapWithBrackets(str: string | null): string {
+  if (!str) return '';
+
+  if (!str.startsWith('[') || !str.endsWith(']')) {
+    return `[${str}]`;
+  }
+  return str;
+}
+
 export default function ExplanationPopup({
   onClose,
   conversation,
@@ -26,25 +35,25 @@ export default function ExplanationPopup({
   onAddExplanation,
 }: ExplanationPopupProps) {
   const [loading, setLoading] = useState(false);
-  const [addingToCards, setAddingToCards] = useState(false);
-  const [doesCardExist, setDoesCardExist] = useState<
-    'checking' | 'exists' | 'not-exists'
-  >('checking');
+  // const [addingToCards, setAddingToCards] = useState(false);
+  // const [doesCardExist, setDoesCardExist] = useState<
+  //   'checking' | 'exists' | 'not-exists'
+  // >('checking');
   const [existingExplanation, setExistingExplanation] = useState<
     Explanation | undefined
   >(explanation);
 
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  // const { t } = useTranslation();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (!explanation) {
       onGetExplanation();
     }
 
-    if (doesCardExist === 'checking') {
-      onGetCard(text);
-    }
+    // if (doesCardExist === 'checking') {
+    //   onGetCard(text);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
@@ -65,48 +74,51 @@ export default function ExplanationPopup({
     const explanation = await response.json();
 
     onAddExplanation(explanation);
-    setDoesCardExist('not-exists');
+    // setDoesCardExist('not-exists');
     setExistingExplanation(explanation);
     setLoading(false);
   };
 
-  const onGetCard = async (text: string) => {
-    // @ts-ignore
-    if (!existingExplanation?.explanation.original) return;
-    const response = await fetch(`/api/card/fetch`, {
-      method: 'POST',
-      body: JSON.stringify({
-        // @ts-ignore
-        text: existingExplanation?.explanation.original,
-      }),
-    });
+  // const onGetCard = async (text: string) => {
+  //   // @ts-ignore
+  //   if (!existingExplanation?.explanation.original) {
+  //     setDoesCardExist('not-exists');
+  //     return;
+  //   }
+  //   const response = await fetch(`/api/card/fetch`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       // @ts-ignore
+  //       text: existingExplanation?.explanation.original,
+  //     }),
+  //   });
 
-    const card = await response.json();
-    if (card) {
-      setDoesCardExist('exists');
-    } else {
-      setDoesCardExist('not-exists');
-    }
-  };
+  //   const card = await response.json();
+  //   if (card) {
+  //     setDoesCardExist('exists');
+  //   } else {
+  //     setDoesCardExist('not-exists');
+  //   }
+  // };
 
-  const onAddToCards = async () => {
-    if (doesCardExist !== 'not-exists') {
-      navigate('/app/cards');
-      return;
-    }
+  // const onAddToCards = async () => {
+  //   if (doesCardExist !== 'not-exists') {
+  //     navigate('/app/cards');
+  //     return;
+  //   }
 
-    setAddingToCards(true);
-    await fetch('/api/card/add', {
-      method: 'POST',
-      body: JSON.stringify({
-        messageId: message?.id,
-        // @ts-ignore
-        text: existingExplanation?.explanation.original,
-      }),
-    });
-    setDoesCardExist('exists');
-    setAddingToCards(false);
-  };
+  //   setAddingToCards(true);
+  //   await fetch('/api/card/add', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       messageId: message?.id,
+  //       // @ts-ignore
+  //       text: existingExplanation?.explanation.original,
+  //     }),
+  //   });
+  //   setDoesCardExist('exists');
+  //   setAddingToCards(false);
+  // };
 
   return (
     <Transition.Root show={show} as={Fragment}>
@@ -146,7 +158,7 @@ export default function ExplanationPopup({
                       <div className="w-full h-full rounded-full border-4 border-l-blue-300 border-r-transparent border-t-transparent border-b-transparent absolute -top-1 -left-1 animate-spin box-content"></div>
                     ) : null}
                   </div>
-                  {existingExplanation && doesCardExist !== 'checking' ? (
+                  {existingExplanation ? (
                     <div>
                       {/** @ts-ignore */}
                       <p className="text-slate-500 text-2xl font-bold flex justify-between items-center">
@@ -161,8 +173,10 @@ export default function ExplanationPopup({
                         />
                       </p>
                       <p className="text-slate-500 text-lg">
-                        {/** @ts-ignore */}[
-                        {existingExplanation?.explanation.transcription}]
+                        {wrapWithBrackets(
+                          // @ts-ignore
+                          existingExplanation?.explanation.transcription
+                        )}
                       </p>
                       <p className="text-slate-500 text-md font-bold">
                         {/** @ts-ignore */}
@@ -173,11 +187,11 @@ export default function ExplanationPopup({
                         {existingExplanation?.explanation.explanation}
                       </p>
 
-                      <Button onClick={onAddToCards} loading={addingToCards}>
+                      {/* <Button onClick={onAddToCards} loading={addingToCards}>
                         {doesCardExist === 'exists'
                           ? t('cards.check')
                           : t('cards.add')}
-                      </Button>
+                      </Button> */}
                     </div>
                   ) : null}
                 </div>
