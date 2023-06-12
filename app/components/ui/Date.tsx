@@ -1,10 +1,16 @@
 import { isToday, isYesterday, format as formatFunc } from 'date-fns';
 import { useTranslation } from 'react-i18next';
-import { enGB, uk } from 'date-fns/locale';
+import { enGB, uk, es, de, it, pl, pt, fr } from 'date-fns/locale';
 
 const locales: Record<string, Locale> = {
   en: enGB,
   ua: uk,
+  es: es,
+  de: de,
+  fr: fr,
+  it: it,
+  pl: pl,
+  pt: pt,
 };
 
 interface DateComponentProps {

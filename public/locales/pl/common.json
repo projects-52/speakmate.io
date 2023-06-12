@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Słowo",
+    "translation": "Tłumaczenie",
+    "explanation": "Wyjaśnienie"
+  },
+  "conversations": {
+    "all": "Wszystko",
+    "new": "Rozpocznij nową rozmowę"
+  },
+  "language": {
+    "practice": {
+      "title": "Jakiego języka chcesz ćwiczyć?"
+    },
+    "native": {
+      "title": "Jakim językiem mówisz?"
+    }
+  },
+  "level": {
+    "title": "Poziom umiejętności",
+    "beginner": "Początkujący",
+    "intermediate": "Średnio zaawansowany",
+    "advanced": "Zaawansowany"
+  },
+  "message": {
+    "dontUnderstand": "Ups, nie zrozumiałem tego.",
+    "edit": {
+      "title": "Edytuj",
+      "loading": "Wczytywanie...",
+      "send": "Wyślij wiadomość"
+    },
+    "feedback": "Podaj mi opinię"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Potwierdź",
+      "cancel": "Anuluj",
+      "title": "Usuń",
+      "close": "Zamknij"
+    },
+    "explanationTooltip": {
+      "button": "Co to jest?"
+    },
+    "start": "Zacznijmy rozmowę"
+  },
+  "cards": {
+    "check": "Sprawdź karty",
+    "add": "Dodaj do kart"
+  },
+  "topic": {
+    "literature": "Książki i historie",
+    "hiking": "Wędrówki",
+    "photography": "Zrób i udostępnij",
+    "cooking": "Kącik kucharza",
+    "history": "Podróż do przeszłości",
+    "gardening": "Zielone kciuki",
+    "education": "Uczenie jest zabawą",
+    "yoga": "Rozciągaj i relaksuj",
+    "music": "Rytmy muzyki",
+    "socialMedia": "#Trendy",
+    "moviesAndTvShows": "Czas na popcorn",
+    "videoGames": "Czas na grę",
+    "foodAndCuisine": "Raj dla smakoszy",
+    "travel": "Podróżnik",
+    "technology": "Tech Talk",
+    "careerAndWork": "Rozmowy o pracy",
+    "artAndCulture": "Artystyczna atmosfera",
+    "environment": "Zielona planeta",
+    "healthAndWellness": "Fit i wspaniały",
+    "hobbies": "Czas na zabawę",
+    "chooseTopic": "Wybierz swój temat",
+    "noTopic": "Luźna rozmowa"
+  },
+  "settings": {
+    "language": {
+      "title": "Ustawienia języka"
+    },
+    "logout": "Wyloguj się",
+    "title": "Ustawienia"
+  },
+  "common": {
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Wybierz rozmowę"
+  },
+  "auth": {
+    "title": "Witaj z powrotem!",
+    "google": "Kontynuuj z Google"
+  }
+}

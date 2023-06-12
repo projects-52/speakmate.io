@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Mot",
+    "translation": "Traduction",
+    "explanation": "Explication"
+  },
+  "conversations": {
+    "all": "Tout",
+    "new": "Démarrer une nouvelle conversation"
+  },
+  "language": {
+    "practice": {
+      "title": "Quelle langue voulez-vous pratiquer?"
+    },
+    "native": {
+      "title": "Quelle langue parlez-vous?"
+    }
+  },
+  "level": {
+    "title": "Niveau de compétence",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé"
+  },
+  "message": {
+    "dontUnderstand": "Oups, je n'ai pas compris cela.",
+    "edit": {
+      "title": "Modifier",
+      "loading": "Chargement...",
+      "send": "Envoyer un message"
+    },
+    "feedback": "Donnez-moi votre avis"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Confirmer",
+      "cancel": "Annuler",
+      "title": "Supprimer",
+      "close": "Fermer"
+    },
+    "explanationTooltip": {
+      "button": "Qu'est-ce que c'est?"
+    },
+    "start": "Commençons à discuter"
+  },
+  "cards": {
+    "check": "Vérifier les cartes",
+    "add": "Ajouter aux cartes"
+  },
+  "topic": {
+    "literature": "Livres et histoires",
+    "hiking": "Randonnée",
+    "photography": "Photographie",
+    "cooking": "Coin du chef",
+    "history": "Retour dans le passé",
+    "gardening": "Jardinage",
+    "education": "Apprendre est amusant",
+    "yoga": "Etirer et se relaxer",
+    "music": "Melodies groovy",
+    "socialMedia": "#Tendance",
+    "moviesAndTvShows": "C'est l'heure du pop-corn",
+    "videoGames": "C'est parti",
+    "foodAndCuisine": "Paradis des gourmets",
+    "travel": "Globe-trotter",
+    "technology": "Tech Talk",
+    "careerAndWork": "Paroles de bureau",
+    "artAndCulture": "Vibration artistique",
+    "environment": "Planète verte",
+    "healthAndWellness": "Fit 'n Fab",
+    "hobbies": "Temps amusant",
+    "chooseTopic": "Choisissez votre intérêt",
+    "noTopic": "Chat détendu"
+  },
+  "settings": {
+    "language": {
+      "title": "Paramètres de langue"
+    },
+    "logout": "Déconnexion",
+    "title": "Paramètres"
+  },
+  "common": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Sélectionnez une conversation"
+  },
+  "auth": {
+    "title": "Bienvenue à nouveau!",
+    "google": "Continuer avec Google"
+  }
+}

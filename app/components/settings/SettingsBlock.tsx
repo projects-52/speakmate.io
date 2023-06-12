@@ -17,6 +17,12 @@ interface SettingsBlockProps {
 const languages: Record<string, { nativeName: string; icon: string }> = {
   en: { nativeName: 'English', icon: '🇺🇸' },
   ua: { nativeName: 'Українська', icon: '🇺🇦' },
+  es: { nativeName: 'Español', icon: '🇪🇸' },
+  de: { nativeName: 'Deutsch', icon: '🇩🇪' },
+  fr: { nativeName: 'Français', icon: '🇫🇷' },
+  it: { nativeName: 'Italiano', icon: '🇮🇹' },
+  pl: { nativeName: 'Polski', icon: '🇵🇱' },
+  pt: { nativeName: 'Português', icon: '🇵🇹' },
 };
 
 export function SettingsBlock({ user }: SettingsBlockProps) {

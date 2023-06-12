@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Palavra",
+    "translation": "Tradução",
+    "explanation": "Explicação"
+  },
+  "conversations": {
+    "all": "Todos",
+    "new": "Iniciar nova conversa"
+  },
+  "language": {
+    "practice": {
+      "title": "Qual língua você quer praticar?"
+    },
+    "native": {
+      "title": "Qual língua você fala?"
+    }
+  },
+  "level": {
+    "title": "Nível de habilidade",
+    "beginner": "Estou começando",
+    "intermediate": "Estou chegando lá",
+    "advanced": "Estou bem avançado"
+  },
+  "message": {
+    "dontUnderstand": "Ops, não entendi.",
+    "edit": {
+      "title": "Editar",
+      "loading": "Carregando...",
+      "send": "Enviar mensagem"
+    },
+    "feedback": "Me dê um feedback"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "title": "Excluir",
+      "close": "Fechar"
+    },
+    "explanationTooltip": {
+      "button": "O que é isso?"
+    },
+    "start": "Vamos começar a conversar"
+  },
+  "cards": {
+    "check": "Verificar cartões",
+    "add": "Adicionar aos cartões"
+  },
+  "topic": {
+    "literature": "Livros e histórias",
+    "hiking": "Trilha",
+    "photography": "Click e compartilhe",
+    "cooking": "Cantinho do chef",
+    "history": "Blast from the Past",
+    "gardening": "Mãos verdes",
+    "education": "Aprender é divertido",
+    "yoga": "Alongar e relaxar",
+    "music": "Melodias Groovy",
+    "socialMedia": "#Tendência",
+    "moviesAndTvShows": "Hora do Pipoca",
+    "videoGames": "Vamos jogar",
+    "foodAndCuisine": "Paraíso da comida",
+    "travel": "Jetsetter",
+    "technology": "Conversa sobre tecnologia",
+    "careerAndWork": "Papo de escritório",
+    "artAndCulture": "Vibe artística",
+    "environment": "Planeta verde",
+    "healthAndWellness": "Fit 'n Fab",
+    "hobbies": "Hora da diversão",
+    "chooseTopic": "Escolha seu interesse",
+    "noTopic": "Conversa casual"
+  },
+  "settings": {
+    "language": {
+      "title": "Configurações de idioma"
+    },
+    "logout": "Sair",
+    "title": "Configurações"
+  },
+  "common": {
+    "today": "Hoje",
+    "yesterday": "Ontem"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Selecione uma conversa"
+  },
+  "auth": {
+    "title": "Bem-vindo de volta!",
+    "google": "Continuar com o Google"
+  }
+}

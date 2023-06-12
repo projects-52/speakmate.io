@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Parola",
+    "translation": "Traduzione",
+    "explanation": "Spiegazione"
+  },
+  "conversations": {
+    "all": "Tutti",
+    "new": "Avvia nuova chat"
+  },
+  "language": {
+    "practice": {
+      "title": "Quale lingua vuoi praticare?"
+    },
+    "native": {
+      "title": "Quale lingua parli?"
+    }
+  },
+  "level": {
+    "title": "Livello di competenza",
+    "beginner": "Appena iniziato",
+    "intermediate": "Ci stai arrivando",
+    "advanced": "Piuttosto bravo"
+  },
+  "message": {
+    "dontUnderstand": "Oops, non ho capito.",
+    "edit": {
+      "title": "Modifica",
+      "loading": "Caricamento...",
+      "send": "Invia messaggio"
+    },
+    "feedback": "Dammelo un feedback"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Conferma",
+      "cancel": "Annulla",
+      "title": "Elimina",
+      "close": "Chiudi"
+    },
+    "explanationTooltip": {
+      "button": "Cos'è questo?"
+    },
+    "start": "Iniziamo a parlare"
+  },
+  "cards": {
+    "check": "Verifica carte",
+    "add": "Aggiungi alle carte"
+  },
+  "topic": {
+    "literature": "Libri e storie",
+    "hiking": "Escursionismo",
+    "photography": "Scatta e condividi",
+    "cooking": "Angolo dello chef",
+    "history": "Un salto nel passato",
+    "gardening": "Pollice verde",
+    "education": "Imparare è divertente",
+    "yoga": "Allunga e rilassati",
+    "music": "Note groovy",
+    "socialMedia": "#Trending",
+    "moviesAndTvShows": "Tempo di popcorn",
+    "videoGames": "Gioco on",
+    "foodAndCuisine": "Rifugio del buongustaio",
+    "travel": "Girovagando",
+    "technology": "Chiacchiere hi-tech",
+    "careerAndWork": "Parlare di lavoro",
+    "artAndCulture": "Atmosfera artistica",
+    "environment": "Pianeta verde",
+    "healthAndWellness": "In forma e favoloso",
+    "hobbies": "Divertimento",
+    "chooseTopic": "Scegli il tuo interesse",
+    "noTopic": "Chat senza impegno"
+  },
+  "settings": {
+    "language": {
+      "title": "Impostazioni lingua"
+    },
+    "logout": "Disconnetti",
+    "title": "Impostazioni"
+  },
+  "common": {
+    "today": "Oggi",
+    "yesterday": "Ieri"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Seleziona una conversazione"
+  },
+  "auth": {
+    "title": "Bentornato!",
+    "google": "Continua con Google"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Wort",
+    "translation": "Übersetzung",
+    "explanation": "Erklärung"
+  },
+  "conversations": {
+    "all": "Alle",
+    "new": "Neuen Chat starten"
+  },
+  "language": {
+    "practice": {
+      "title": "Welche Sprache möchten Sie üben?"
+    },
+    "native": {
+      "title": "Welche Sprache sprechen Sie?"
+    }
+  },
+  "level": {
+    "title": "Fertigkeitsstufe",
+    "beginner": "Anfänger",
+    "intermediate": "Fortgeschritten",
+    "advanced": "Experte"
+  },
+  "message": {
+    "dontUnderstand": "Hoppla, das habe ich nicht verstanden.",
+    "edit": {
+      "title": "Bearbeiten",
+      "loading": "Wird geladen...",
+      "send": "Nachricht senden"
+    },
+    "feedback": "Geben Sie mir Feedback"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Bestätigen",
+      "cancel": "Abbrechen",
+      "title": "Löschen",
+      "close": "Schließen"
+    },
+    "explanationTooltip": {
+      "button": "Was ist das?"
+    },
+    "start": "Lassen Sie uns das Gespräch beginnen"
+  },
+  "cards": {
+    "check": "Karten überprüfen",
+    "add": "Zu Karten hinzufügen"
+  },
+  "topic": {
+    "literature": "Bücher und Geschichten",
+    "hiking": "Wandern",
+    "photography": "Fotografie",
+    "cooking": "Kochkunst",
+    "history": "Zeitreise",
+    "gardening": "Gartenarbeit",
+    "education": "Lernen macht Spaß",
+    "yoga": "Entspannen und Dehnen",
+    "music": "Groovy Melodien",
+    "socialMedia": "#Trendthemen",
+    "moviesAndTvShows": "Filmzeit",
+    "videoGames": "Spielzeit",
+    "foodAndCuisine": "Gourmet-Paradies",
+    "travel": "Weltenbummler",
+    "technology": "Tech Talk",
+    "careerAndWork": "Bürogespräche",
+    "artAndCulture": "Kulturelle Atmosphäre",
+    "environment": "Grüner Planet",
+    "healthAndWellness": "Fit und Gesund",
+    "hobbies": "Freizeitvergnügen",
+    "chooseTopic": "Wählen Sie Ihr Interesse",
+    "noTopic": "Freie Unterhaltung"
+  },
+  "settings": {
+    "language": {
+      "title": "Spracheinstellungen"
+    },
+    "logout": "Ausloggen",
+    "title": "Einstellungen"
+  },
+  "common": {
+    "today": "Heute",
+    "yesterday": "Gestern"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Wählen Sie eine Unterhaltung"
+  },
+  "auth": {
+    "title": "Willkommen zurück!",
+    "google": "Mit Google fortfahren"
+  }
+}

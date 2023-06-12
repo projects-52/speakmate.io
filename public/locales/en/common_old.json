@@ -23,6 +23,21 @@
     "language": "Language"
   },
   "cards": {
-    "link": "Cards"
+    "link": "Cards",
+    "check": "Check cards",
+    "add": "Add to cards"
+  },
+  "card": {
+    "word": "Word",
+    "translation": "Translation",
+    "explanation": "Explanation"
+  },
+  "conversations": {
+    "new": "Start New Chat"
+  },
+  "message": {
+    "edit": {
+      "loading": "Loading..."
+    }
   }
 }

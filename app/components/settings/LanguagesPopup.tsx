@@ -11,6 +11,12 @@ interface LanguagePopupProps {
 const languages: Record<string, { nativeName: string; icon: string }> = {
   en: { nativeName: 'English', icon: '🇺🇸' },
   ua: { nativeName: 'Українська', icon: '🇺🇦' },
+  es: { nativeName: 'Español', icon: '🇪🇸' },
+  de: { nativeName: 'Deutsch', icon: '🇩🇪' },
+  fr: { nativeName: 'Français', icon: '🇫🇷' },
+  it: { nativeName: 'Italiano', icon: '🇮🇹' },
+  pl: { nativeName: 'Polski', icon: '🇵🇱' },
+  pt: { nativeName: 'Português', icon: '🇵🇹' },
 };
 
 export default function LanguagePopup({ open, setOpen }: LanguagePopupProps) {
@@ -72,7 +78,7 @@ export default function LanguagePopup({ open, setOpen }: LanguagePopupProps) {
                         {i18n.resolvedLanguage === lng ? (
                           <button
                             type="submit"
-                            className="rounded-md bg-primary-dark p-4 text-sm font-semibold text-slate-600 shadow-sm w-full text-left flex gap-4 items-center"
+                            className="rounded-md bg-light-shades-800 p-4 text-sm font-semibold text-slate-600 shadow-sm w-full text-left flex gap-4 items-center outline-0"
                           >
                             <span className="text-2xl">
                               {languages[lng].icon}
@@ -82,7 +88,7 @@ export default function LanguagePopup({ open, setOpen }: LanguagePopupProps) {
                         ) : (
                           <button
                             type="submit"
-                            className="rounded-md  p-4 text-sm font-semibold text-gray-900 w-full text-left flex gap-4 items-center"
+                            className="rounded-md  p-4 text-sm hover:bg-light-shades-600 font-semibold text-gray-900 w-full text-left flex gap-4 items-center outline-0"
                           >
                             <span className="text-2xl">
                               {languages[lng].icon}

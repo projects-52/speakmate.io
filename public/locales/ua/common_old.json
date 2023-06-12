@@ -23,6 +23,21 @@
     "language": "Мова"
   },
   "cards": {
-    "link": "Картки"
+    "link": "Картки",
+    "check": "Подивитися картки",
+    "add": "Додати картку"
+  },
+  "card": {
+    "word": "Слово",
+    "translation": "Переклад",
+    "explanation": "Пояснення"
+  },
+  "conversations": {
+    "new": "Почати новий чат"
+  },
+  "message": {
+    "edit": {
+      "loading": "Завантаження..."
+    }
   }
 }

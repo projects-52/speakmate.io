@@ -1,0 +1,95 @@
+{
+  "card": {
+    "word": "Palabra",
+    "translation": "Traducción",
+    "explanation": "Explicación"
+  },
+  "conversations": {
+    "all": "Todo",
+    "new": "Iniciar nueva conversación"
+  },
+  "language": {
+    "practice": {
+      "title": "¿Qué idioma quieres practicar?"
+    },
+    "native": {
+      "title": "¿Qué idioma hablas?"
+    }
+  },
+  "level": {
+    "title": "Nivel de habilidad",
+    "beginner": "Recién comenzando",
+    "intermediate": "Llegando allí",
+    "advanced": "Bastante bueno"
+  },
+  "message": {
+    "dontUnderstand": "Vaya, no entendí eso.",
+    "edit": {
+      "title": "Editar",
+      "loading": "Cargando...",
+      "send": "Enviar mensaje"
+    },
+    "feedback": "Dame feedback"
+  },
+  "conversation": {
+    "delete": {
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "title": "Eliminar",
+      "close": "Cerrar"
+    },
+    "explanationTooltip": {
+      "button": "¿Qué es esto?"
+    },
+    "start": "Empecemos a hablar"
+  },
+  "cards": {
+    "check": "Verificar tarjetas",
+    "add": "Agregar a tarjetas"
+  },
+  "topic": {
+    "literature": "Libros y cuentos",
+    "hiking": "Senderismo",
+    "photography": "Fotografía",
+    "cooking": "Rincón del chef",
+    "history": "Blast from the Past",
+    "gardening": "Dedos verdes",
+    "education": "Aprender es divertido",
+    "yoga": "Estirar y relajarse",
+    "music": "Melodías groovy",
+    "socialMedia": "#Tendencias",
+    "moviesAndTvShows": "Hora de palomitas",
+    "videoGames": "¡A jugar!",
+    "foodAndCuisine": "Paraíso foodie",
+    "travel": "Viajero frecuente",
+    "technology": "Hablar de tecnología",
+    "careerAndWork": "Charlas de oficina",
+    "artAndCulture": "Vibra artística",
+    "environment": "Planeta verde",
+    "healthAndWellness": "Saludable y fabuloso",
+    "hobbies": "Tiempo de diversión",
+    "chooseTopic": "Elige tu interés",
+    "noTopic": "Charla relajada"
+  },
+  "settings": {
+    "language": {
+      "title": "Configuración de idioma"
+    },
+    "logout": "Cerrar sesión",
+    "title": "Configuración"
+  },
+  "common": {
+    "today": "Hoy",
+    "yesterday": "Ayer"
+  },
+  "meta": {
+    "title": "Speakmate"
+  },
+  "dashboard": {
+    "selectConversation": "Selecciona una conversación"
+  },
+  "auth": {
+    "title": "¡Bienvenido de nuevo!",
+    "google": "Continuar con Google"
+  }
+}
