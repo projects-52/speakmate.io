@@ -46,10 +46,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   await updateConversationSummary(conversationId, summary as string);
 
-  console.log('-- RESPONSE', response);
-
-  console.log('-- SUMMARY', summary);
-
   if (!response) {
     return null;
   }

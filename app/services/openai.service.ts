@@ -63,6 +63,7 @@ export async function getResponse(
 
     return data.choices[0].message?.content ?? null;
   } catch (error) {
+    console.error(error);
     return null;
   }
 }
@@ -109,8 +110,6 @@ export async function getAnswer(
     content: propmpt,
   };
 
-  console.log('-- MESSAGES', [propmptMessage, ...preparedMessages]);
-
   const response = await getResponse(
     [propmptMessage, ...preparedMessages].map((m) => ({
       role: m.role,
@@ -142,8 +141,6 @@ export async function createSummary(
       )
       .join('\n'),
   });
-
-  console.log('-- SUMMARY PROMPT', propmpt);
 
   const propmptMessage = {
     role: ChatCompletionRequestMessageRoleEnum.System,

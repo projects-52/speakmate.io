@@ -29,7 +29,6 @@ export async function createFeedback(
 
   try {
     text = (await getFeedback(message, conversation)) as string;
-    console.log('-- FEEDBACK TEXT', text);
   } catch (error) {
     console.error(error);
     return null;
