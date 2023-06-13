@@ -14,11 +14,23 @@ export const EnglishCharacters: Character[] = [
       'A man in his mid-thirties with short curly hair, glasses, a friendly smile, and often seen wearing casual clothing.',
     welcome: {
       'en-US':
-        "Hello! I'm Sam, your guide on this exciting journey through the English language. We'll explore together, using literature, nature, and even cooking as our compass. Looking forward to our adventure!",
+        "Hello, I'm Sam Baxter, an enthusiast of English literature. Let's explore the beauty of this language through literary contexts, nature, and some good food!",
       'ja-JP':
-        'こんにちは！私の名前はサムで、英語を通じて素晴らしい旅をガイドします。文学、自然、そして料理を使って一緒に探検しましょう。冒険が楽しみです！',
+        'こんにちは、英文学の愛好家であるサム・バクスターです。文学のコンテキスト、自然、そして美味しい料理を通じて、この言語の美しさを探求しましょう！',
       'uk-UA':
-        'Привіт! Я Сем, ваш гід у цій захоплюючій подорожі англійською мовою. Ми будемо досліджувати разом, використовуючи літературу, природу, і навіть кулінарію як наш компас. Чекаю з нетерпінням на нашу пригоду!',
+        'Привіт, я Семюель Бакстер, ентузіаст англійської літератури. Давайте разом досліджувати красу цієї мови через літературні контексти, природу і смачну їжу!',
+      'es-ES':
+        'Hola, soy Sam Baxter, un entusiasta de la literatura inglesa. ¡Vamos a explorar la belleza de este idioma a través de contextos literarios, la naturaleza y algo de buena comida!',
+      'fr-FR':
+        'Bonjour, je suis Sam Baxter, un passionné de littérature anglaise. Explorons ensemble la beauté de cette langue à travers des contextes littéraires, la nature et de bons repas!',
+      'pt-PT':
+        'Olá, sou Sam Baxter, um entusiasta da literatura inglesa. Vamos explorar a beleza desta língua através de contextos literários, natureza e alguma boa comida!',
+      'it-IT':
+        "Ciao, sono Sam Baxter, un appassionato di letteratura inglese. Esploriamo insieme la bellezza di questa lingua attraverso contesti letterari, la natura e un po' di buon cibo!",
+      'de-DE':
+        'Hallo, ich bin Sam Baxter, ein begeisterter Anhänger der englischen Literatur. Lassen Sie uns die Schönheit dieser Sprache durch literarische Kontexte, die Natur und gutes Essen erkunden!',
+      'pl-PL':
+        'Cześć, jestem Sam Baxter, entuzjastą literatury angielskiej. Odkryjmy razem piękno tego języka przez literackie konteksty, naturę i trochę dobrej kuchni!',
     },
   },
   {
@@ -34,11 +46,23 @@ export const EnglishCharacters: Character[] = [
       'A woman in her early fifties with shoulder-length straight hair, a warm gaze, and typically seen dressed in professional attire.',
     welcome: {
       'en-US':
-        "Greetings! I'm Liz, and I can't wait to delve into the rich history of the English language with you. We'll draw from diverse fields like history, education, and even yoga to deepen our understanding. Let's get started!",
+        "Hi, I'm Liz Thompson. My lessons are like a journey through time with the English language. Let's learn and grow together!",
       'ja-JP':
-        'こんにちは！私の名前はリズで、あなたと一緒に英語の豊かな歴史を探求するのを待ちきれません。歴史、教育、ヨガなど多様な分野から学び、理解を深めていきましょう。始めましょう！',
+        'こんにちは、私はリズ・トンプソンです。私のレッスンは英語とともに時間を旅するようなものです。一緒に学び、成長しましょう！',
       'uk-UA':
-        'Вітаю! Я Ліз, і я не можу дочекатися, щоб поринути у багатий світ історії англійської мови з вами. Ми використовуватимемо знання з таких різноманітних областей, як історія, освіта, і навіть йога, щоб поглибити наше розуміння. Давайте почнемо!',
+        'Привіт, я Ліз Томпсон. Мої уроки - це подорож у часі з англійською мовою. Давайте вчитися та розвиватися разом!',
+      'es-ES':
+        'Hola, soy Liz Thompson. Mis lecciones son como un viaje en el tiempo con el idioma inglés. ¡Aprendamos y crezcamos juntos!',
+      'fr-FR':
+        'Bonjour, je suis Liz Thompson. Mes leçons sont comme un voyage dans le temps avec la langue anglaise. Apprenons et grandissons ensemble !',
+      'pt-PT':
+        'Olá, sou a Liz Thompson. As minhas aulas são como uma viagem no tempo com a língua inglesa. Vamos aprender e crescer juntos!',
+      'it-IT':
+        'Ciao, sono Liz Thompson. Le mie lezioni sono come un viaggio nel tempo con la lingua inglese. Impariamo e cresciamo insieme!',
+      'de-DE':
+        'Hallo, ich bin Liz Thompson. Meine Stunden sind wie eine Zeitreise mit der englischen Sprache. Lass uns gemeinsam lernen und wachsen!',
+      'pl-PL':
+        'Cześć, jestem Liz Thompson. Moje lekcje to jak podróż w czasie z językiem angielskim. Uczmy się i rozwijajmy razem!',
     },
   },
   {
@@ -54,11 +78,23 @@ export const EnglishCharacters: Character[] = [
       'A non-binary individual in their mid-twenties with a vibrant, multicolored hairstyle, a joyful expression, and a preference for comfortable, colorful clothes.',
     welcome: {
       'en-US':
-        "Hey there! I'm Jamie, and I'm stoked to explore the cool and contemporary side of English with you. We'll dive into music, pop culture, and even video games to make our lessons fun and relevant. Let's roll!",
+        "Hey! I'm Jamie Turner. With me, you'll learn English through a unique blend of pop culture, music, and modern slang. Let's dive in!",
       'ja-JP':
-        'やあ！私の名前はジェイミーで、あなたと一緒に英語のクールで現代的な側面を探求するのが楽しみです。音楽、ポップカルチャー、ビデオゲームに飛び込んで、レッスンを楽しく、関連性のあるものにしましょう。さあ、始めましょう！',
+        'ヘイ！私はジェイミー・ターナーです。私と一緒に、ポップカルチャー、音楽、そして現代のスラングを通じて英語を学びましょう。始めましょう！',
       'uk-UA':
-        'Привіт! Я Джеймі, і я готовий досліджувати з вами круту і сучасну сторону англійської мови. Ми зануримося у світ музики, поп-культури, і навіть відеоігор, щоб зробити наші уроки веселими та актуальними. Починаємо!',
+        'Привіт! Я - Джеймі Тернер. Зі мною ви вивчите англійську через унікальне поєднання поп-культури, музики та сучасного сленгу. Почнімо!',
+      'es-ES':
+        '¡Hola! Soy Jamie Turner. Conmigo, aprenderás inglés a través de una mezcla única de cultura pop, música y jerga moderna. ¡Vamos a sumergirnos en ello!',
+      'fr-FR':
+        "Salut ! Je suis Jamie Turner. Avec moi, vous apprendrez l'anglais grâce à un mélange unique de culture pop, de musique et d'argot moderne. Plongeons-nous dedans !",
+      'pt-PT':
+        'Olá! Sou Jamie Turner. Comigo, aprenderás inglês através de uma mistura única de cultura pop, música e gíria moderna. Vamos mergulhar nisso!',
+      'it-IT':
+        "Ehi! Sono Jamie Turner. Con me, imparerai l'inglese attraverso un mix unico di cultura pop, musica e slang moderno. Tuffiamoci dentro!",
+      'de-DE':
+        'Hallo! Ich bin Jamie Turner. Mit mir lernen Sie Englisch durch eine einzigartige Mischung aus Popkultur, Musik und modernem Slang. Lass uns eintauchen!',
+      'pl-PL':
+        'Cześć! Jestem Jamie Turner. Ze mną nauczysz się angielskiego przez unikalne połączenie popkultury, muzyki i nowoczesnego slangu. Zanurzmy się w to!',
     },
   },
   {
@@ -74,11 +110,23 @@ export const EnglishCharacters: Character[] = [
       'A man in his mid-forties with short hair, a beard, glasses, and usually seen in casual business attire.',
     welcome: {
       'en-US':
-        "Hello! I'm Marty. Ready to combine our love for food, travel, and technology to navigate the English language? I'm excited to share my experiences and learn about yours. Let's go!",
+        "Hi, I'm Marty Clarke. I love to intertwine language, technology, and food. Ready for an adventure? Let's explore English together!",
       'ja-JP':
-        'こんにちは！私の名前はマーティです。食べ物、旅行、テクノロジーへの愛を組み合わせて英語を学びませんか？あなたの経験を共有し、あなたのことを学ぶのが楽しみです。さあ、行きましょう！',
+        'こんにちは、マーティ・クラークです。私は言語、テクノロジー、そして食べ物を絡め合わせるのが大好きです。冒険の準備はできましたか？一緒に英語を探求しましょう！',
       'uk-UA':
-        "Привіт! Я Марті. Готові об'єднати нашу любов до їжі, подорожей, і технологій, щоб вивчити англійську мову? Я з нетерпінням чекаю поділитися своїми досвідом та дізнатися про ваші. Поїхали!",
+        'Привіт, я Марті Кларк. Мені подобається поєднувати мову, технології та їжу. Готові до пригод? Давайте разом вивчати англійську!',
+      'es-ES':
+        'Hola, soy Marty Clarke. Me encanta entrelazar el idioma, la tecnología y la comida. ¿Listo para una aventura? ¡Vamos a explorar el inglés juntos!',
+      'fr-FR':
+        "Salut, je suis Marty Clarke. J'adore entrelacer la langue, la technologie et la nourriture. Prêt pour une aventure ? Explorons ensemble l'anglais !",
+      'pt-PT':
+        'Olá, sou o Marty Clarke. Adoro interligar a língua, a tecnologia e a comida. Preparado para uma aventura? Vamos explorar o inglês juntos!',
+      'it-IT':
+        "Ciao, sono Marty Clarke. Adoro intrecciare lingua, tecnologia e cibo. Pronti per un'avventura? Esploriamo l'inglese insieme!",
+      'de-DE':
+        'Hallo, ich bin Marty Clarke. Ich liebe es, Sprache, Technologie und Essen zu verknüpfen. Bereit für ein Abenteuer? Lass uns zusammen Englisch erkunden!',
+      'pl-PL':
+        'Cześć, jestem Marty Clarke. Uwielbiam łączyć język, technologię i jedzenie. Gotowy na przygodę? Odkrywajmy razem angielski!',
     },
   },
   {
@@ -99,11 +147,23 @@ export const EnglishCharacters: Character[] = [
       'A woman in her early sixties with long grey hair often tied in a bun, a friendly smile, and typically seen dressed in comfortable, earth-toned clothes.',
     welcome: {
       'en-US':
-        "Hello! I'm Helen. Are you ready to discover English through art, culture, and wellness? I'm eager to share my hobbies and learn about yours as we journey through the language. Let's begin!",
+        "Hello, I'm Helen Adams. Together we'll explore English through art, culture, and wellness. Looking forward to our journey of discovery!",
       'ja-JP':
-        'こんにちは！私の名前はヘレンです。アート、文化、ウェルネスを通じて英語を発見する準備はできていますか？私は趣味を共有し、あなたのことを学ぶことを楽しみにしています。さあ、始めましょう！',
+        'こんにちは、ヘレン・アダムスです。私たちは一緒に、アート、文化、ウェルネスを通じて英語を探求します。私たちの発見の旅を楽しみにしています！',
       'uk-UA':
-        "Привіт! Я Хелен. Готові відкрити для себе англійську через мистецтво, культуру, і здоров'я? Я з нетерпінням чекаю поділитися своїми захопленнями і дізнатися про ваші, поки ми подорожуємо мовою. Починаємо!",
+        "Привіт, я Гелен Адамс. Разом ми досліджуватимемо англійську через мистецтво, культуру та здоров'я. Чекаю з нетерпінням нашої подорожі відкриттів!",
+      'es-ES':
+        'Hola, soy Helen Adams. Juntos exploraremos el inglés a través del arte, la cultura y el bienestar. ¡Esperando con ansias nuestro viaje de descubrimiento!',
+      'fr-FR':
+        "Bonjour, je suis Helen Adams. Ensemble, nous explorerons l'anglais à travers l'art, la culture et le bien-être. J'attends avec impatience notre voyage de découverte !",
+      'pt-PT':
+        'Olá, sou a Helen Adams. Juntos vamos explorar o inglês através da arte, cultura e bem-estar. Mal posso esperar pela nossa jornada de descoberta!',
+      'it-IT':
+        "Ciao, sono Helen Adams. Insieme esploreremo l'inglese attraverso arte, cultura e benessere. Non vedo l'ora del nostro viaggio di scoperta!",
+      'de-DE':
+        'Hallo, ich bin Helen Adams. Zusammen werden wir Englisch durch Kunst, Kultur und Wellness erforschen. Ich freue mich auf unsere Entdeckungsreise!',
+      'pl-PL':
+        'Cześć, jestem Helen Adams. Razem będziemy odkrywać język angielski poprzez sztukę, kulturę i wellness. Nie mogę się doczekać naszej podróży odkrywania!',
     },
   },
 ];
